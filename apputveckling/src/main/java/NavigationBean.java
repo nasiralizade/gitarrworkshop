@@ -16,6 +16,7 @@ public class NavigationBean implements java.io.Serializable{
         externalContext.redirect("admin_home.xhtml");
         facesContext.responseComplete();
     }
+    //to be used in the future, if we want to do more with the admin page
     public String goToProductPage() throws IOException {
         return "admin_products";
     }
