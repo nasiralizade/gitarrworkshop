@@ -1,26 +1,53 @@
 <!-- Statistics page -->
 
 <div class="container-fluid" xmlns:h="http://java.sun.com/jsf/html">
-   <div class="row">
-      <div class="col-md-9 order-md-first">
-         <h1>Statistics</h1>
-         <h:graphicImage styleClass="img-fluid rounded" value="../resources/img/statistics.png"/><br/>
-      </div>
-      <!-- Right Column -->
-      <div class="col-md-3 order-md-last mt-5">
-         <div class="card">
-            <p class="card-header card-title">Summary</p>
-            <div class="card-body">
-               <h5 class="card-title">This Month</h5>
-               <hr/>
-               <p class="card-text"><strong>Worked time: </strong> 60 hours</p>
-               <p class="card-text"><strong>Earnings: </strong>23000 kr</p><br/>
-               <h5 class="card-title">Last 12 Months</h5>
-               <hr/>
-               <p class="card-text"><strong>Worked time: </strong> 720 hours</p>
-               <p class="card-text"><strong>Earnings: </strong>276000 kr</p>
+    <div class="row">
+        <div class="col-md-8 order-md-first">
+            <h1>Statistics</h1>
+            <h:graphicImage styleClass="img-fluid rounded" value="../resources/img/statistics.png"/><br/>
+        </div>
+        <!-- Right Column -->
+        <div class="col-md-4 order-md-last mt-5">
+            <div class="card">
+                <p class="card-header card-title">Summary</p>
+                <div class="card-body">
+                    <h5 class="card-title">This Month</h5>
+                    <hr/>
+                    <p class="card-text"><strong>Worked time: </strong> 60 hours</p>
+                    <p class="card-text"><strong>Earnings: </strong>23000 kr</p><br/>
+                    <h5 class="card-title">Last 12 Months</h5>
+                    <hr/>
+                    <p class="card-text"><strong>Worked time: </strong> 720 hours</p>
+                    <p class="card-text"><strong>Earnings: </strong>276000 kr</p>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+            <div class="card mt-4">
+                <p class="card-header">Active cases</p>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-header">Repair <i class="material-symbols-outlined">construction</i></h5>
+                            <p class="card-text"><strong>Case ID: </strong> 123456</p>
+                            <p class="card-text"><strong>Customer: </strong> John Doe</p><br/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-header">Meeting in progress</h5>
+                            <p class="card-text"><strong>Customer: </strong> John Doe</p><br/>
+                            <h5 class="card-header">Meeting scheduled</h5>
+                            <p class="card-text">Magnus: 09:50</p>
+                            <p class="card-text">John: 10:00</p>
+                            <h5 class="card-header">Meeting finished</h5>
+                            <p class="card-text">Magnus: 10:30</p>
+                            <p class="card-text">John: 10:30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
