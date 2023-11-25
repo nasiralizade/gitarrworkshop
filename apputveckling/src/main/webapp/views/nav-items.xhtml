@@ -1,18 +1,33 @@
 <!-- nav-items.xhtml -->
-<ul class="nav flex-column">
+<ul class="nav flex-column" xmlns:h="http://java.sun.com/jsf/html">
     <li class="nav-item">
-        <a class="nav-link text-white" href="admin_home.xhtml">Home</a>
+        <h:form>
+            <h:commandLink styleClass="nav-link text-white" action="#{navigationBean.goToHomePage()}"
+                           value="Home"/>
+        </h:form>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-white" href="admin_calendar.xhtml">Calendar</a>
+        <h:form>
+            <h:commandLink styleClass="nav-link text-white" action="#{navigationBean.goToCalendarPage()}"
+                           value="Calendar"/>
+        </h:form>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-white" href="admin_cases.xhtml">Cases</a>
+        <h:form>
+            <h:commandLink styleClass="nav-link text-white" action="#{navigationBean.goToCasesPage()}"
+                           value="Cases"/>
+        </h:form>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-white" href="admin_members.xhtml">Members</a>
+        <h:form>
+            <h:commandLink styleClass="nav-link text-white" action="#{navigationBean.goToMembers()}"
+                           value="Members"/>
+        </h:form>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-white" href="admin_products.xhtml">Products</a>
+        <h:form>
+            <h:commandLink styleClass="nav-link text-white" action="#{navigationBean.goToProductPage()}"
+                           value="Products"/>
+        </h:form>
     </li>
 </ul>
