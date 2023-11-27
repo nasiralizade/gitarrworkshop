@@ -20,7 +20,7 @@ public class StatisticServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        String [] month = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        String [] month = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};// för db sen, det är bara ändra här
         int [] income = {21000,20000,30000,21000,50000,30000,15000,17000,21000,30000,25000,30000};
         for (int i = 0; i < 12; i++) {
             JsonObject json = Json.createObjectBuilder()
