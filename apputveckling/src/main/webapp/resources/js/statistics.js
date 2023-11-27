@@ -19,7 +19,7 @@ async function drawStuff() {
         },
         axes: {
             x: {
-                0: {side: 'top', label: 'AndersWorksShop'} // Top x-axis.
+                0: {side: 'top', label: 'Income'} // Top x-axis.
             }
         },
         bar: {groupWidth: "90%"}
