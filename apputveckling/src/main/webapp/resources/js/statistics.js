@@ -11,7 +11,7 @@ async function drawStuff() {
             });
         });
     var options = {
-        width: 800,
+
         legend: {position: 'none'},
         chart: {
             title: 'Monthly income',
@@ -21,10 +21,11 @@ async function drawStuff() {
             x: {
                 0: {side: 'top', label: 'Income'} // Top x-axis.
             }
+
         },
-        bar: {groupWidth: "90%"}
+        bar: {groupWidth: "90%", response:true}
     };
-    var chart = new google.charts.Bar(document.getElementById('char-div'));
+    var chart = new google.charts.Bar(document.getElementById('chart-div'));
     // Convert the Classic options to Material options.
     chart.draw(data, google.charts.Bar.convertOptions(options));
 }
