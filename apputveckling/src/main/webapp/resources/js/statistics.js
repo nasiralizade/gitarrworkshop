@@ -3,7 +3,7 @@ async function drawStuff() {
     const data = new google.visualization.DataTable();
     data.addColumn('string', 'Month');
     data.addColumn('number', 'income');
-    await fetch("myservlet")
+    await fetch("http://localhost:8080/apputveckling-1.0-SNAPSHOT/myservlet")
         .then(response => response.json())
         .then(fetchedData => {
             fetchedData.forEach((item) => {
