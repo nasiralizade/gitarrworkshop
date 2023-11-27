@@ -18,15 +18,15 @@
 <div class="d-flex">
     <!-- Sidebar for mobile -->
     <div class="d-md-none">
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+        <button class="btn btn-light text-dark border border-secondary m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
             &#9776; <!-- Unicode character for hamburger icon -->
         </button>
     </div>
 
     <!-- Sidebar for desktop -->
     <div class="d-none d-md-block vh-100">
-        <div class="bg-dark text-white h-100">
-            <div class="d-flex flex-column h-100">
+        <div class="bg-dark text-white h-100 fs-5">
+            <div class="d-flex flex-column h-100 p-2">
                 <ui:include src="nav-items.xhtml"/>
             </div>
         </div>
@@ -36,7 +36,7 @@
     <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebar" data-bs-toggle="offcanvas">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title"> </h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"> </button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"> </button>
         </div>
         <div class="offcanvas-body">
             <ui:include src="nav-items.xhtml"/>
