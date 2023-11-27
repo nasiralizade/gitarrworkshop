@@ -1,4 +1,6 @@
-
+$(window).resize(function(){
+    drawStuff();
+});
 async function drawStuff() {
     const data = new google.visualization.DataTable();
     data.addColumn('string', 'Month');
