@@ -29,16 +29,67 @@ public class DB {
 
     public void CreateTableMembers(){
         try (Connection con = dataSource.getConnection()) {
-            String sql = "CREATE TABLE IF NOT EXISTS Member(\"\n" +
-                    "                + \"id INT AUTO_INCREMENT PRIMARY KEY,\"\n" +
-                    "                + \"first_name VARCHAR(255),\"\n" +
-                    "                + \"last_name VARCHAR(255),\"\n" +
-                    "                + \"email VARCHAR(255)\"\n" +
-                    "                + \")";
+            String sql = "CREATE TABLE IF NOT EXISTS Member("
+                    +"Member_id INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "Member_name VARCHAR(255),"
+                    + "Member_date datetime,"
+                    + "Member_phone int,"
+                    + "Member_email VARCHAR(255))";
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.executeUpdate();
             }
             System.out.println("CREATED Table Member!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void CreateTableProduct(){
+        try (Connection con = dataSource.getConnection()) {
+            String sql = "CREATE TABLE IF NOT EXISTS Product("
+                    +"Product_id INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "Product_price int,"
+                    + " Product_amount int,"
+                    + "Product_description VARCHAR(255),"
+                    + "Product_case VARCHAR(255),"
+                    + "Product_image VARCHAR(255))";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.executeUpdate();
+            }
+            System.out.println("CREATED Table Product!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void CreateTableCase(){
+        try (Connection con = dataSource.getConnection()) {
+            String sql = "CREATE TABLE IF NOT EXISTS Cases("
+                    + "Case_id INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "Case_member_id int,"
+                    + "Case_state VARCHAR(255),"
+                    + "Case_date_start datetime,"
+                    + "Case_date_end datetime,"
+                    + "Case_profit int,"
+                    + "Case_description VARCHAR(255),"
+                    + "Case_image VARCHAR(255),"
+                    + "Case_type VARCHAR(255))";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.executeUpdate();
+            }
+            System.out.println("CREATED Table Case!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void CreateTableCaseType(){
+        try (Connection con = dataSource.getConnection()) {
+            String sql = "CREATE TABLE IF NOT EXISTS Case_Type("
+                    + "Type_id INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "Type_description VARCHAR(255))";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.executeUpdate();
+            }
+            System.out.println("CREATED Table Case_Type!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -180,7 +231,7 @@ public class DB {
             preparedStatement.setString(1, name);
             preparedStatement.setDate(2, date);
             preparedStatement.setInt(3, phoneNumber);
-            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, email);
 
 
             int rowsAffected = preparedStatement.executeUpdate();
@@ -238,12 +289,16 @@ public class DB {
         //skapa en ny db om den inte existerar.
         databaseExample.CreateDB();
         databaseExample.CreateTableMembers();
+        databaseExample.CreateTableCase();
+        databaseExample.CreateTableProduct();
+        databaseExample.CreateTableCaseType();
+
         // Now, you can call fetchData
         //databaseExample.fetchData();
         //databaseExample.getIdByPhonNum(700389406);
         //databaseExample.getIdByEmail("jojo2109@student.miun.se");
         //databaseExample.getNameById(1);
 //måste fixas        databaseExample.InsertMember("jag",20,1234567,"jagj2723@gmail.com");
-        databaseExample.GetAllName();
+        //databaseExample.GetAllName();
     }
 }
