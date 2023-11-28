@@ -10,7 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/img/135317.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/img/bobmarleyguitarr.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/img/guitarr2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/img/guitarri3.webp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
