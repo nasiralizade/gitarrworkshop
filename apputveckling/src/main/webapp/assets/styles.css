@@ -49,6 +49,24 @@
     border-radius: 25px;
     box-shadow: 2px 2px 5px #808080;
 
+}
 
 
+.card-img-top{
+    max-width: 300px;
+    max-height: 400px;
+    min-height: 400px;
+    resize: block;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+.menu{
+    text-align: center;
+}
+.card{
+    text-align: center;
+    margin: auto;
 }
