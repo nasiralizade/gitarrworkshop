@@ -10,10 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/create_plt/BarChartPanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/create_plt/CreateImageBean.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/create_plt/ReadData_db.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Application.DB">
+  <component name="RunManager" selected="GlassFish Server.GlassFish 6.9.0">
     <configuration name="DB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="admin.DB.DB" />
       <module name="apputveckling" />
@@ -156,6 +153,23 @@
         </option>
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="apputveckling" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="apputveckling" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.DB" />
+      <item itemvalue="GlassFish Server.GlassFish 6.9.0" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.DB" />
