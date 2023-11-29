@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>My Application</title>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <link rel="stylesheet" href="#{request.contextPath}/assets/styles.css"/>
     <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
     <script type="text/javascript" src="https://www.google.com/jsapi"> </script><!-- Google Charts -->
@@ -15,13 +15,10 @@
     <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
 </h:head>
 <h:body>
+
     <ui:include src="../includes/nav_client.xhtml"/>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <h1>Home client</h1>
-            </div>
-        </div>
-    </div>
+
+    <ui:include src="../includes/clientHomeContent.xhtml"/>
+    <ui:include src="../includes/productContent.xhtml"></ui:include>
 </h:body>
 </html>
