@@ -15,11 +15,14 @@
     <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
 </h:head>
 <h:body>
-
-    <ui:include src="../includes/nav_client.xhtml"/>
-    <ui:include src="../includes/clientHomeContent.xhtml"/>
-    <ui:include src="../includes/productContent.xhtml"/>
-    <ui:include src="../includes/repair_field.xhtml"/>
-    <ui:include src="../includes/footer.xhtml"/>
+    <div class="container-fluid mb-5 " id="HomeClient" style="margin-top: 130px">
+        <div class="row">
+            <ui:include src="../includes/nav_client.xhtml"/>
+            <ui:include src="../includes/clientHomeContent.xhtml"/>
+            <ui:include src="../includes/productContent.xhtml"/>
+            <ui:include src="../includes/repair_field.xhtml"/>
+            <ui:include src="../includes/footer.xhtml"/>
+        </div>
+    </div>
 </h:body>
 </html>
