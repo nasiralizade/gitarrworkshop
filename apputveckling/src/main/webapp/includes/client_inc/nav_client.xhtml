@@ -1,7 +1,21 @@
-<nav class="navbar bg-body-tertiary fixed-top ">
+<nav class="navbar bg-body-tertiary fixed-top " xmlns:h="http://java.sun.com/jsf/html">
     <div class="container justify-content-center p-3">
-        <a class="nav-link nav-item p-3 " href="home.xhtml?bookMeeting"> HOME</a>
-        <a class="nav-link nav-item p-3" href="#"> BOOK</a>
-        <a class="nav-link nav-item p-3" href="home.xhtml?"> PRODUCT</a>
+        <h:form>
+            <h:commandButton value="HOME"
+                             action="#{navigationBean.goToClientHome}"
+                             styleClass="#{navigationBean.selectedSection eq 'home' ? 'nav-link nav-item p-3 myactive':'nav-link nav-item p-3'}"/>
+        </h:form>
+        <h:form>
+            <h:commandButton action="#{navigationBean.goToClientProducts}"
+                             styleClass="#{navigationBean.selectedSection eq 'product' ? 'nav-link nav-item p-3 myactive':'nav-link nav-item p-3'}"
+                             value="PRODUCT"
+            />
+        </h:form>
+        <h:form>
+            <h:commandButton action="#{navigationBean.goToClientBook}"
+                             styleClass="#{navigationBean.selectedSection eq 'book' ? 'nav-link nav-item p-3 myactive':'nav-link nav-item p-3'}"
+                             value="Book"
+            />
+        </h:form>
     </div>
 </nav>
