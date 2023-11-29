@@ -7,7 +7,7 @@ public class SetDB {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setURL("jdbc:mysql://localhost:3306/ProjectDB");
         mysqlDataSource.setUser("root");
-        mysqlDataSource.setPassword("malek123");
+        mysqlDataSource.setPassword("12345678");
 
         return mysqlDataSource;
     }
