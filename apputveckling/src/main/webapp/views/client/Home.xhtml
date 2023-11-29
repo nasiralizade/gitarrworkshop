@@ -10,19 +10,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <link rel="stylesheet" href="#{request.contextPath}/assets/styles.css"/>
     <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script><!-- Google Charts -->
-    <script src="#{request.contextPath}/resources/js/statistics.js" type=""></script>
-    <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"> </script><!-- Google Charts -->
+    <script src="#{request.contextPath}/resources/js/statistics.js" type=""> </script>
+    <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
 </h:head>
 <h:body>
     <div class="container-fluid mb-5 " id="HomeClient" style="margin-top: 130px">
-
-        <ui:include src="../includes/nav_client.xhtml"/>
-        <ui:include src="../includes/clientHomeContent.xhtml"/>
-        <ui:include src="../includes/productContent.xhtml"/>
-        <ui:include src="../includes/repair_field.xhtml"/>
-        <ui:include src="../includes/footer.xhtml"/>
-
+        <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
+        <ui:include src="../../includes/client_inc/clientHomeContent.xhtml"/>
+        <ui:include src="../../includes/productContent.xhtml"/>
+        <ui:include src="../../includes/client_inc/repair_field.xhtml"/>
     </div>
+    <ui:include src="../../includes/client_inc/footer.xhtml"/>
 </h:body>
 </html>
