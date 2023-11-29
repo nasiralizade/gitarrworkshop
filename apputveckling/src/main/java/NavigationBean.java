@@ -34,4 +34,7 @@ public class NavigationBean implements java.io.Serializable{
     }
 
 
+    public String goToClientHome() {
+        return "Home";
+    }
 }
