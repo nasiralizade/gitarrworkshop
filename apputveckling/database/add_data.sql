@@ -7,8 +7,8 @@ VALUES
 -- Insert data into CASES table
 INSERT INTO CASES (CASE_ID, MEMBER_ID, STATUS, CASE_DATE_START, CASE_DATE_END, CASE_PROFIT, CASE_DESC, CASE_HOURS, CASE_TYPE)
 VALUES
-    (1, 1, 'Open', '2023-01-10', '2023-01-20', 500.00, 'Project A description', 30, 'Development'),
-    (2, 2, 'Closed', '2023-02-01', '2023-02-28', 800.00, 'Project B description', 40, 'Marketing');
+    (1, 1, 'Open', '2023-01-10', '2023-01-20', 500.00, 'Project A description', 30, 'Rented'),
+    (2, 2, 'Closed', '2023-02-01', '2023-02-28', 800.00, 'Project B description', 40, 'Repairment');
 
 -- Insert data into PRODUCT table
 INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_PRICE, PRODUCT_HISTORY_DESC, PRODUCT_MAIN_DESC, PRODUCT_YEAR, PRODUCT_NAME)
@@ -25,11 +25,11 @@ VALUES
 -- Insert data into PROD_IMG table
 INSERT INTO PROD_IMG (PROD_IMG_ID, PRODUCT_ID, IMG_PATH_STRING)
 VALUES
-    (1, 1, '/images/product_a.jpg'),
-    (2, 2, '/images/product_b.jpg');
+    (1, 1, '../src/main/webapp/assets/product_a.jpg'),
+    (2, 2, '../src/main/webapp/assets/product_b.jpg');
 
 -- Insert data into JOURNAL_IMG table
 INSERT INTO JOURNAL_IMG (IMG_ID, JOURNAL_ID, IMG_PATH_STRING)
 VALUES
-    (1, 1, '/images/journal_entry_a.jpg'),
-    (2, 2, '/images/journal_entry_b.jpg');
+    (1, 1, '../src/main/webapp/assets/journal_entry_a.jpg'),
+    (2, 2, '../src/main/webapp/assets/journal_entry_b.jpg');
