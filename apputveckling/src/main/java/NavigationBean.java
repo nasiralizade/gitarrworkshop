@@ -19,9 +19,9 @@ public class NavigationBean implements java.io.Serializable{
         this.selectedSection = "product";
         return "product";
     }
-    public String goToClientBook(){
-        this.selectedSection = "book";
-        return "book";
+    public String goToClientReserve(){
+        this.selectedSection = "Reserve";
+        return "Reserve";
     }
 
     public String getSelectedSection() {
