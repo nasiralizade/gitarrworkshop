@@ -1,3 +1,4 @@
+USE ProjectDB;
 -- Insert data into CLIENT table
 INSERT INTO CLIENT (CLIENT_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL, CLIENT_DATE)
 VALUES (1, 'John Doe', '123-456-7890', 'john.doe@example.com', '2023-01-01'),
