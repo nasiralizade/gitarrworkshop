@@ -1,16 +1,15 @@
 <div class="container-fluid"
      xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:ui="http://java.sun.com/jsf/facelets" >
+     xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
     <div class="row m-3 justify-content-center">
         <ui:repeat value="#{productsBean.products}" var="product">
             <div class="col-md-2 m-3 card" style="width: 300px">
                 <img src="#{request.contextPath}/resources/img/#{product.image}" class="card-img-top" alt="..."/>
                 <h4 class="card-title">#{product.name}</h4>
-                <p class="card-text">#{product.description} </p>
-                <p class="card-text">#{product.category}</p>
                 <h5 class="card-title">Price: #{product.price}</h5>
-                <p>Id: #{product.id}</p>
-                <a href="#" class=" card-footer">Läs mer...</a>
+                <h:form>
+                    <h:commandButton styleClass="card-footer" value="Läs mer..." action="#{productsBean.showProductDetails(product.id)}"/>
+                </h:form>
             </div>
         </ui:repeat>
     </div>

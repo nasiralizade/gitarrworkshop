@@ -1,9 +1,11 @@
 package admin.product;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-public class Product {
-    private Long id;
 
+public class Product {
+    private int id;
+    List<String> images = List.of("BobMarley.JPG", "IMG_1186.JPG", "IMG_1187.JPG", "IMG_1188.JPG", "IMG_1189.JPG");
 
     private String name;
     private String description;
@@ -13,9 +15,9 @@ public class Product {
     private String category;
     private String image;
 
-    public Product(String name, String description, String price, String quantity, String category, String image) {
+    public Product(int id, String name, String description, String price, String quantity, String category, String image) {
 
-        this.id= (long) ThreadLocalRandom.current().nextInt(1, 1000 + 1);
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -34,11 +36,11 @@ public class Product {
         this.image = "";
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -96,5 +98,13 @@ public class Product {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }
