@@ -32,6 +32,27 @@
       <div class="card-body">
          <div class="container">
 
+
+            <ui:repeat value="#{membersbean.memberlist}" var="memberlist">
+               <div class="row">
+
+                  <div class="col">
+                     <p class="card-text">#{memberlist.memberID}</p>
+                  </div>
+
+                  <div class="col">
+                     <p class="card-text">#{memberlist.clientName}</p>
+                  </div>
+
+                  <div class="col">
+                     <p class="card-text">#{memberlist.case_typ}</p>
+                  </div>
+
+               </div>
+               <hr/>
+            </ui:repeat>
+
+
             <div class="row">
 
                <div class="col">
