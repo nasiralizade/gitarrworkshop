@@ -31,7 +31,7 @@
     </div>
 
     <!-- Sidebar for desktop -->
-    <div class="d-none d-md-block vh-100">
+    <div class="d-none d-md-block vh-100 position-fixed">
         <div class="bg-dark text-white h-100 fs-5">
             <div class="d-flex flex-column h-100 p-2">
                 <ui:include src="nav-items.xhtml"/>
@@ -51,7 +51,7 @@
     </div>
 
     <!-- Content area -->
-    <div class="flex-grow-1">
+    <div class="flex-grow-1" style="margin-left: 200px;">
         <ui:insert name="content"/>
     </div>
 </div>
