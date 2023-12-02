@@ -1,4 +1,4 @@
-package admin.members;
+package admin.clients;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
