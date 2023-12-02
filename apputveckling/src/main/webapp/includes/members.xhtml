@@ -6,166 +6,69 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+
 <body>
 
 <div class="history_div">
    <h3>History</h3>
    <hr/>
-   <div class="row">
 
-      <div class="col">
-         <p class="card-text"><strong>Name: </strong></p>
-      </div>
+   <div class="card">
+      <div class="row">
 
-      <div class="col">
-         <p class="card-text"><strong>Appointment Typ: </strong></p>
-      </div>
+         <div class="col">
+            <p class="card-text"><strong>ID: </strong></p>
+         </div>
+         <div class="col">
+            <p class="card-text"><strong>Name: </strong></p>
+         </div>
 
-      <div class="col">
-         <p class="card-text"><strong>Time: </strong></p>
+         <div class="col">
+            <p class="card-text"><strong>Appointment Typ: </strong></p>
+         </div>
+
+         <div class="col">
+            <p class="card-text"><strong>Time: </strong></p>
+         </div>
+
       </div>
 
    </div>
 
+
+
+
    <div class="card mt-3 history_list">
+
+      <ui:repeat value="#{clientBean.clients}" var="clients">
+         <div class="row">
+            <div class="col">
+               <p class="card-text">#{clients.clientID}</p>
+            </div>
+
+            <div class="col">
+               <p class="card-text">#{clients.name}</p>
+            </div>
+
+            <div class="col">
+               <p class="card-text">#{clients.cas_type}</p>
+            </div>
+
+            <div class="col">
+               <p class="card-text">#{clients.date}</p>
+            </div>
+
+
+         </div>
+         <hr/>
+      </ui:repeat>
+
 
       <div class="card-body">
          <div class="container">
 
 
-            <ui:repeat value="#{membersbean.memberlist}" var="memberlist">
-               <div class="row">
 
-                  <div class="col">
-                     <p class="card-text">#{memberlist.memberID}</p>
-                  </div>
-
-                  <div class="col">
-                     <p class="card-text">#{memberlist.clientName}</p>
-                  </div>
-
-                  <div class="col">
-                     <p class="card-text">#{memberlist.case_typ}</p>
-                  </div>
-
-               </div>
-               <hr/>
-            </ui:repeat>
-
-
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">The Goat</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reparation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-20</p>
-               </div>
-
-            </div>
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Johannes Bestis</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-18</p>
-               </div>
-
-            </div>
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Nasir Bootstrap</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reparation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-16</p>
-               </div>
-
-            </div>
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Amarildo Min Chatgpt</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-15</p>
-               </div>
-
-            </div>
-
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Taha Kungen</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-15</p>
-               </div>
-
-            </div>
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Seran project-ledare</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-15</p>
-               </div>
-
-            </div>
-
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Emmanuel New Guy</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-15</p>
-               </div>
-
-            </div>
 
          </div>
 
@@ -182,23 +85,30 @@
 
 <div class=" m-3 p-xl-4 Medlemmar">
    <!-- Your content goes here -->
-   <label for="search_bar">Medlemmar:</label><br></br>
-   <input type="text" id="search_bar" name="fname" value="Sök namn"/>
 
 
-   <div class="list-group list-group-item-action test">
-      <a href="#" class="list-group-item active">Aaron Hank</a>
-      <a href="#" class="list-group-item">Abagnale Frank</a>
-      <a href="#" class="list-group-item">Abbey Edward</a>
-      <a href="#" class="list-group-item">Abel Reuben</a>
-      <a href="#" class="list-group-item">Bachelot Roselyne</a>
-      <a href="#" class="list-group-item">LiCarey Sandrank</a>
-      <a href="#" class="list-group-item">Dean James</a>
-      <a href="#" class="list-group-item">Link</a>
-      <a href="#" class="list-group-item">Link</a>
-      <a href="#" class="list-group-item">Link</a>
+   <h:form>
 
-   </div>
+      <h:inputText styleClass="custom-input" value="#{clientSearch.inputtext}" />
+      <h:commandButton styleClass="custom-button" value="Submit" action="#{clientSearch.Submited}" />
+
+
+      <div class="list-group list-group-item-action test">
+         <a href="#" class="list-group-item active">Aaron Hank</a>
+         <a href="#" class="list-group-item">Abagnale Frank</a>
+         <a href="#" class="list-group-item">Abbey Edward</a>
+         <a href="#" class="list-group-item">Abel Reuben</a>
+         <a href="#" class="list-group-item">Bachelot Roselyne</a>
+         <a href="#" class="list-group-item">LiCarey Sandrank</a>
+         <a href="#" class="list-group-item">Dean James</a>
+         <a href="#" class="list-group-item">Link</a>
+         <a href="#" class="list-group-item">Link</a>
+         <a href="#" class="list-group-item">Link</a>
+
+      </div>
+
+   </h:form>
+
 
    <button class="add_button" onclick="window.location.href='../includes/customerInfo.xhtml'">Add new members</button>
 </div>
