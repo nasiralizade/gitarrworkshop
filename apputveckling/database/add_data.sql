@@ -31,21 +31,21 @@ VALUES (1, 1, 'Journal entry for Project A'),
 
 -- Insert data into PROD_IMG table
 INSERT INTO PROD_IMG (PRODUCT_ID, IMG_PATH_STRING)
-VALUES (1, '../src/main/webapp/resources/img/BobMarley.JPG'),
-       (1, '../src/main/webapp/resources/img/IMG_1186.JPG'),
-       (1, '../src/main/webapp/resources/img/IMG_1187.JPG'),
-       (1, '../src/main/webapp/resources/img/IMG_1188.JPG'),
-       (2, '../src/main/webapp/resources/img/IMG_1189.JPG'),
-       (2, '../src/main/webapp/resources/img/BobMarley.JPG'),
-       (3, '../src/main/webapp/resources/img/IMG_1186.JPG'),
-       (3, '../src/main/webapp/resources/img/IMG_1187.JPG'),
-       (4, '../src/main/webapp/resources/img/IMG_1188.JPG'),
-       (4, '../src/main/webapp/resources/img/IMG_1189.JPG'),
-       (5, '../src/main/webapp/resources/img/BobMarley.JPG'),
-       (6, '../src/main/webapp/resources/img/IMG_1186.JPG'),
-       (7, '../src/main/webapp/resources/img/IMG_1187.JPG'),
-       (8, '../src/main/webapp/resources/img/IMG_1188.JPG'),
-       (9, '../src/main/webapp/resources/img/IMG_1189.JPG');
+VALUES (1, 'BobMarley.JPG'),
+       (1, 'IMG_1186.JPG'),
+       (1, 'IMG_1187.JPG'),
+       (1, 'IMG_1188.JPG'),
+       (2, 'IMG_1189.JPG'),
+       (2, 'BobMarley.JPG'),
+       (3, 'IMG_1186.JPG'),
+       (3, 'IMG_1187.JPG'),
+       (4, 'IMG_1188.JPG'),
+       (4, 'IMG_1189.JPG'),
+       (5, 'BobMarley.JPG'),
+       (6, 'IMG_1186.JPG'),
+       (7, 'IMG_1187.JPG'),
+       (8, 'IMG_1188.JPG'),
+       (9, 'IMG_1189.JPG');
 
 
 -- Insert data into JOURNAL_IMG table

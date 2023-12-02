@@ -1,18 +1,12 @@
 package admin.product;
 
-import jakarta.annotation.Resource;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
-import javax.sql.DataSource;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 @Named
 @RequestScoped
@@ -61,4 +55,6 @@ public class ProductBean implements Serializable {
     public List<Product> getProductsDetails() {
         return productsDetails;
     }
+
+
 }
