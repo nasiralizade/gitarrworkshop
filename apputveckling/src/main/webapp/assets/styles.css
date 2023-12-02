@@ -36,9 +36,8 @@
     overflow-y: auto;
 
 }
-#link:hover{
+#link_styl:hover{
     background-color: lightblue;
-
 }
 .history_list{
     position: relative;

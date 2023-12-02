@@ -78,12 +78,14 @@
 
     <div class="list-group list-group-action test">
 
-        <ui:repeat value="#{clientBean.clients}" var="client">
-            <h:form>
-                <a id="link" href="#{clientBean.setClientTest(client.clientID)}"
-                   class="list-group-item list-group-item-action">#{client.name}</a>
-            </h:form>
-        </ui:repeat>
+        <h:form>
+            <ui:repeat value="#{clientBean.clients}" var="client">
+                <h:commandLink action="#{clientBean.setClientTest(client.clientID)}" styleClass="list-group-item list-group-item-action">
+                    <f:param name="clientId" value="#{client.clientID}" />
+                    #{client.name}
+                </h:commandLink>
+            </ui:repeat>
+        </h:form>
 
     </div>
 

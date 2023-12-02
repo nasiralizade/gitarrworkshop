@@ -3,6 +3,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -24,12 +25,14 @@ public class ClientBean implements Serializable {
     @Resource(name = "msql_web")
     private DataSource dataSource;
 
+    @ManagedProperty("#{param.clientID}")
+    private Client test;
     private static final Logger LOGGER = Logger.getLogger(ClientBean.class.getName());
     private List<Client> clients;
-    List<Client> test;
 
-    public String setClientTest(int client_id) {
-        test=new ArrayList<>();
+
+    public String setClientTest(String client_id) {
+
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "SELECT * FROM client where CLIENT_ID="+ client_id;
@@ -39,7 +42,7 @@ public class ClientBean implements Serializable {
                  ResultSet resultSet = statement.executeQuery()) {
 
                 while (resultSet.next()) {
-                    test.add(mapResultSetToClient(resultSet));
+                    test =mapResultSetToClient(resultSet);
                 }
             }
         } catch (SQLException e) {
@@ -48,11 +51,11 @@ public class ClientBean implements Serializable {
         return "customerInfo.xhtml";
     }
 
-    public List<Client> getTest() {
+    public Client getTest() {
         return test;
     }
 
-    public void setTest(List<Client> test) {
+    public void setTest(Client test) {
         this.test = test;
     }
 
