@@ -26,6 +26,35 @@ public class ClientBean implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(ClientBean.class.getName());
     private List<Client> clients;
+    List<Client> test;
+
+    public String setClientTest(int client_id) {
+        test=new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT * FROM client where CLIENT_ID="+ client_id;
+
+
+            try (PreparedStatement statement = connection.prepareStatement(sql);
+                 ResultSet resultSet = statement.executeQuery()) {
+
+                while (resultSet.next()) {
+                    test.add(mapResultSetToClient(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
+        }
+        return "customerInfo.xhtml";
+    }
+
+    public List<Client> getTest() {
+        return test;
+    }
+
+    public void setTest(List<Client> test) {
+        this.test = test;
+    }
 
     @PostConstruct
     public void init() {

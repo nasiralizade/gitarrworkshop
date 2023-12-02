@@ -10,107 +10,86 @@
 <body>
 
 <div class="history_div">
-   <h3>History</h3>
-   <hr/>
+    <h3>History</h3>
+    <hr/>
 
-   <div class="card">
-      <div class="row">
+    <div class="card">
+        <div class="row">
 
-         <div class="col">
-            <p class="card-text"><strong>ID: </strong></p>
-         </div>
-         <div class="col">
-            <p class="card-text"><strong>Name: </strong></p>
-         </div>
-
-         <div class="col">
-            <p class="card-text"><strong>Appointment Typ: </strong></p>
-         </div>
-
-         <div class="col">
-            <p class="card-text"><strong>Time: </strong></p>
-         </div>
-
-      </div>
-
-   </div>
-
-
-
-
-   <div class="card mt-3 history_list">
-
-      <ui:repeat value="#{clientBean.clients}" var="clients">
-         <div class="row">
             <div class="col">
-               <p class="card-text">#{clients.clientID}</p>
+                <p class="card-text"><strong>ID: </strong></p>
+            </div>
+            <div class="col">
+                <p class="card-text"><strong>Name: </strong></p>
             </div>
 
             <div class="col">
-               <p class="card-text">#{clients.name}</p>
+                <p class="card-text"><strong>Appointment Typ: </strong></p>
             </div>
 
             <div class="col">
-               <p class="card-text">#{clients.cas_type}</p>
+                <p class="card-text"><strong>Time: </strong></p>
             </div>
 
-            <div class="col">
-               <p class="card-text">#{clients.date}</p>
+        </div>
+
+    </div>
+
+
+    <div class="card mt-3 history_list">
+
+        <ui:repeat value="#{clientBean.clients}" var="clients">
+            <div class="row">
+                <div class="col">
+                    <p class="card-text">#{clients.clientID}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{clients.name}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{clients.cas_type}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{clients.date}</p>
+                </div>
+
+
             </div>
+            <hr/>
+        </ui:repeat>
 
 
-         </div>
-         <hr/>
-      </ui:repeat>
-
-
-      <div class="card-body">
-         <div class="container">
-
-
-
-
-         </div>
-
-
-
-
-      </div>
-
-
-   </div>
+    </div>
 </div>
 
 
-
 <div class=" m-3 p-xl-4 Medlemmar">
-   <!-- Your content goes here -->
+    <!-- Your content goes here -->
 
 
-   <h:form>
+    <h:form>
 
-      <h:inputText styleClass="custom-input" value="#{clientSearch.inputtext}" />
-      <h:commandButton styleClass="custom-button" value="Submit" action="#{clientSearch.Submited}" />
+        <h:inputText styleClass="custom-input" value="#{clientSearch.inputtext}"/>
+        <h:commandButton styleClass="custom-button" value="Submit" action="#{clientSearch.Submited}"/>
+    </h:form>
 
+    <div class="list-group list-group-action test">
 
-      <div class="list-group list-group-item-action test">
-         <a href="#" class="list-group-item active">Aaron Hank</a>
-         <a href="#" class="list-group-item">Abagnale Frank</a>
-         <a href="#" class="list-group-item">Abbey Edward</a>
-         <a href="#" class="list-group-item">Abel Reuben</a>
-         <a href="#" class="list-group-item">Bachelot Roselyne</a>
-         <a href="#" class="list-group-item">LiCarey Sandrank</a>
-         <a href="#" class="list-group-item">Dean James</a>
-         <a href="#" class="list-group-item">Link</a>
-         <a href="#" class="list-group-item">Link</a>
-         <a href="#" class="list-group-item">Link</a>
+        <ui:repeat value="#{clientBean.clients}" var="client">
+            <h:form>
+                <a id="link" href="#{clientBean.setClientTest(client.clientID)}"
+                   class="list-group-item list-group-item-action">#{client.name}</a>
+            </h:form>
+        </ui:repeat>
 
-      </div>
-
-   </h:form>
+    </div>
 
 
-   <button class="add_button" onclick="window.location.href='../includes/customerInfo.xhtml'">Add new members</button>
+    <button class="add_button" onclick="window.location.href='customerInfo.xhtml'">Add new members</button>
+
 </div>
 
 

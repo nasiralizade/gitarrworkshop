@@ -11,7 +11,6 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class ClientSearch implements Serializable{
-    @Resource(name = "msql_web")
 
     private String inputtext;
     private DataSource dataSource;
