@@ -1,13 +1,21 @@
-USE ProjectDB;
+USE
+ProjectDB;
 -- Insert data into CLIENT table
 INSERT INTO CLIENT (CLIENT_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL, CLIENT_DATE)
 VALUES (1, 'John Doe', '123-456-7890', 'john.doe@example.com', '2023-01-01'),
        (2, 'Jane Smith', '987-654-3210', 'jane.smith@example.com', '2023-02-15');
 
 -- Insert data into PRODUCT table
-INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_PRICE, PRODUCT_HISTORY_DESC, PRODUCT_MAIN_DESC, PRODUCT_YEAR, PRODUCT_NAME)
-VALUES (1, 49.99, 'Product A history', 'Product A main description', 2022, 'Product A'),
-       (2, 79.99, 'Product B history', 'Product B main description', 2021, 'Product B');
+
+INSERT INTO PRODUCT (PRODUCT_PRICE, PRODUCT_HISTORY_DESC, PRODUCT_MAIN_DESC, PRODUCT_YEAR, PRODUCT_NAME)
+VALUES (49.99, 'Product A history', 'Product A main description', 2022, 'Product A'),
+       (79.99, 'Product B history', 'Product B main description', 2021, 'Product B'),
+       (99.99, 'Product C history', 'Product C main description', 2020, 'Product C'),
+       (149.99, 'Product D history', 'Product D main description', 2019, 'Product D'),
+       (199.99, 'Product E history', 'Product E main description', 2018, 'Product E'),
+       (249.99, 'Product F history', 'Product F main description', 2017, 'Product F'),
+       (299.99, 'Product G history', 'Product G main description', 2016, 'Product G');
+
 
 -- Insert data into CASES table with NULL PRODUCT_ID
 INSERT INTO CASES (CASE_ID, MEMBER_ID, PRODUCT_ID, STATUS, CASE_DATE_START, CASE_DATE_END, CASE_PROFIT, CASE_DESC,
@@ -22,9 +30,23 @@ VALUES (1, 1, 'Journal entry for Project A'),
        (2, 2, 'Journal entry for Project B');
 
 -- Insert data into PROD_IMG table
-INSERT INTO PROD_IMG (PROD_IMG_ID, PRODUCT_ID, IMG_PATH_STRING)
-VALUES (1, 1, '../src/main/webapp/assets/product_a.jpg'),
-       (2, 2, '../src/main/webapp/assets/product_b.jpg');
+INSERT INTO PROD_IMG (PRODUCT_ID, IMG_PATH_STRING)
+VALUES (1, '../src/main/webapp/resources/img/BobMarley.JPG'),
+       (1, '../src/main/webapp/resources/img/IMG_1186.JPG'),
+       (1, '../src/main/webapp/resources/img/IMG_1187.JPG'),
+       (1, '../src/main/webapp/resources/img/IMG_1188.JPG'),
+       (2, '../src/main/webapp/resources/img/IMG_1189.JPG'),
+       (2, '../src/main/webapp/resources/img/BobMarley.JPG'),
+       (3, '../src/main/webapp/resources/img/IMG_1186.JPG'),
+       (3, '../src/main/webapp/resources/img/IMG_1187.JPG'),
+       (4, '../src/main/webapp/resources/img/IMG_1188.JPG'),
+       (4, '../src/main/webapp/resources/img/IMG_1189.JPG'),
+       (5, '../src/main/webapp/resources/img/BobMarley.JPG'),
+       (6, '../src/main/webapp/resources/img/IMG_1186.JPG'),
+       (7, '../src/main/webapp/resources/img/IMG_1187.JPG'),
+       (8, '../src/main/webapp/resources/img/IMG_1188.JPG'),
+       (9, '../src/main/webapp/resources/img/IMG_1189.JPG');
+
 
 -- Insert data into JOURNAL_IMG table
 INSERT INTO JOURNAL_IMG (IMG_ID, JOURNAL_ID, IMG_PATH_STRING)
