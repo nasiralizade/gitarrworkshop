@@ -6,4 +6,7 @@
   <persistence-unit name="default">
 
   </persistence-unit>
+  <persistence-unit name="msql_web">
+    <jta-data-source>msql_web</jta-data-source>
+  </persistence-unit>
 </persistence>
