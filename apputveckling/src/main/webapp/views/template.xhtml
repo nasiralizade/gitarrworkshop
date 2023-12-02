@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <head>
     <title>My Application</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
@@ -30,7 +31,7 @@
     </div>
 
     <!-- Sidebar for desktop -->
-    <div class="d-none d-md-block vh-100">
+    <div class="d-none d-md-block vh-100 position-fixed">
         <div class="bg-dark text-white h-100 fs-5">
             <div class="d-flex flex-column h-100 p-2">
                 <ui:include src="nav-items.xhtml"/>
@@ -50,7 +51,7 @@
     </div>
 
     <!-- Content area -->
-    <div class="flex-grow-1">
+    <div class="flex-grow-1" style="margin-left: 200px;">
         <ui:insert name="content"/>
     </div>
 </div>
