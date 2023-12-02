@@ -2,14 +2,18 @@ package admin.product;
 
 import jakarta.persistence.*;
 
+/**
+ * this class is used to get the list of products from the database
+ * and to show the details of a specific product
+ */
 @Entity
 @Table(name = "PRODUCT")
 public class Product {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int PRODUCT_ID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // used to generate the id automatically
+    private int PRODUCT_ID;  // the id of the product
     @Column(name = "PRODUCT_NAME")
     private String PRODUCT_NAME;
     @Column(name = "PRODUCT_PRICE")

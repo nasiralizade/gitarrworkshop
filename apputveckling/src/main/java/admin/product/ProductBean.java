@@ -8,16 +8,26 @@ import jakarta.persistence.PersistenceContext;
 
 import java.io.Serializable;
 import java.util.List;
+
+/**
+ * this class is used to get the list of products from the database
+ * and to show the details of a specific product
+ * @see Product for the product entity
+ */
 @Named
 @RequestScoped
 public class ProductBean implements Serializable {
     @Produces
     @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
-    List<Product> products;
-    List<Product> productsDetails;
-    private String isShowProductDetails = "false";
+    List<Product> products; // used to get the list of products from the database
+    List<Product> productsDetails; // used to show the details of a specific product
+    private String isShowProductDetails = "false"; // used to show the details of a specific product
 
+    /**
+     * this method is used to get the value of isShowProductDetails
+     * @return the value of isShowProductDetails
+     */
     public String getIsShowProductDetails() {
         return isShowProductDetails;
     }
@@ -35,6 +45,13 @@ public class ProductBean implements Serializable {
         this.productsDetails = productsDetails;
     }
 
+    /**
+     * this method is used to show the details of a specific product
+     * @see Product for the product entity
+     * @param productId the id of the product
+     *                  the id is used to get the product from the database
+     *                  and to show the details of the product
+     */
     public void showProductDetails(int productId){
         productsDetails = entityManager.createQuery("select p from Product p where p.PRODUCT_ID = :productId", Product.class)
                 .setParameter("productId", productId)
@@ -43,15 +60,27 @@ public class ProductBean implements Serializable {
 
     }
 
+    /**
+     * this method is used to get the list of products from the database
+     * @return the list of products
+     */
     public List<Product> getProducts() {
         products = entityManager.createQuery("select p from Product p", Product.class).getResultList();
         return products;
     }
 
+    /**
+     * this method is used to set the list of products
+     * @param products the list of products
+     */
     public void setProducts(List<Product> products) {
         this.products = products;
     }
 
+    /**
+     * this method is used to get the list of products from the database
+     * @return the list of products
+     */
     public List<Product> getProductsDetails() {
         return productsDetails;
     }

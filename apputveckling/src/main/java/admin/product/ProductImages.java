@@ -2,6 +2,10 @@ package admin.product;
 
 import jakarta.persistence.*;
 
+/**
+ * Product images entity
+ * This class is used to get product images from the database
+ */
 @Entity
 @Table(name = "PROD_IMG")
 public class ProductImages {
