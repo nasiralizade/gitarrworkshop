@@ -2,13 +2,15 @@
      xmlns="http://www.w3.org/1999/xhtml"
      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
     <div class="row m-3 justify-content-center">
-        <ui:repeat value="#{productsBean.products}" var="product">
+        <h1>Products</h1>
+        <h1>#{productBean.products.size()}</h1>
+        <ui:repeat value="#{productBean.products}" var="product">
             <div class="col-md-2 m-3 card" style="width: 300px">
-                <img src="#{request.contextPath}/resources/img/#{product.image}" class="card-img-top" alt="..."/>
-                <h4 class="card-title">#{product.name}</h4>
-                <h5 class="card-title">Price: #{product.price}</h5>
+                <img src="#{request.contextPath}/resources/img/BobMarley.JPG" class="card-img-top" alt="..."/>
+                <h4 class="card-title">#{product.PRODUCT_NAME}</h4>
+                <h5 class="card-title">Price: #{product.PRODUCT_PRICE}</h5>
                 <h:form>
-                    <h:commandButton styleClass="card-footer" value="Läs mer..." action="#{productsBean.showProductDetails(product.id)}"/>
+                    <h:commandButton styleClass="card-footer" value="Läs mer..." action="#{productBean.showProductDetails(product.PRODUCT_ID)}"/>
                 </h:form>
             </div>
         </ui:repeat>
