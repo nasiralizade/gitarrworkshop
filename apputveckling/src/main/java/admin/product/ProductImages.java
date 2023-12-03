@@ -40,4 +40,5 @@ public class ProductImages {
     public void setImgPathString(String imgPathString) {
         this.imgPathString = imgPathString;
     }
+
 }
