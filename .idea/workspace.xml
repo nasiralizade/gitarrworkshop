@@ -10,8 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
-      <change afterPath="$PROJECT_DIR$/apputveckling/database/drop_database.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/cases/cases.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/cases/casesbean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/cases/casesbean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/cassesContent.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/cassesContent.xhtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +30,17 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Members" />
+        <entry key="$PROJECT_DIR$" value="PROTOTYPE_1_dbjojo" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="client-page" />
+      </list>
+    </option>
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -63,8 +72,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Database",
-    "import_schema_mapping": "<schema-mapping>\n  <databases>\n    <list>\n      <schema-mapping-item>\n        <source-data-source-id>58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be</source-data-source-id>\n        <source-path>schema/&quot;test_schema&quot;</source-path>\n        <target-data-source-id>58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be</target-data-source-id>\n        <target-path>schema/&quot;ProjectDB&quot;</target-path>\n      </schema-mapping-item>\n    </list>\n  </databases>\n</schema-mapping>",
+    "git-widget-placeholder": "Cases",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -77,7 +85,11 @@
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
-      "mysql"
+      "mysql",
+      "redshift"
+    ],
+    "RunConfigurationTargetLRU": [
+      "bab94654-a58d-4cb3-a92c-9ec9ac912731"
     ]
   }
 }]]></component>
@@ -95,7 +107,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GlassFish 7" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 7.0.10" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17">
+    <configuration name="add_data.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/apputveckling/database/add_data.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="bab94654-a58d-4cb3-a92c-9ec9ac912731" />
+      <method v="2" />
+    </configuration>
+    <configuration name="create_database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/apputveckling/database/create_database.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="bab94654-a58d-4cb3-a92c-9ec9ac912731" />
+      <method v="2" />
+    </configuration>
+    <configuration name="drop_database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/apputveckling/database/drop_database.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="bab94654-a58d-4cb3-a92c-9ec9ac912731" />
+      <method v="2" />
+    </configuration>
+    <configuration name="GlassFish 7" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 6.9.0" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17">
       <deployment>
         <artifact name="apputveckling:war exploded">
           <settings />
@@ -167,13 +197,16 @@
     </configuration>
     <list>
       <item itemvalue="Application.DB" />
+      <item itemvalue="Database Script.add_data.sql" />
+      <item itemvalue="Database Script.create_database.sql" />
+      <item itemvalue="Database Script.drop_database.sql" />
       <item itemvalue="GlassFish Server.GlassFish 7" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DB" />
-        <item itemvalue="Application.DB" />
-        <item itemvalue="Application.DB" />
+        <item itemvalue="Database Script.add_data.sql" />
+        <item itemvalue="Database Script.create_database.sql" />
+        <item itemvalue="Database Script.drop_database.sql" />
         <item itemvalue="Application.DB" />
         <item itemvalue="Application.DB" />
       </list>
@@ -193,8 +226,6 @@
       <workItem from="1701095575408" duration="10292000" />
       <workItem from="1701162728497" duration="62000" />
       <workItem from="1701177270014" duration="599000" />
-      <workItem from="1701184424942" duration="851000" />
-      <workItem from="1701266763633" duration="1806000" />
     </task>
     <task id="LOCAL−00001" summary="inte helt klar med att fixa db:n">
       <option name="closed" value="true" />

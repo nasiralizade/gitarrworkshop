@@ -1,16 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
 <head>
+
    <title>Work Cases</title>
    <style>
-      body {
-         -webkit-touch-callout: none;
-         -webkit-user-select: none;
-         -khtml-user-select: none;
-         -moz-user-select: none;
-         -ms-user-select: none;
-         user-select: none;
-      }
 
       .case {
          cursor: pointer;
@@ -29,6 +23,9 @@
          background-color: #e0e0e0;
          transition: max-height 0.3s ease;
          overflow: hidden;
+      }
+      .case_des{
+         display: none;
       }
 
       .arrow {
@@ -80,18 +77,16 @@
       function toggleDescription(caseId) {
          var description = document.getElementById("description_" + caseId);
          var arrow = document.getElementById("arrow_" + caseId);
-
+         var des_title = document.getElementById("case_des_" + caseId)
          if (description.style.display === 'none') {
             description.style.display = 'block';
+            des_title.style.display = 'block'
             arrow.style.transform = 'rotate(225deg)';
          } else {
             description.style.display = 'none';
+            des_title.style.display = 'none'
             arrow.style.transform = 'rotate(45deg)';
          }
-      }
-
-      function editCase(caseId) {
-         alert("Edit Case " + caseId);
       }
    </script>
 </head>
@@ -109,10 +104,12 @@
       <span class="status-text">Status: Done</span>
    </div>
    <span id="arrow_1" class="arrow"></span>
-   <span class="case-number">Case Number: 1</span>
-   <div id="description_1" class="description">
-      Description for Case 1: Description here.
-      <span class="edit-button" onclick="editCase(1)">Edit</span>
+   <span class="case-number">Case Number: #{casesbean.my_case.case_id}</span>
+   <div id = "case_des_1" class ="case_des"> Description for case: </div>
+   <div id="description_1" class="description" contenteditable="true">
+            #{casesbean.my_case.case_desc}
+      <span class="edit-button" onclick="toggleContentEditable(1)">Edit</span>
+      <input type="submit" class="update-button"></input>
    </div>
 </div>
 
@@ -125,7 +122,7 @@
    <span class="case-number">Case Number: 2</span>
    <div id="description_2" class="description">
       Description for Case 2: Description here.
-      <span class="edit-button" onclick="editCase(2)">Edit</span>
+      <span class="edit-button"> Edit</span>
    </div>
 </div>
 
@@ -138,7 +135,7 @@
    <span class="case-number">Case Number: 3</span>
    <div id="description_3" class="description">
       Description for Case 3: Description here.
-      <span class="edit-button" onclick="editCase(3)">Edit</span>
+      <span class="edit-button">Edit</span>
    </div>
 </div>
 
