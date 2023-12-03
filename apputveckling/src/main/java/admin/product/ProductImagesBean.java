@@ -5,6 +5,7 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -65,6 +66,7 @@ public class ProductImagesBean implements Serializable {
      * @param productId the product id
      * @param imgPathString the image path string [example:image49.jpg]
      */
+    @Transactional
     public void addProductImages(int productId, String imgPathString) {
         ProductImages productImages = new ProductImages();
         productImages.setPRODUCT_ID(productId);
