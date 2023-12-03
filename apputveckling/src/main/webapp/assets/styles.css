@@ -73,3 +73,11 @@
     margin: auto;
 }
 
+.calendar-content-cust {
+    text-align: center;
+    margin: auto;
+}
+
+.calendar-header-cust {
+    font-family: Gadugi, fantasy;
+}

@@ -12,9 +12,10 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/views/template.xhtml">
         <ui:define name="content">
-            <h1>"calendar action"</h1>
-            <ui:include src="../includes/Calendar.xhtml"/>
-            <button onclick="location.href='admin_home.xhtml'">go back to home</button>
+            <div class="calendar-content-cust">
+                <h1 class="calendar-header-cust">Din kalender</h1>
+                <ui:include src="../includes/Calendar.xhtml"/>
+            </div>
         </ui:define>
 
 
