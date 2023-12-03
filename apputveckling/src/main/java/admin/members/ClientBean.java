@@ -24,14 +24,21 @@ import java.util.logging.Logger;
 public class ClientBean implements Serializable {
     @Resource(name = "msql_web")
     private DataSource dataSource;
+    private Client clientToEdit;
 
-    @ManagedProperty("#{param.clientID}")
-    private Client test;
+    private String searchName;
     private static final Logger LOGGER = Logger.getLogger(ClientBean.class.getName());
     private List<Client> clients;
 
+    public String getSearchName() {
+        return searchName;
+    }
 
-    public String setClientTest(String client_id) {
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
+    }
+
+    public String setClientToEdit(String client_id) {
 
 
         try (Connection connection = dataSource.getConnection()) {
@@ -42,7 +49,7 @@ public class ClientBean implements Serializable {
                  ResultSet resultSet = statement.executeQuery()) {
 
                 while (resultSet.next()) {
-                    test =mapResultSetToClient(resultSet);
+                    clientToEdit =mapResultSetToClient(resultSet);
                 }
             }
         } catch (SQLException e) {
@@ -51,13 +58,14 @@ public class ClientBean implements Serializable {
         return "customerInfo.xhtml";
     }
 
-    public Client getTest() {
-        return test;
+    public void setClientToEdit(Client clientToEdit) {
+        this.clientToEdit = clientToEdit;
     }
 
-    public void setTest(Client test) {
-        this.test = test;
+    public Client getClientToEdit() {
+        return clientToEdit;
     }
+
 
     @PostConstruct
     public void init() {
@@ -120,9 +128,9 @@ public class ClientBean implements Serializable {
         return client;
     }
 
-    private Client clientToEdit;
 
-    public String editClient(int clientID) {
+
+    public void editClient(int clientID) {
         try (Connection connection = dataSource.getConnection()) {
             String sql = "SELECT * FROM CLIENT WHERE CLIENT_ID = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -136,12 +144,9 @@ public class ClientBean implements Serializable {
         } catch (SQLException e) {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
-        return "editClient"; // Return the name of the page where the user can edit the member data
+        //return "editClient"; // Return the name of the page where the user can edit the member data
     }
 
-    public Client getClientToEdit() {
-        return clientToEdit;
-    }
 
     public String saveOrUpdateClient() {
         try (Connection connection = dataSource.getConnection()) {
@@ -164,21 +169,20 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
         loadClients();
-        return "clients"; // Return the name of the page where the user can see the member list
+        return "admin_members.xhtml"; // Return the name of the page where the user can see the member list
     }
 
     public String addClient() {
         clientToEdit = new Client(); // Create a new Member object
         clientToEdit.setClientID(-1); // Set memberID to -1 to represent a new member
-        return "editClient"; // Return the name of the page where the user can input the data for the new member
+        return "Add Client Info"; // Return the name of the page where the user can input the data for the new member
     }
 
 
     public String deleteEntity(int clientID) {
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "DELETE FROM CLIENT WHERE CLIENT_ID = ?";
+            String sql = "DELETE FROM CLIENT WHERE CLIENT_ID ="+ clientID;
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, clientID);
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -186,7 +190,7 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
         loadClients();
-        return "clients"; // Return the name of the page where the user can see the member list
+        return "admin_members.xhtml"; // Return the name of the page where the user can see the member list
     }
 
     // Getter method for the members list
@@ -194,7 +198,51 @@ public class ClientBean implements Serializable {
         return clients;
     }
 
+
+    public String Search(){
+
+        List<Client> matchingName=new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT * FROM CLIENT WHERE CLIENT_NAME LIKE '%" + this.searchName + "%'";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+
+                ResultSet resultSet =  statement.executeQuery();
+
+                while (resultSet.next()) {
+
+                    Client Name = mapResultSetToClient(resultSet);
+                    matchingName.add(Name);
+
+                    for (Client match:clients) {
+
+                        if (match.getName().equals(Name.getName())) {
+                            clients.remove(match); // Delete the person if found
+                        }
+                    }
+                }
+
+                for (Client match:matchingName) {
+                    clients.add(0,match);
+                }
+
+            }
+        } catch (SQLException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("An error occurred while deleting the member."));
+            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
+        }
+
+        return "admin_members.xhtml";
+    }
+
+
+
+
     public static void main(String[] arg){
         ClientBean D=new ClientBean();
+
+        D.deleteEntity(1);
     }
+
+
+
 }

@@ -71,16 +71,16 @@
 
 
     <h:form>
-
-        <h:inputText styleClass="custom-input" value="#{clientSearch.inputtext}"/>
-        <h:commandButton styleClass="custom-button" value="Submit" action="#{clientSearch.Submited}"/>
+        <h5 style="margin-top:2px">Client List</h5>
+        <h:inputText styleClass="custom-input" value="#{clientBean.searchName}"/>
+        <h:commandButton styleClass="custom-button" value="Submit" action="#{clientBean.Search()}"/>
     </h:form>
 
     <div class="list-group list-group-action test">
 
         <h:form>
             <ui:repeat value="#{clientBean.clients}" var="client">
-                <h:commandLink action="#{clientBean.setClientTest(client.clientID)}" styleClass="list-group-item list-group-item-action">
+                <h:commandLink action="#{clientBean.setClientToEdit(client.clientID)}" styleClass="list-group-item list-group-item-action">
                     <f:param name="clientId" value="#{client.clientID}" />
                     #{client.name}
                 </h:commandLink>
@@ -89,8 +89,9 @@
 
     </div>
 
-
-    <button class="add_button" onclick="window.location.href='customerInfo.xhtml'">Add new members</button>
+<h:form>
+    <h:commandButton styleClass="add_button" value="Add New Client" action="popUp.xhtml"/>
+</h:form>
 
 </div>
 

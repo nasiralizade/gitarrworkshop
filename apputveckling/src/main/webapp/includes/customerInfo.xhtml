@@ -11,11 +11,15 @@
     <div class="customer_info">
 
         <h1>Client Details</h1>
+        <h:form>
+            <h:commandButton value="Delete Client" action="#{clientBean.deleteEntity(clientBean.clientToEdit.clientID)}"/>
+            <h:commandButton value="Edit Client" action="editMember"/>
+        </h:form>
 
-        <p>#{clientBean.test.clientID}</p>
-        <p>#{clientBean.test.name}</p>
-        <p>#{clientBean.test.date}</p>
-        <p>#{clientBean.test.email}</p>
+    <p>#{clientBean.clientToEdit.clientID}</p>
+        <p>#{clientBean.clientToEdit.name}</p>
+        <p>#{clientBean.clientToEdit.date}</p>
+        <p>#{clientBean.clientToEdit.email}</p>
 
 
 
