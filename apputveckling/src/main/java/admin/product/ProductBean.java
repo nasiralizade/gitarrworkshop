@@ -104,7 +104,7 @@ public class ProductBean implements Serializable {
     }
 
     /**
-     * this method is used to update a product in the database
+     * this method is used to delete a product in the database
      * @param productId the id of the product
      */
 
