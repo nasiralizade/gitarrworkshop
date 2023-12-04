@@ -8,5 +8,10 @@
   </persistence-unit>
   <persistence-unit name="msql_web">
     <jta-data-source>msql_web</jta-data-source>
+  <persistence-unit name="PRODUCT" transaction-type="JTA">
+    <jta-data-source>mysql_web</jta-data-source>
+  </persistence-unit>
+  <persistence-unit name="ProductImages" transaction-type="JTA">
+    <jta-data-source>mysql_web</jta-data-source>
   </persistence-unit>
 </persistence>
