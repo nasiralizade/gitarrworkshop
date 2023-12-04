@@ -5,6 +5,7 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -64,31 +65,14 @@ public class ProductImagesBean implements Serializable {
      * Add product images to the database
      * @param productId the product id
      * @param imgPathString the image path string [example:image49.jpg]
+     * @Deprecated need to be removed in the future or changed to a better method
      */
+    @Transactional
     public void addProductImages(int productId, String imgPathString) {
         ProductImages productImages = new ProductImages();
         productImages.setPRODUCT_ID(productId);
         productImages.setImgPathString(imgPathString);
         entityManager.persist(productImages);
     }
-    /**
-     * Delete product images from the database
-     * @param productId the product id
-     */
-    public void deleteProductImages(int productId) {
-        entityManager.createQuery("delete from ProductImages p where p.PRODUCT_ID = :productId")
-                .setParameter("productId", productId)
-                .executeUpdate();
-    }
-    /**
-     * Delete one product image from the database
-     * @param productId the product id
-     * @param imgPathString the image path string [example:image49.jpg]
-     */
-    public void deleteOneProductImage(int productId, String imgPathString) {
-        entityManager.createQuery("delete from ProductImages p where p.PRODUCT_ID = :productId and p.imgPathString = :imgPathString")
-                .setParameter("productId", productId)
-                .setParameter("imgPathString", imgPathString)
-                .executeUpdate();
-    }
+   
 }
