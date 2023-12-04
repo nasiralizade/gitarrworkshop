@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 @Named
 @SessionScoped
 public class ClientBean implements Serializable {
-    @Resource(name = "projectdb")
+    @Resource(name = "mysql_web")
     private DataSource dataSource;
     private Client clientToEdit;
 
