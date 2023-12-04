@@ -1,16 +1,20 @@
 package admin.DB;
 
 import jakarta.annotation.Resource;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import javax.sql.DataSource;
+import java.io.Serializable;
 import java.sql.*;
 
-public class DB {
-
+@Named
+@SessionScoped
+public class DB implements Serializable {
 
     @Resource(name = "mysql_web")
     private DataSource dataSource;
-
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -219,19 +223,18 @@ public class DB {
             throw new RuntimeException(e);
         }
     }
-
-    public void InsertMember(String name, Date date, int phoneNumber, String email){
+    @Inject
+    public void InsertMember(String name, String phoneNumber, String email){
 
         try {
             Connection con = dataSource.getConnection();
-            String sql = "INSERT INTO Member (Member_name, Member_date, Member_phone,Member_email) VALUES (?, ?,?,?)";
+            String sql = "INSERT INTO CLIENT (CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL,CLIENT_DATE) VALUES (?,?,?,CURRENT_DATE)";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setString(1, name);
-            preparedStatement.setDate(2, date);
-            preparedStatement.setInt(3, phoneNumber);
-            preparedStatement.setString(4, email);
+            preparedStatement.setString(2, phoneNumber);
+            preparedStatement.setString(3, email);
 
 
             int rowsAffected = preparedStatement.executeUpdate();

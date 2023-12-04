@@ -15,22 +15,22 @@
          <h:outputLabel for="txtName">
             <h:outputText value="Enter Name"> </h:outputText>
          </h:outputLabel>
-         <h:inputText id="txtName" value="#{obj.name}" ></h:inputText>
+         <h:inputText id="txtName" value="#{signup.name}" ></h:inputText>
          <br></br>
 
          <h:outputLabel for="txtpass">
             <h:outputText value="Enter Password"> </h:outputText>
          </h:outputLabel>
-         <h:inputText id="txtpass" value="#{obj.password}" ></h:inputText>
+         <h:inputText id="txtpass" value="#{signup.password}" ></h:inputText>
          <br></br>
 
          <h:outputLabel for="txtemail">
             <h:outputText value="Enter Email"> </h:outputText>
          </h:outputLabel>
-         <h:inputText id="txtemail" value="#{obj.email}" ></h:inputText>
+         <h:inputText id="txtemail" value="#{signup.email}" ></h:inputText>
          <br></br>
 
-         <h:commandButton id="cmdInsert" value="Create account" action="#{obj.add()}"></h:commandButton>
+         <h:commandButton id="cmdInsert" value="Create account" action="#{signup.add()}"></h:commandButton>
       </h:form>
 
 

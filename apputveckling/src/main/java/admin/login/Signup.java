@@ -1,8 +1,19 @@
 package admin.login;
 
+import admin.DB.DB;
+import admin.DB.SetDB;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
-@Named("obj")
-public class Signup {
+
+import javax.sql.DataSource;
+import java.io.Serializable;
+@Named
+@SessionScoped
+@Resource(name = "mysql_web")
+
+public class Signup implements Serializable {
 
     private String name;
     private String password;
@@ -46,8 +57,15 @@ public class Signup {
         this.phone = phone;
     }
 
+
     public String add(){
         System.out.println(name+" "+phone+" "+email+" "+ password);
+
+        DB databaseExample = new DB();
+
+        databaseExample.InsertMember(name,phone,email);
+
         return "loggedinpage";
+
     }
 }
