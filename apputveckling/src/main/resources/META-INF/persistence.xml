@@ -6,4 +6,7 @@
   <persistence-unit name="default">
 
   </persistence-unit>
+  <persistence-unit name="test" transaction-type="JTA">
+    <jta-data-source>mysql_web</jta-data-source>
+  </persistence-unit>
 </persistence>
