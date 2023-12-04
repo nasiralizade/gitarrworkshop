@@ -114,18 +114,6 @@ public class ProductBean implements Serializable {
     }
 
 
-    /**
-     * this method is used to delete a product in the database
-     *
-     * @param productId the id of the product
-     */
-    public void deleteProduct(int productId) {
-        entityManager.createQuery("delete from Product p where p.PRODUCT_ID = :productId")
-                .setParameter("productId", productId)
-                .executeUpdate();
-        ProductImagesBean productImagesBean = new ProductImagesBean();
-        productImagesBean.deleteProductImages(productId);
-    }
 
 
 }

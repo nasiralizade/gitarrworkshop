@@ -73,24 +73,5 @@ public class ProductImagesBean implements Serializable {
         productImages.setImgPathString(imgPathString);
         entityManager.persist(productImages);
     }
-    /**
-     * Delete product images from the database
-     * @param productId the product id
-     */
-    public void deleteProductImages(int productId) {
-        entityManager.createQuery("delete from ProductImages p where p.PRODUCT_ID = :productId")
-                .setParameter("productId", productId)
-                .executeUpdate();
-    }
-    /**
-     * Delete one product image from the database
-     * @param productId the product id
-     * @param imgPathString the image path string [example:image49.jpg]
-     */
-    public void deleteOneProductImage(int productId, String imgPathString) {
-        entityManager.createQuery("delete from ProductImages p where p.PRODUCT_ID = :productId and p.imgPathString = :imgPathString")
-                .setParameter("productId", productId)
-                .setParameter("imgPathString", imgPathString)
-                .executeUpdate();
-    }
+   
 }
