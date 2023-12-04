@@ -5,6 +5,7 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,6 +21,16 @@ public class ProductBean implements Serializable {
     @Produces
     @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
+    Product newProduct= new Product();
+
+    public Product getNewProduct() {
+        return newProduct;
+    }
+
+    public void setNewProduct(Product newProduct) {
+        this.newProduct = newProduct;
+    }
+
     List<Product> products; // used to get the list of products from the database
     List<Product> productsDetails; // used to show the details of a specific product
     private String isShowProductDetails = "false"; // used to show the details of a specific product
@@ -93,21 +104,15 @@ public class ProductBean implements Serializable {
      * @param productHistoryDesc the history description of the product
      * @param productYear the year of the product
      */
-    public void addProduct(String productName, int productPrice, String productMainDesc, String productHistoryDesc, int productYear){
-        Product product = new Product();
-        product.setPRODUCT_NAME(productName);
-        product.setPRODUCT_PRICE(productPrice);
-        product.setPRODUCT_MAIN_DESC(productMainDesc);
-        product.setPRODUCT_HISTORY_DESC(productHistoryDesc);
-        product.setPRODUCT_YEAR(productYear);
-        entityManager.persist(product);
+    public void addProduct(){
+
     }
 
     /**
      * this method is used to update a product in the database
      * @param productId the id of the product
      */
-
+@Transactional
     public void deleteProduct(int productId){
         entityManager.createQuery("delete from Product p where p.PRODUCT_ID = :productId")
                 .setParameter("productId", productId)
