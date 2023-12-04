@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 @Named
 @SessionScoped
 public class ClientBean implements Serializable {
-    @Resource(name = "msql_web")
+    @Resource(name = "projectdb")
     private DataSource dataSource;
     private Client clientToEdit;
 
@@ -33,11 +33,6 @@ public class ClientBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        MysqlDataSource dataSource1 = new MysqlDataSource();
-        dataSource1.setURL("jdbc:mysql://localhost:3306/Projectdb");
-        dataSource1.setUser("root2");
-        dataSource1.setPassword("1234");
-        dataSource = dataSource1;
 
         // Load member data from the database during bean initialization
         loadClients();
