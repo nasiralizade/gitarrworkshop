@@ -78,6 +78,10 @@
     margin: auto;
 }
 
-.calendar-header-cust {
-    font-family: Gadugi, fantasy;
+
+.calendar-flex-col1-cust {
+    width: 25%;
+}
+.calendar-flex-col2-cust {
+    width: 50%;
 }
