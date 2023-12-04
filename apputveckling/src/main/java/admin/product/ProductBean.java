@@ -115,6 +115,4 @@ public class ProductBean implements Serializable {
        ProductImagesBean productImagesBean = new ProductImagesBean();
          productImagesBean.deleteProductImages(productId);
     }
-
-
 }

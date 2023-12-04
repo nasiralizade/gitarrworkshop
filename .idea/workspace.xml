@@ -10,8 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
-      <change afterPath="$PROJECT_DIR$/apputveckling/database/drop_database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/product/ProductBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/product/ProductBean.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Members" />
+        <entry key="$PROJECT_DIR$" value="Calendar___patched" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -63,7 +63,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Database",
+    "git-widget-placeholder": "Products",
     "import_schema_mapping": "<schema-mapping>\n  <databases>\n    <list>\n      <schema-mapping-item>\n        <source-data-source-id>58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be</source-data-source-id>\n        <source-path>schema/&quot;test_schema&quot;</source-path>\n        <target-data-source-id>58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be</target-data-source-id>\n        <target-path>schema/&quot;ProjectDB&quot;</target-path>\n      </schema-mapping-item>\n    </list>\n  </databases>\n</schema-mapping>",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
