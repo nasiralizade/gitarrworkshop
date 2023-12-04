@@ -104,16 +104,5 @@ public class ProductBean implements Serializable {
         return productsDetails;
     }
 
-    /**
-     * this method is used to get the list of product images from the database
-     * TODO: add the product images to the database
-     */
-    @Transactional
-    public void addProduct() {
-        entityManager.persist(newProduct);
-    }
-
-
-
 
 }

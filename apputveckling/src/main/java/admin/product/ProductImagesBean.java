@@ -65,6 +65,7 @@ public class ProductImagesBean implements Serializable {
      * Add product images to the database
      * @param productId the product id
      * @param imgPathString the image path string [example:image49.jpg]
+     * @Deprecated need to be removed in the future or changed to a better method
      */
     @Transactional
     public void addProductImages(int productId, String imgPathString) {
