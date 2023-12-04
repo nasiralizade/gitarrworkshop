@@ -9,8 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
-default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="Final touch for prototype2">
+    <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="Final touch for prototype2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apputveckling/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apputveckling/package.json" beforeDir="false" />
@@ -80,6 +79,7 @@ default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment=
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+
 
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
