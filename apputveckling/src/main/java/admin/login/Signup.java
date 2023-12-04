@@ -11,10 +11,9 @@ import javax.sql.DataSource;
 import java.io.Serializable;
 @Named
 @SessionScoped
-@Resource(name = "mysql_web")
-
 public class Signup implements Serializable {
-
+    //@Inject
+    private DB databaseExample;
     private String name;
     private String password;
     private String email;
@@ -61,9 +60,9 @@ public class Signup implements Serializable {
     public String add(){
         System.out.println(name+" "+phone+" "+email+" "+ password);
 
-        DB databaseExample = new DB();
+        //DB databaseExample = new DB();
 
-        databaseExample.InsertMember(name,phone,email);
+        //databaseExample.InsertMember(name,phone,email);
 
         return "loggedinpage";
 

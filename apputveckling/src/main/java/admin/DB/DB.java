@@ -1,7 +1,9 @@
 package admin.DB;
 
 import jakarta.annotation.Resource;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
@@ -10,9 +12,11 @@ import java.io.Serializable;
 import java.sql.*;
 
 @Named
-@SessionScoped
+@Default
+@ApplicationScoped
 public class DB implements Serializable {
-
+    @Inject
+    private DB databaseExample;
     @Resource(name = "mysql_web")
     private DataSource dataSource;
     public void setDataSource(DataSource dataSource) {
@@ -223,7 +227,8 @@ public class DB implements Serializable {
             throw new RuntimeException(e);
         }
     }
-    @Inject
+
+
     public void InsertMember(String name, String phoneNumber, String email){
 
         try {
@@ -285,21 +290,21 @@ public class DB implements Serializable {
 
         DB databaseExample = new DB();
         //fixar en connection setURL, setUser och setPassword.
-        SetDB DBsource = new SetDB();
+        //SetDB DBsource = new SetDB();
         // Set the DataSource on the DatabaseExample instance
-        databaseExample.setDataSource(DBsource.setDB());
+        //databaseExample.setDataSource(DBsource.setDB());
 
         //skapa en ny db om den inte existerar.
-        databaseExample.CreateDB();
-        databaseExample.CreateTableMembers();
-        databaseExample.CreateTableCase();
-        databaseExample.CreateTableProduct();
-        databaseExample.CreateTableCaseType();
+        //databaseExample.CreateDB();
+        //databaseExample.CreateTableMembers();
+        //databaseExample.CreateTableCase();
+        //databaseExample.CreateTableProduct();
+        //databaseExample.CreateTableCaseType();
 
         // Now, you can call fetchData
         //databaseExample.fetchData();
         //databaseExample.getIdByPhonNum(700389406);
-        //databaseExample.getIdByEmail("jojo2109@student.miun.se");
+        databaseExample.getIdByEmail("jojo2109@student.miun.se");
         //databaseExample.getNameById(1);
 //måste fixas        databaseExample.InsertMember("jag",20,1234567,"jagj2723@gmail.com");
         //databaseExample.GetAllName();
