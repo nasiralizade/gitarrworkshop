@@ -1,4 +1,4 @@
-package admin.members;
+package admin.clients;
 
 import java.io.Serializable;
 

@@ -1,9 +1,7 @@
-package admin.members;
-import com.mysql.cj.jdbc.MysqlDataSource;
+package admin.clients;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -52,7 +50,7 @@ public class ClientBean implements Serializable {
 
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM client where CLIENT_ID="+ client_id;
+            String sql = "SELECT * FROM CLIENT where CLIENT_ID="+ client_id;
 
 
             try (PreparedStatement statement = connection.prepareStatement(sql);
@@ -81,7 +79,7 @@ public class ClientBean implements Serializable {
         clients = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM client";
+            String sql = "SELECT * FROM CLIENT";
 
 
             try (PreparedStatement statement = connection.prepareStatement(sql);
@@ -107,7 +105,7 @@ public class ClientBean implements Serializable {
         client.setDate(resultSet.getString("CLIENT_DATE"));
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql2 = "SELECT * FROM cases WHERE MEMBER_ID ="+ client.getClientID();
+            String sql2 = "SELECT * FROM CASES WHERE MEMBER_ID ="+ client.getClientID();
 
 
             try (PreparedStatement statement = connection.prepareStatement(sql2);

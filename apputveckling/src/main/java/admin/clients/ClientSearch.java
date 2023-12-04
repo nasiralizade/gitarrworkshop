@@ -1,7 +1,6 @@
-package admin.members;
+package admin.clients;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
