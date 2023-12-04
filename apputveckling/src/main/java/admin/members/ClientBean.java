@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,20 @@ public class ClientBean implements Serializable {
     private String searchName;
     private static final Logger LOGGER = Logger.getLogger(ClientBean.class.getName());
     private List<Client> clients;
+
+    @PostConstruct
+    public void init() {
+        MysqlDataSource dataSource1 = new MysqlDataSource();
+        dataSource1.setURL("jdbc:mysql://localhost:3306/Projectdb");
+        dataSource1.setUser("root2");
+        dataSource1.setPassword("1234");
+        dataSource = dataSource1;
+
+        // Load member data from the database during bean initialization
+        loadClients();
+    }
+
+    // Encapsulate the logic for mapping a row in the result set to a Member object
 
     public String getSearchName() {
         return searchName;
@@ -65,22 +80,6 @@ public class ClientBean implements Serializable {
     public Client getClientToEdit() {
         return clientToEdit;
     }
-
-
-    @PostConstruct
-    public void init() {
-        MysqlDataSource dataSource1 = new MysqlDataSource();
-        dataSource1.setURL("jdbc:mysql://localhost:3306/Projectdb");
-        dataSource1.setUser("root2");
-        dataSource1.setPassword("1234");
-        dataSource = dataSource1;
-
-        // Load member data from the database during bean initialization
-        loadClients();
-    }
-
-    // Encapsulate the logic for mapping a row in the result set to a Member object
-
 
 
     private void loadClients() {
@@ -199,6 +198,76 @@ public class ClientBean implements Serializable {
     }
 
 
+    public String Search() {
+        List<Client> matchingName = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT * FROM CLIENT WHERE CLIENT_NAME LIKE '%" + this.searchName + "%'";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    Client name = mapResultSetToClient(resultSet);
+                    matchingName.add(name);
+                }
+
+                Iterator<Client> iterator = clients.iterator();
+                while (iterator.hasNext()) {
+                    Client match = iterator.next();
+                    if (matchingName.stream().anyMatch(name -> name.getName().equals(match.getName()))) {
+                        iterator.remove(); // Remove the matching client
+                    }
+                }
+
+                clients.addAll(0, matchingName);
+
+            }
+        } catch (SQLException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("An error occurred while searching for clients."));
+            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
+        }
+
+        return "admin_members";
+    }
+
+
+
+/*
+    public String Search() {
+        List<Client> matchingName = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT * FROM CLIENT WHERE CLIENT_NAME LIKE '%" + this.searchName + "%'";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                ResultSet resultSet = statement.executeQuery();
+
+
+                while (resultSet.next()) {
+                    Client name = mapResultSetToClient(resultSet);
+                    matchingName.add(name);
+                }
+
+                Iterator<Client> iterator = clients.iterator();
+                while (iterator.hasNext()) {
+                    Client match = iterator.next();
+                    if (matchingName.contains(match)) {
+                        iterator.remove(); // Remove the matching client
+                    }
+                }
+
+
+                clients.addAll(0, matchingName);
+
+            }
+        } catch (SQLException e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("An error occurred while searching for clients."));
+            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
+        }
+
+        return "admin_members";
+    }
+    */
+/*
+
     public String Search(){
 
         List<Client> matchingName=new ArrayList<>();
@@ -231,8 +300,8 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
 
-        return "admin_members.xhtml";
-    }
+        return "admin_members";
+    }*/
 
 
 
