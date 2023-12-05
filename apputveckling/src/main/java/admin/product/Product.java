@@ -10,7 +10,6 @@ import jakarta.persistence.*;
 @Table(name = "PRODUCT")
 public class Product {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // used to generate the id automatically
     private int PRODUCT_ID;  // the id of the product
