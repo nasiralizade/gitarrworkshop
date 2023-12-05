@@ -1,5 +1,5 @@
 USE
-ProjectDB;
+    ProjectDB;
 -- Insert data into CLIENT table
 INSERT INTO CLIENT (CLIENT_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL, CLIENT_DATE)
 VALUES (1, 'John Doe', '123-456-7890', 'john.doe@example.com', '2023-01-01'),
@@ -43,12 +43,20 @@ VALUES (1, 'BobMarley.JPG'),
        (4, 'IMG_1189.JPG'),
        (5, 'BobMarley.JPG'),
        (6, 'IMG_1186.JPG'),
-       (7, 'IMG_1187.JPG'),
-       (8, 'IMG_1188.JPG'),
-       (9, 'IMG_1189.JPG');
+       (7, 'IMG_1187.JPG');
 
 
 -- Insert data into JOURNAL_IMG table
 INSERT INTO JOURNAL_IMG (IMG_ID, JOURNAL_ID, IMG_PATH_STRING)
 VALUES (1, 1, '../src/main/webapp/assets/journal_entry_a.jpg'),
        (2, 2, '../src/main/webapp/assets/journal_entry_b.jpg');
+
+-- Insert data into APPOINTMENT table
+INSERT INTO APPOINTMENT (APPOINTMENT_TYPE, APPOINTMENT_DATE, APPOINTMENT_TIME)
+VALUES ('Reservation', '2024-01-01', '10:00:00');
+
+INSERT INTO APPOINTMENT (APPOINTMENT_TYPE, APPOINTMENT_DATE, APPOINTMENT_TIME)
+VALUES ('Reparation', '2024-01-01', '14:30:00');
+
+INSERT INTO APPOINTMENT (APPOINTMENT_TYPE, APPOINTMENT_DATE, APPOINTMENT_TIME)
+VALUES ('Reparation', '2024-01-01', '16:45:00');
