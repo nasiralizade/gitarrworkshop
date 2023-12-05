@@ -161,7 +161,7 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
         loadClients();
-        return "admin_members.xhtml"; // Return the name of the page where the user can see the member list
+        return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
 
     public String addClient() {
@@ -182,7 +182,7 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
         loadClients();
-        return "admin_members.xhtml"; // Return the name of the page where the user can see the member list
+        return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
 
     // Getter method for the members list
@@ -220,7 +220,7 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
 
-        return "admin_members";
+        return "admin_clients";
     }
 
 
@@ -256,7 +256,7 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
 
-        return "admin_members";
+        return "admin_clients";
     }
     */
 /*
@@ -293,7 +293,7 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
 
-        return "admin_members";
+        return "admin_clients";
     }*/
 
 
