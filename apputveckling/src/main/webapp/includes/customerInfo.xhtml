@@ -12,13 +12,15 @@
 
 <body>
 
+
+
     <div class="customer_info">
 
         <h1>Client Details</h1>
         <h:form>
             <h:commandButton value="Delete Client" action="#{clientBean.deleteEntity(clientBean.clientToEdit.clientID)}"/>
 
-            <p:commandButton styleClass="editClient" value="Edit Client" action="editMember" update=":editClient"
+            <p:commandButton styleClass="editClient " value="Edit Client" action="editMember" update=":editClient"
                              oncomplete="PF('editClient').show()"/>
 
         </h:form>
@@ -33,6 +35,9 @@
         <p>#{clientBean.clientToEdit.email}</p>
 
     </div>
+
+
+
 
 
 </body>
