@@ -1,4 +1,4 @@
-<div id="menu" class="container" xmlns:ui="http://java.sun.com/jsf/facelets">
+<div id="menu" class="container" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
 
     <div class="container-fluid row menu">
        <ui:repeat value="#{productBean.products}" var="item">
@@ -7,6 +7,9 @@
             <div class="card-body">
                 <h5 class="card-title">#{item.PRODUCT_NAME}</h5>
                 <p class="card-text">#{item.PRODUCT_MAIN_DESC}</p>
+               <h:form>
+                  <h:commandButton styleClass="btn btn-danger" value="Radera produkt" action="#{productBean.deleteProduct(item.PRODUCT_ID)}"/>
+               </h:form>
                 <a href="" class="location link btn btn-dark">redigera inlägg</a>
             </div>
         </div>
