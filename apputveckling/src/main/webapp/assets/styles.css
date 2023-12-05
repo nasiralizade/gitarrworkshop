@@ -24,7 +24,6 @@
 }
 
 .Medlemmar{
-    position: absolute;
     width: 90%;
     top: 50%;
     height: 5%;
@@ -57,7 +56,6 @@
 
 .history_div{
 
-    position: absolute;
     margin-top: 2%;
     padding: 2%;
     right: 6%;
