@@ -24,13 +24,7 @@
          <h:inputText id="txtpass" value="#{signup.password}" ></h:inputText>
          <br></br>
 
-         <h:outputLabel for="txtemail">
-            <h:outputText value="Enter Email"> </h:outputText>
-         </h:outputLabel>
-         <h:inputText id="txtemail" value="#{signup.email}" ></h:inputText>
-         <br></br>
-
-         <h:commandButton id="cmdInsert" value="Create account" action="#{signup.add()}"></h:commandButton>
+         <h:commandButton id="cmdInsert" value="Log in" action="#{signup.LogIn()}"></h:commandButton>
       </h:form>
 
 

@@ -6,16 +6,23 @@ import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.security.enterprise.credential.Password;
 
 import javax.sql.DataSource;
 import java.io.Serializable;
+import java.util.Objects;
+
 @Named
 @SessionScoped
 public class Signup implements Serializable {
-    //@Inject
+    @Inject
     private DB databaseExample;
     private String name;
     private String password;
+
+
+
+    private String password2;
     private String email;
     private String phone;
 
@@ -23,7 +30,13 @@ public class Signup implements Serializable {
     public Signup(){
 
     }
+    public String getPassword2() {
+        return password2;
+    }
 
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
     public String getEmail() {
         return email;
     }
@@ -58,13 +71,26 @@ public class Signup implements Serializable {
 
 
     public String add(){
-        System.out.println(name+" "+phone+" "+email+" "+ password);
-
+        //System.out.println(name+" "+phone+" "+email+" "+ password);
         //DB databaseExample = new DB();
+        if((password.equals(password2))) {
+            if(databaseExample.GetNameByName(name).isEmpty()){
+                databaseExample.InsertMember(name, phone, email, password);
+            }else return "SignUp";
+        }else return "SignUp";
 
-        //databaseExample.InsertMember(name,phone,email);
+        return "/includes/loggedinpage";
+    }
 
-        return "loggedinpage";
+    public String LogIn() {
 
+        if (Objects.equals(name, "admin")) {
+            return "admin_home.xhtml";
+        }
+
+        if(Objects.equals(databaseExample.GetNameByName(name), name) && Objects.equals(databaseExample.GetPasswordByName(name), password) ){
+            return "/includes/loggedinpage";
+        }
+        return "SignUp";
     }
 }
