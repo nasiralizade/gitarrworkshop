@@ -105,24 +105,4 @@ public class ProductBean implements Serializable {
     }
 
 
-    /**
-     * this method is used to add a product to the database
-     * @param productName the name of the product
-     * @param productPrice the price of the product
-     * @param productMainDesc the main description of the product
-     * @param productHistoryDesc the history description of the product
-     * @param productYear the year of the product
-     */
-    public void addProduct(String productName, int productPrice, String productMainDesc, String productHistoryDesc, int productYear){
-        Product product = new Product();
-        product.setPRODUCT_NAME(productName);
-        product.setPRODUCT_PRICE(productPrice);
-        product.setPRODUCT_MAIN_DESC(productMainDesc);
-        product.setPRODUCT_HISTORY_DESC(productHistoryDesc);
-        product.setPRODUCT_YEAR(productYear);
-        entityManager.persist(product);
-    }
-
-
-
 }
