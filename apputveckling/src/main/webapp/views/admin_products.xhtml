@@ -15,9 +15,7 @@
     <ui:define name="content">
         <h1 style="text-align: center;margin-bottom: 30px;">"product list!"</h1>
         <ui:include src="../includes/productContent.xhtml"/>
-        <h:form>
-            <h:commandButton value="BTN" action="#{navigationBean.goToHomePage()}"/>
-        </h:form>
+        <ui:include src="../includes/addForm.xhtml"/>
     </ui:define>
 
 

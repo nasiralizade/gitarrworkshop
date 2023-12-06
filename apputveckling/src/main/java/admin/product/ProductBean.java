@@ -5,10 +5,12 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.Part;
 import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * this class is used to get the list of products from the database
@@ -23,6 +25,17 @@ public class ProductBean implements Serializable {
     @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
     Product newProduct = new Product();
+    private Part imageFile;
+
+    public Part getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(Part imageFile) {
+        this.imageFile = imageFile;
+    }
+
+
 
     public Product getNewProduct() {
         return newProduct;
@@ -111,6 +124,19 @@ public class ProductBean implements Serializable {
         entityManager.createQuery("delete from Product p where p.PRODUCT_ID = :productId")
                 .setParameter("productId", productId)
                 .executeUpdate();
+    }
+
+    @Transactional
+    public void addProduct() {
+        try {
+
+            entityManager.persist(newProduct);
+            //ProductImagesBean imagesBean =new ProductImagesBean();
+           // imagesBean.addProductImages(newProduct.getPRODUCT_ID(), imageFile);
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 
 
