@@ -26,30 +26,10 @@ public class ProductBean implements Serializable {
     @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
     Product newProduct = new Product();
-    private Part imageFile;
-
-    public Part getImageFile() {
-        return imageFile;
-    }
-
-    public void setImageFile(Part imageFile) {
-        this.imageFile = imageFile;
-    }
-
-
-
-    public Product getNewProduct() {
-        return newProduct;
-    }
-
-    public void setNewProduct(Product newProduct) {
-        this.newProduct = newProduct;
-    }
-
+    private List<Part>imageFile;
     List<Product> products; // used to get the list of products from the database
     List<Product> productsDetails; // used to show the details of a specific product
     private String isShowProductDetails = "false"; // used to show the details of a specific product
-    Product newProduct = new Product(); // used to add a product to the database
     List<ProductImages> productImagesList; // used to get the list of product images from the database
     private Part saveProductImages; // used to save the product images to the database
 
@@ -82,6 +62,14 @@ public class ProductBean implements Serializable {
         this.productsDetails = productsDetails;
     }
 
+    public List<Part> getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(List<Part> imageFile) {
+        this.imageFile = imageFile;
+    }
+
     /**
      * this method is used to show the details of a specific product
      *
@@ -96,6 +84,15 @@ public class ProductBean implements Serializable {
                 .getResultList();
         isShowProductDetails = "true";
 
+    }
+
+    public List<ProductImages> getProductImagesList() {
+        productImagesList = entityManager.createQuery("select p from ProductImages p", ProductImages.class).getResultList();
+        return productImagesList;
+    }
+
+    public void setProductImagesList(List<ProductImages> productImagesList) {
+        this.productImagesList = productImagesList;
     }
 
     /**
@@ -140,8 +137,12 @@ public class ProductBean implements Serializable {
                 .executeUpdate();
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     @Transactional
-    public void addProduct() {
+    public void addProduct() throws IOException {
         try {
 
             entityManager.persist(newProduct);

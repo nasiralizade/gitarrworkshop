@@ -19,6 +19,7 @@ public class ProductImages {
     @Column(name = "IMG_PATH_STRING")
     private String imgPathString;
 
+
     public int getPROD_IMG_ID() {
         return PROD_IMG_ID;
     }
