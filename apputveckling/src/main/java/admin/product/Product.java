@@ -13,7 +13,6 @@ import java.util.List;
 @Table(name = "PRODUCT")
 public class Product {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // used to generate the id automatically
     @Column(name = "PRODUCT_ID")
