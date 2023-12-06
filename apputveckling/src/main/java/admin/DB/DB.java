@@ -35,14 +35,15 @@ public class DB implements Serializable {
         }
     }
 
-    public void CreateTableMembers(){
+    public void CreateTableClient(){
         try (Connection con = dataSource.getConnection()) {
-            String sql = "CREATE TABLE IF NOT EXISTS Member("
-                    +"Member_id INT AUTO_INCREMENT PRIMARY KEY,"
-                    + "Member_name VARCHAR(255),"
-                    + "Member_date datetime,"
-                    + "Member_phone int,"
-                    + "Member_email VARCHAR(255))";
+            String sql = "CREATE TABLE IF NOT EXISTS CLIENT("
+                    +"CLIENT_ID INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "CLIENT_NAME VARCHAR(255),"
+                    + "CLIENT_PHONE VARCHAR(20),"
+                    + "CLIENT_EMAIL VARCHAR(255),"
+                    + "CLIENT_DATE date," +
+                    "PASSWORD VARCHAR(200))";
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.executeUpdate();
             }
@@ -53,13 +54,13 @@ public class DB implements Serializable {
     }
     public void CreateTableProduct(){
         try (Connection con = dataSource.getConnection()) {
-            String sql = "CREATE TABLE IF NOT EXISTS Product("
-                    +"Product_id INT AUTO_INCREMENT PRIMARY KEY,"
-                    + "Product_price int,"
-                    + " Product_amount int,"
-                    + "Product_description VARCHAR(255),"
-                    + "Product_case VARCHAR(255),"
-                    + "Product_image VARCHAR(255))";
+            String sql = "CREATE TABLE IF NOT EXISTS PRODUCT("
+                    +"PRODUCT_ID INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "PRODUCT_PRICE DECIMAL(10,2),"
+                    + "PRODUCT_HISTORY_DESC VARCHAR(255),"
+                    + "PRODUCT_MAIN_DESC VARCHAR(500),"
+                    + "PRODUCT_YEAR INT,"
+                    + "PRODUCT_NAME VARCHAR(255))";
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.executeUpdate();
             }

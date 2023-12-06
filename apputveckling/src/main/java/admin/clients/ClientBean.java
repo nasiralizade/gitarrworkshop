@@ -168,6 +168,7 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
         loadClients();
+
         return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
 
@@ -226,6 +227,7 @@ public class ClientBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("An error occurred while searching for clients."));
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
+
 
         return "admin_clients";
     }

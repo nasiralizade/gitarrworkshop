@@ -100,5 +100,3 @@ public class Client implements Serializable {
         this.date = date;
     }
 }
-
-
