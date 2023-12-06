@@ -1,8 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE html [
+        <!ENTITY times "&#215;">
+        ]>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <head>
 
    <title>Work Cases</title>
@@ -74,6 +79,49 @@
       .search-filter-container{
          margin: 10px;
       }
+
+      .modal-content {
+         background-color: #fefefe;
+         padding: 40px;
+         border-radius: 10px;
+         max-width: 600px;
+         width: 80%;
+         margin: auto;
+         position: relative;
+      }
+
+      /* Style for inputs */
+      .add-case-container label {
+         display: block;
+         margin-bottom: 5px;
+      }
+
+
+      #journalDesc {
+         height: 100px;
+         width: 100%;
+         box-sizing: border-box;
+         resize: vertical;
+      }
+
+      /* Position the "Add" button to the far right at the bottom */
+      .add-case-container {
+         display: flex;
+         flex-direction: column;
+      }
+
+      .add-case-container button {
+         align-self: flex-end;
+         margin-top: 20px;
+      }
+
+
+
+
+
+
+
+
    </style>
    <script>
       function toggleDescription(caseId) {
@@ -101,6 +149,27 @@
          arrow.style.transform = 'rotate(45deg)';
       }
 
+         function showAddCaseModal() {
+         var modal = document.getElementById("addCaseModal");
+         modal.style.display = "block";
+      }
+
+         function closeAddCaseModal() {
+         var modal = document.getElementById("addCaseModal");
+         modal.style.display = "none";
+      }
+      function showAddCaseModal() {
+         var modal = document.getElementById("addCaseModal");
+         modal.style.display = "flex";  // Use "flex" for better centering
+      }
+
+      function closeAddCaseModal() {
+         var modal = document.getElementById("addCaseModal");
+         modal.style.display = "none";
+      }
+
+
+
    </script>
 </head>
 <body>
@@ -108,26 +177,71 @@
    <input type="text" id="search_bar" placeholder="Search id..."/>
    <button class="search_button">Search</button>
    <button class="filter-button">Filter</button>
-   <button class="add-button">Add</button>
+   <button class="add-button" onclick="showAddCaseModal()">Add</button>
+</div>
+<!-- Add Case Modal -->
+<!-- Add Case Modal -->
+<!-- Add Case Modal -->
+<div id="addCaseModal" class="modal">
+   <div class="modal-content">
+      <span class="close" onclick="closeAddCaseModal()">&times;</span>
+      <h:form id="addCaseForm">
+         <div class="add-case-container">
+            <!-- Label and input for Status -->
+            <label for="status">Status:</label>
+            <h:selectOneMenu id="status" value="#{casesBean.newCaseStatus}">
+               <f:selectItem itemValue="Done" itemLabel="Done" />
+               <f:selectItem itemValue="In Progress" itemLabel="In Progress" />
+               <f:selectItem itemValue="Pending" itemLabel="Pending" />
+            </h:selectOneMenu>
+
+            <label for="description">Description:</label>
+            <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" />
+            <label for="journalDesc">Journal Description:</label>
+            <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" />
+
+            <h:commandButton value="Add" action="#{casesBean.addCase}" />
+         </div>
+      </h:form>
+   </div>
 </div>
 
-<div class="case" onclick="toggleDescription(1)">
-   <div class="status-container">
-      <div class="status-indicator status-done"></div>
-      <span class="status-text">Status: Done</span>
+
+
+
+<c:forEach var="case" items="#{casesBean.cases}">
+   <div class="case" onclick="toggleDescription(#{case.CASE_ID})">
+      <div class="status-container">
+         <div class="status-indicator status-done"></div>
+         <span class="status-text">Status: #{case.CASE_STATUS}</span>
+      </div>
+      <span id="arrow_#{case.CASE_ID}" class="arrow"></span>
+      <span class="case-number" onclick="collapseDescription(#{case.CASE_ID})">Case #{case.CASE_ID}</span>
+      <div id="case_des_#{case.CASE_ID}" class="case_des">
+         Description for case: #{case.CASE_DESC}
+         <br />
+         Case Type: #{case.CASE_TYPE}
+         <br />
+         Case Start Date: #{case.CASE_DATE_START}
+         <br />
+         Case Hours: #{case.CASE_HOURS}h
+         <br />
+         Case Profit: #{case.CASE_PROFIT}kr
+      </div>
+
+      <c:forEach var="caseJournal" items="#{case.caseJournals}">
+      <div id="description_#{case.CASE_ID}" class="description" onclick="collapseDescription(#{case.CASE_ID})">
+         #{caseJournal.JOURNAL_DESC}
+         <h:form>
+            <h:commandButton value="Edit" action="#{casesBean.editCase(case.CASE_ID)}" styleClass="edit-button" />
+         </h:form>
+
+
+      </div>
+   </c:forEach>
+
    </div>
-   <span id="arrow_1" class="arrow"></span>
-   <span class="case-number" onclick="collapseDescription(1)"> </span>
-   <div id="case_des_1" class="case_des"> Description for case: </div>
-   <div id="description_1" class="description" onclick="collapseDescription(1)">
-      <span class="edit-button">Edit</span>
-   </div>
-</div>
-<c:if test="#{empty casesbean.my_cases}">
-   <p>No cases available.</p>
-</c:if>
 
-
-
+</c:forEach>
 </body>
 </html>
