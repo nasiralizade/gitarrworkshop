@@ -55,12 +55,12 @@ public class ProductImagesBean implements Serializable {
     public void addProductImages(int productId, Part imageFile) {
        String filename=imageFile.getSubmittedFileName();
        String imagePath=getImgPath();
-       saveImage(filename,imageFile,imagePath,productId);
+       //saveImage(filename,imageFile,imagePath,productId);
     }
 
     @Transactional
     private void saveImage(String filename, Part imageFile, String imagePath, int productId) {
-        try {
+        /*try {
             ProductImages productImages1 =new ProductImages();
             productImages1.setPRODUCT_ID(productId);
             productImages1.setImgPathString(filename);
@@ -68,7 +68,7 @@ public class ProductImagesBean implements Serializable {
 
         }catch (Exception e){
             throw e;
-        }
+        }*/
     }
 
 

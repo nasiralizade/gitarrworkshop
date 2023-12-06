@@ -37,19 +37,10 @@ public class ProductBean implements Serializable {
     }
 
 
-
-    public Product getNewProduct() {
-        return newProduct;
-    }
-
-    public void setNewProduct(Product newProduct) {
-        this.newProduct = newProduct;
-    }
-
     List<Product> products; // used to get the list of products from the database
     List<Product> productsDetails; // used to show the details of a specific product
     private String isShowProductDetails = "false"; // used to show the details of a specific product
-    Product newProduct = new Product(); // used to add a product to the database
+
     List<ProductImages> productImagesList; // used to get the list of product images from the database
     private Part saveProductImages; // used to save the product images to the database
 

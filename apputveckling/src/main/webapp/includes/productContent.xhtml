@@ -3,7 +3,7 @@
     <div class="container-fluid row menu">
        <ui:repeat value="#{productBean.products}" var="item">
         <div class="card" style="width: 20rem;">
-            <img src="../resources/img/#{productImagesBean.getOneImage(item.PRODUCT_ID)}" class="card-img-top" alt="..."/>
+            <img src="../resources/img/#{item.firstImage}" class="card-img-top" alt="..."/>
             <div class="card-body">
                 <h5 class="card-title">#{item.PRODUCT_NAME}</h5>
                 <p class="card-text">#{item.PRODUCT_MAIN_DESC}</p>
