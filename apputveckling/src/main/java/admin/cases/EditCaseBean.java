@@ -1,15 +1,18 @@
-package admin.cases;// EditCaseBean.java
-import jakarta.faces.bean.ManagedBean;
-import jakarta.faces.bean.RequestScoped;
+package admin.cases;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.application.FacesMessage;
 
-@ManagedBean
-@RequestScoped
-public class EditCaseBean {
+import java.io.Serializable;
+
+@Named
+@Transactional
+@SessionScoped
+public class EditCaseBean implements Serializable {
 
     @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
