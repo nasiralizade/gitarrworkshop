@@ -56,6 +56,7 @@ public class ProductImagesBean implements Serializable {
                 .setParameter("productId", productId)
                 .getResultList();
         return oneImage.get(0).getImgPathString();
+
     }
 
 
