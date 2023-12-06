@@ -73,3 +73,15 @@
     margin: auto;
 }
 
+.calendar-content-cust {
+    text-align: center;
+    margin: auto;
+}
+
+
+.calendar-flex-col1-cust {
+    width: 25%;
+}
+.calendar-flex-col2-cust {
+    width: 50%;
+}

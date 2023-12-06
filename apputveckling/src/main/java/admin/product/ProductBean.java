@@ -4,6 +4,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.Part;
 import jakarta.transaction.Transactional;
@@ -48,6 +49,17 @@ public class ProductBean implements Serializable {
     List<Product> products; // used to get the list of products from the database
     List<Product> productsDetails; // used to show the details of a specific product
     private String isShowProductDetails = "false"; // used to show the details of a specific product
+    Product newProduct = new Product(); // used to add a product to the database
+    List<ProductImages> productImagesList; // used to get the list of product images from the database
+    private Part saveProductImages; // used to save the product images to the database
+
+    public Product getNewProduct() {
+        return newProduct;
+    }
+
+    public void setNewProduct(Product newProduct) {
+        this.newProduct = newProduct;
+    }
 
     /**
      * this method is used to get the value of isShowProductDetails
@@ -114,6 +126,7 @@ public class ProductBean implements Serializable {
         return productsDetails;
     }
 
+
     /**
      * this method is used to update a product in the database
      *
@@ -138,6 +151,5 @@ public class ProductBean implements Serializable {
         }
 
     }
-
 
 }
