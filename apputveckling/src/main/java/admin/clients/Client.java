@@ -14,18 +14,31 @@ public class Client implements Serializable {
 
     private String date;
 
+    private String cas_type;
+
     // Constructors, getters, and setters
 
     public Client() {
         // Default constructor
     }
 
-    public Client(int clientID, String name, String phone, String email, String date) {
+    public Client(int clientID, String name, String phone, String email, String date, String cas_type) {
         this.clientID = clientID;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.date = date;
+        this.cas_type = cas_type;
+
+    }
+
+
+    public String getCas_type() {
+        return cas_type;
+    }
+
+    public void setCas_type(String cas_type) {
+        this.cas_type = cas_type;
     }
 
     public int getClientID() {
@@ -69,5 +82,3 @@ public class Client implements Serializable {
         this.date = date;
     }
 }
-
-
