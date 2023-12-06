@@ -33,23 +33,8 @@ public class ProductImagesBean implements Serializable {
         this.productImages = productImages;
     }
 
-    /**
-     * Get one product image from the database
-     * @param productId the product id
-     * @return a string of the image path
-     */
-    public String getOneImage(int productId) {
-       oneImage = entityManager.createQuery("select p from ProductImages p where p.PRODUCT_ID = :productId", ProductImages.class)
-                .setParameter("productId", productId)
-                .getResultList();
-        return oneImage.get(0).getImgPathString();
-
-    }
 
 
-    public void setOneImage(List<ProductImages> oneImage) {
-        this.oneImage = oneImage;
-    }
 
 
     public void addProductImages(int productId, Part imageFile) {
@@ -77,25 +62,5 @@ public class ProductImagesBean implements Serializable {
         return webapp+"../../src/main/webapp/resources/img";
     }
 
-    /**
-     * Delete product images from the database
-     * @param productId the product id
-     */
-    public void deleteProductImages(int productId) {
-        entityManager.createQuery("delete from ProductImages p where p.PRODUCT_ID = :productId")
-                .setParameter("productId", productId)
-                .executeUpdate();
-    }
-    /**
-     * Delete one product image from the database
-     * @param productId the product id
-     * @param imgPathString the image path string [example:image49.jpg]
-     */
-    public void deleteOneProductImage(int productId, String imgPathString) {
-        entityManager.createQuery("delete from ProductImages p where p.PRODUCT_ID = :productId and p.imgPathString = :imgPathString")
-                .setParameter("productId", productId)
-                .setParameter("imgPathString", imgPathString)
-                .executeUpdate();
-    }
 
 }
