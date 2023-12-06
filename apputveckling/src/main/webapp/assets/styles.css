@@ -7,10 +7,33 @@
     width: 30%;
     border-radius: 12px;
 }
+.custom-input{
+    margin-bottom: 1%;
+    width: 30%;
+    border-radius: 12px;
+}
+.custom-button{
+    position: relative;
+    margin-left: 1%;
+    width: 8%;
+    background-color:dodgerblue;
+    border-radius: 12px;
+    color: white;
+    border: none;
+
+}
+.customer_info{
+    margin-left: 15%;
+    margin-top: 5%;
+    background-color: lightgray;
+    padding: 2%;
+    border-radius: 12px;
+    box-shadow: 2px 2px 5px #808080; ;
+
+}
 
 .Medlemmar{
-    position: absolute;
-    width: 90%;
+
     top: 50%;
     height: 5%;
 }
@@ -19,7 +42,9 @@
     max-height: 200px;
     overflow-y: auto;
 
-
+}
+#link_styl:hover{
+    background-color: lightblue;
 }
 .history_list{
     position: relative;
@@ -40,19 +65,16 @@
 
 .history_div{
 
-    position: absolute;
     margin-top: 2%;
     padding: 2%;
     right: 6%;
     top: 5%;
-    width: 80%;
     height: 45%;
     border-radius: 25px;
     box-shadow: 2px 2px 5px #808080;
 
 
 }
-
 
 .card-img-top{
     max-width: 300px;
@@ -85,3 +107,4 @@
 .calendar-flex-col2-cust {
     width: 50%;
 }
+

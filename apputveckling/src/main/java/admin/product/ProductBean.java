@@ -127,6 +127,7 @@ public class ProductBean implements Serializable {
     }
 
 
+
     /**
      * this method is used to update a product in the database
      *

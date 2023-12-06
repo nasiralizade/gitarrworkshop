@@ -29,19 +29,6 @@ public class ProductImagesBean implements Serializable {
     List<ProductImages> oneImage; // for the product page
     public ProductImagesBean() {
     }
-
-    /**
-     * Get all product images from the database
-     * @param productId the product id
-     * @return a list of product images
-     */
-    public List<ProductImages> getProductImages(int productId) {
-        productImages = entityManager.createQuery("select p from ProductImages p where p.PRODUCT_ID = :productId", ProductImages.class)
-                .setParameter("productId", productId)
-                .getResultList();
-        return productImages;
-    }
-
     public void setProductImages(List<ProductImages> productImages) {
         this.productImages = productImages;
     }
@@ -110,4 +97,5 @@ public class ProductImagesBean implements Serializable {
                 .setParameter("imgPathString", imgPathString)
                 .executeUpdate();
     }
+
 }
