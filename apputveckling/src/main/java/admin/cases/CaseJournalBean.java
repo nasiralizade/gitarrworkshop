@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CaseJournalBean implements Serializable{
     @Produces
-    @PersistenceContext(unitName = "test")
+    @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
     List<CaseJournal> casejournlas;
     CaseJournal newJournal = new CaseJournal();

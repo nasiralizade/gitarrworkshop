@@ -18,7 +18,7 @@ import java.util.List;
 @SessionScoped
 public class CasesBean implements Serializable{
     @Produces
-    @PersistenceContext(unitName = "test")
+    @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
     List<Cases> cases;
     List<Cases> cases_details;

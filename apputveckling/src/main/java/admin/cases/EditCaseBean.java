@@ -11,7 +11,7 @@ import jakarta.faces.application.FacesMessage;
 @RequestScoped
 public class EditCaseBean {
 
-    @PersistenceContext(unitName = "test")
+    @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
 
     private String editCaseDesc;
