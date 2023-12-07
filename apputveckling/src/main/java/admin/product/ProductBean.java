@@ -4,7 +4,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.Part;
 import jakarta.transaction.Transactional;
