@@ -10,13 +10,14 @@
 <h:body>
     <div class="card">
         <h:form>
-            <p:growl id="messages" showDetail="true"/>
+            <p:growl id="messages" showDetail="true" escape="false"/>
 
-            <p:schedule id="schedule" value="#{scheduleBean.model}" widgetVar="myschedule" maxTime="18:00:00" minTime="10:00:00">
+            <p:schedule id="schedule" value="#{scheduleBean.model}" widgetVar="myschedule">
                 <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}" update="eventDetails"
                         oncomplete="PF('eventDialog').show();"/>
                 <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}" update="eventDetails"
                         oncomplete="PF('eventDialog').show();"/>
+                <p:ajax event="eventMove" listener="#{scheduleBean.onEventMove}" update="messages"/>
             </p:schedule>
 
             <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="fade" hideEffect="fade">
@@ -32,25 +33,25 @@
                     <p:datePicker id="to" value="#{scheduleBean.event.endDate}" pattern="dd/MM/yyyy"
                                   showTime="true" appendTo="@(body)"/>
 
+
                     <p:outputLabel for="allDay" value="All Day" styleClass="font-bold"/>
                     <h:selectBooleanCheckbox id="allDay" value="#{scheduleBean.event.allDay}"/>
                 </h:panelGrid>
 
                 <div class="flex justify-content-between mt-3">
-                    <p:commandButton type="reset" value="Reset" styleClass="font-bold ui-button-outlined"/>
+                    <p:commandButton type="reset" value="Reset" styleClass="font-bold ui-button-outlined"
+                                     ignoreAutoUpdate="false"/>
                     <p:commandButton id="addButton" value="Save" action="#{scheduleBean.addEvent}"
                                      oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+                    <h:form>
+                        <p:commandButton id="deleteBtn" type="delete" value="Delete" style="float: right; background-color: red;"
+                                         styleClass="font-bold ui-button-danger "
+                                         action="#{scheduleBean.deleteEvent}"
+                                     oncomplete="PF('myschedule').update();P F('eventDialog').hide(); model.delete"/>
+                    </h:form>
                 </div>
             </p:dialog>
         </h:form>
     </div>
-    <h:form>
-        <h:inputText value="#{eventEntityBean.event.title}"/><br/>
-        <h:inputText value="#{eventEntityBean.event.start_date}"/><br/>
-        <h:inputText value="#{eventEntityBean.event.end_date}"/><br/>
-        <h:inputText value="#{eventEntityBean.event.all_day}"/><br/>
-        <h:commandButton value="Save" action="#{eventEntityBean.saveEvent}"/>
-    </h:form>
-
 </h:body>
 </html>

@@ -2,15 +2,14 @@ package admin.appointment;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
 @Table(name = "Events")
 public class EventEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "title")
@@ -18,9 +17,9 @@ public class EventEntity {
     @Column(name = "description")
     private String description;
     @Column(name = "start_date")
-    private Date start_date;
+    private Timestamp start_date;
     @Column(name = "end_date")
-    private Date end_date;
+    private Timestamp end_date;
     @Column(name = "all_day")
     private boolean all_day;
 
@@ -51,19 +50,19 @@ public class EventEntity {
         this.description = description;
     }
 
-    public Date getStart_date() {
+    public Timestamp getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(Timestamp start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public Timestamp getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(Timestamp end_date) {
         this.end_date = end_date;
     }
 
