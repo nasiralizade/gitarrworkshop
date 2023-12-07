@@ -9,17 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="ni kan testa primeface kalender här">
+    <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntityBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntityBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/client/appointment.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/client/appointment.xhtml" afterDir="false" />
     </list>
     <list id="e3c9961d-4997-480a-8dcf-8afb05a28c93" name="Changes by serhad" comment="" />
-    <list id="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" name="Changes by tahakhudher" comment="">
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" afterDir="false" />
-    </list>
+    <list id="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" name="Changes by tahakhudher" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,38 +29,24 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="PROTOTYPE_1_dbjojo" />
+        <entry key="$PROJECT_DIR$" value="appointment-managing" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java">
-      <ranges>
-        <range start1="4" end1="4" start2="4" end2="5" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="5" end1="5" start2="6" end2="8" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="9" end1="10" start2="12" end2="13" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="12" end1="12" start2="15" end2="16" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
-        <range start1="13" end1="13" start2="17" end2="18" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="19" end1="26" start2="24" end2="25" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="27" end1="27" start2="26" end2="27" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="28" end1="31" start2="28" end2="28" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="41" end1="41" start2="38" end2="40" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
-        <range start1="51" end1="63" start2="50" end2="50" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="66" end1="68" start2="53" end2="54" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="73" end1="75" start2="59" end2="61" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="78" end1="79" start2="64" end2="64" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="97" end1="99" start2="82" end2="83" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="101" end1="101" start2="85" end2="86" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="102" end1="102" start2="87" end2="88" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="109" end1="110" start2="95" end2="95" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="112" end1="116" start2="97" end2="108" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="119" end1="120" start2="111" end2="111" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="123" end1="124" start2="114" end2="114" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="128" end1="147" start2="118" end2="118" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="151" end1="151" start2="122" end2="164" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-      </ranges>
-    </file>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "LocalTweekez"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="d361e318-fff5-4a89-ab41-84fde2b6b6cd" />
+        <option name="url" value="https://github.com/javaapputveckling/gitarrworkshop.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -95,11 +75,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Database Script.add_data.sql.executor": "Run",
+    "Database Script.create_database.sql.executor": "Run",
+    "GlassFish Server.GlassFish 7.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "appointment-managing",
+    "git-widget-placeholder": "temp__appointment",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -114,23 +97,13 @@
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "mysql"
+    ],
+    "RunConfigurationTargetLRU": [
+      "58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be/schema/\"ProjectDB\""
     ]
   }
 }]]></component>
   <component name="RunManager" selected="GlassFish Server.GlassFish 7">
-    <configuration name="DB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="admin.DB.DB" />
-      <module name="apputveckling" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="admin.DB.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="EventEntityBean" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="admin.appointment.EventEntityBean" />
       <module name="apputveckling" />
@@ -156,6 +129,18 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="add_data.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/apputveckling/database/add_data.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be" namespace="schema/&quot;ProjectDB&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="create_database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/apputveckling/database/create_database.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be" namespace="schema/&quot;ProjectDB&quot;" />
+      <method v="2" />
     </configuration>
     <configuration name="GlassFish 7" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 6.8.0" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17">
       <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
@@ -234,17 +219,18 @@
     <list>
       <item itemvalue="Application.EventEntityBean" />
       <item itemvalue="Application.ScheduleBean" />
-      <item itemvalue="Application.DB" />
+      <item itemvalue="Database Script.add_data.sql" />
+      <item itemvalue="Database Script.create_database.sql" />
       <item itemvalue="GlassFish Server.GlassFish 7" />
       <item itemvalue="Node.js.calendar.js" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Database Script.add_data.sql" />
+        <item itemvalue="Database Script.create_database.sql" />
         <item itemvalue="Application.EventEntityBean" />
         <item itemvalue="Application.ScheduleBean" />
         <item itemvalue="Node.js.calendar.js" />
-        <item itemvalue="Application.DB" />
-        <item itemvalue="Application.DB" />
       </list>
     </recent_temporary>
   </component>
@@ -320,10 +306,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="inte helt klar med att fixa db:n" />
-    <MESSAGE value="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db." />
     <MESSAGE value="börjar med calender funktioner för att lägga till och spara events samt att visa de." />
     <MESSAGE value="ni kan testa primeface kalender här" />
-    <option name="LAST_COMMIT_MESSAGE" value="ni kan testa primeface kalender här" />
+    <MESSAGE value="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db." />
+    <option name="LAST_COMMIT_MESSAGE" value="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gitarrworkshop$GlassFish_7.ic" NAME="GlassFish 7 Coverage Results" MODIFIED="1701793687814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
