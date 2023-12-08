@@ -5,11 +5,13 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 @Named
 @SessionScoped
@@ -29,6 +31,7 @@ public class ClientBean implements Serializable {
     @PostConstruct
     public void init() {
 
+        clientTOedit = new Client();
         TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c", Client.class);
         TypedQuery<Cases> query2 = em.createQuery("SELECT a FROM Cases a", Cases.class);
 
@@ -78,26 +81,47 @@ public class ClientBean implements Serializable {
     }
 
 
-    public String editClient(int clientID) {
+    public String editClient() {
+        return "customerInfo.xhtml";
+    }
+
+    public String collectClientInfo(int clientID){
+
+        Query query = em.createQuery("SELECT c FROM Client c WHERE c.clientId =:clientID", Client.class);
+        query.setParameter("clientID", clientID);
+        clientTOedit = (Client) query.getSingleResult();
 
         return "customerInfo.xhtml";
     }
 
 
     public String addClient() {
+        int count = 0;
 
-        for(Client x: clientList ){
-
-            if(clientTOedit.getClientEmail() == x.getClientEmail() && clientTOedit.getClientPhone() == x.getClientPhone()){
-
+        for (Client x : clientList) {
+            if (clientTOedit.getClientEmail().equals(x.getClientEmail()) || clientTOedit.getClientPhone().equals(x.getClientPhone())) {
+                count = count + 1;
             }
-
         }
-        return "addclients"; // Return the name of the page where the user can input the data for the new member
+
+        if (count == 0) {
+            em.persist(clientTOedit);
+        }
+
+        return "admin_clients.xhtml";
     }
 
 
+
     public String deleteEntity(int clientID) {
+        // Find the entity by ID
+        Client entityToDelete = em.find(Client.class, clientID);
+
+        // Check if the entity exists before attempting to delete
+        if (entityToDelete != null) {
+            // Remove the entity from the database
+            em.remove(entityToDelete);
+        }
 
         return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
@@ -127,6 +151,10 @@ public class ClientBean implements Serializable {
                 .getResultList();
        // case_typ = caseList.get(0).getCASE_TYPE();
 
+    }
+
+    public void NewInstans(){
+        clientTOedit = new Client();
     }
 
 

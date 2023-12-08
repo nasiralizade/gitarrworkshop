@@ -13,37 +13,91 @@
 
 <body>
 
-
-
     <div class="customer_info">
 
         <h1>Client Details</h1>
         <h:form>
-            <h:commandButton  value="Delete Client" action="#"
+            <h:commandButton  value="Delete Client" action="#{clientBean.deleteEntity(clientBean.clientTOedit.clientId)}"
             style="color: white;border: none;font-size: 23px;margin-left: 2%;margin-top:2% ; background-color: red; border-radius: 5px"/>
 
-            <p:commandButton styleClass="editClient" value="Edit Client" action="editMember" update=":editClient"
-                             oncomplete="PF('editClient').show()" style="margin-left: 3%"/>
+            <p:commandButton styleClass="editMember" value="Edit Client" action="editMember" update=":editMember"
+                             oncomplete="PF('editMember').show()" style="margin-left: 3%"/>
 
         </h:form>
 
-        <p:dialog id="editClient" widgetVar="editClient" modal="true" visible="false" header="Edit Client" >
+        <p:dialog id="editMember" widgetVar="editMember" modal="true" visible="false" header="Edit Client" >
             <ui:include src="editMember.xhtml"/>
         </p:dialog>
 
-        <p style="margin-top : 2%"><strong>Name</strong>: </p>
+        <p style="margin-top : 2%"><strong>Name :</strong> #{clientBean.clientTOedit.clientName}</p>
 
-        <p><strong>Email :</strong>: </p>
+        <p><strong>Email :</strong>  #{clientBean.clientTOedit.clientEmail}</p>
 
-
-
-        <p><strong>Tel :</strong> </p>
+        <p><strong>Tel :</strong> #{clientBean.clientTOedit.clientPhone} </p>
 
     </div>
 <hr/>
 
+    <div class="card">
+        <div class="row">
+
+            <div class="col">
+                <p class="card-text"><strong>Case ID: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Appointment Typ: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Start Date: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Completed Date: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Status: </strong></p>
+            </div>
+        </div>
 
 
+
+
+    </div>
+
+
+    <div class="card mt-3 history_list">
+
+        <ui:repeat value="#{clientBean.clientList}" var="client">
+            <div class="row">
+                <div class="col">
+                    <p class="card-text">#{client.clientId}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{clientBean.FindCase(client.clientId)} </p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{client.clientDate}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{client.clientDate}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">Done</p>
+                </div>
+
+            </div>
+            <hr/>
+        </ui:repeat>
+
+
+    </div>
 
 </body>
 </html>
