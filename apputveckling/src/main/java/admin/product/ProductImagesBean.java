@@ -1,5 +1,6 @@
 package admin.product;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.faces.context.FacesContext;
@@ -19,7 +20,7 @@ import java.util.List;
  * This class is also used to get one product image from the database
  */
 @Named
-@SessionScoped
+@RequestScoped
 public class ProductImagesBean implements Serializable {
 
     @Produces

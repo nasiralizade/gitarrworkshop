@@ -8,6 +8,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 @Named
 @ViewScoped
@@ -23,6 +25,10 @@ public class EventEntityBean implements Serializable {
 
     public void setEvent(EventEntity event) {
         this.event = event;
+    }
+
+    public void addFreeEvents(Timestamp time_from, Timestamp time_to) {
+
     }
 
     @Transactional

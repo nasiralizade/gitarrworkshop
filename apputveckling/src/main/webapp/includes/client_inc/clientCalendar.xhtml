@@ -1,0 +1,35 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Schemaläggning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"/>
+</h:head>
+<h:body>
+    <div class="card">
+        <div class="d-flex flex-row">
+            <div class="p-2">
+                <h:form>
+                    <p:growl id="messages" showDetail="true" escape="false"/>
+
+                    <h:panelGrid columns="1" cellpadding="5">
+                        <p:calendar id="event"
+                                    value="#{calendarApplication.date}"
+                                    mode="inline">
+                            <p:ajax event="dateSelect" listener="#{calendarApplication.onDateSelect}" update="messages calendarDateSelectHeader"/>
+                        </p:calendar>
+                    </h:panelGrid>
+                </h:form>
+            </div>
+            <div class="p-2 client-calendar-selectTimeDiv">
+                <h2>
+                    <h:outputText id="calendarDateSelectHeader" value="#{calendarApplication.headerDate}"/>
+                </h2>
+            </div>
+        </div>
+
+    </div>
+</h:body>
+</div>

@@ -82,3 +82,13 @@ CREATE TABLE IF NOT EXISTS APPOINTMENT
     FOREIGN KEY (CLIENT_ID) REFERENCES CLIENT (CLIENT_ID),
     FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT (PRODUCT_ID)
 );
+
+CREATE TABLE IF NOT EXISTS Events
+(
+    id                  INT AUTO_INCREMENT PRIMARY KEY,
+    description          VARCHAR(255),
+    title               VARCHAR(50),
+    start_date          TIMESTAMP,
+    end_date            TIMESTAMP,
+    all_day             BOOLEAN
+)

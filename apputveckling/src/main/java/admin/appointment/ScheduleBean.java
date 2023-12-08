@@ -23,6 +23,7 @@ import org.primefaces.model.ScheduleModel;
 
 import java.io.Serializable;
 import java.net.http.HttpRequest;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -36,6 +37,9 @@ public class ScheduleBean implements Serializable {
     private EntityManager entityManager;
     private ScheduleModel model;
     private ScheduleEvent<?> event = new DefaultScheduleEvent<>();
+    private Timestamp time_from;
+    private Timestamp time_to;
+    private Date duration;
     private HttpRequest.Builder response;
     private ServletContext request;
 
@@ -46,7 +50,6 @@ public class ScheduleBean implements Serializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void loadEventsFromDatabase() {
@@ -161,5 +164,33 @@ public class ScheduleBean implements Serializable {
         model.deleteEvent(event);
     }
 
+    @Transactional
+    public void loadAvailableEvents() {
 
+    }
+
+
+    public Timestamp getTime_from() {
+        return time_from;
+    }
+
+    public void setTime_from(Timestamp time_from) {
+        this.time_from = time_from;
+    }
+
+    public Timestamp getTime_to() {
+        return time_to;
+    }
+
+    public void setTime_to(Timestamp time_to) {
+        this.time_to = time_to;
+    }
+
+    public Date getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Date duration) {
+        this.duration = duration;
+    }
 }
