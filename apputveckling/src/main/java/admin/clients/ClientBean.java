@@ -73,15 +73,25 @@ public class ClientBean implements Serializable {
         return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
 
-    public void SearchClient(){
+    public String SearchClient(){
 
         TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c WHERE c.clientName LIKE :searchName", Client.class);
         query.setParameter("searchName", "%" + searchName + "%");
         List<Client> matchList = query.getResultList();
 
-        for(Client x: matchList){
-            clientList.add(0,x);
+        for(Client j: clientList){
+
+            for(Client x: matchList){
+                if(j.getClientId() == x.getClientId()){
+                    clientList.remove(j);
+                    //clientList.add(0,x);
+                }
+
+            }
         }
+
+
+        return "admin_clients";
 
 
     }
