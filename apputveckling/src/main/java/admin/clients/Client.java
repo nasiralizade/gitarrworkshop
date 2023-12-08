@@ -1,14 +1,17 @@
 package admin.clients;
 
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Model;
+import jakarta.inject.Named;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 
 @Entity
 @Table(name = "CLIENT")
-public class Client {
+public class Client implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "CLIENT_ID")
