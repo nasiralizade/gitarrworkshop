@@ -13,6 +13,7 @@ import jakarta.persistence.TypedQuery;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,20 +22,20 @@ import java.util.logging.Logger;
 public class ClientBean implements Serializable {
 
     private String searchName;
-    List<Client> clientList;
-
+    private String case_typ;
+    private List<Client> clientList;
+    private   List<Cases> caseList;
 
     @PersistenceContext(unitName = "mysql_web")
     EntityManager em;
 
-
-
-
-
     @PostConstruct
     public void init() {
         TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c", Client.class);
+        TypedQuery<Cases> query2 = em.createQuery("SELECT a FROM Cases a", Cases.class);
+
         clientList = query.getResultList();
+        caseList = query2.getResultList();
 
     }
 
@@ -74,7 +75,30 @@ public class ClientBean implements Serializable {
 
     public void SearchClient(){
 
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c WHERE c.clientName LIKE :searchName", Client.class);
+        query.setParameter("searchName", "%" + searchName + "%");
+        List<Client> matchList = query.getResultList();
+
+        for(Client x: matchList){
+            clientList.add(0,x);
+        }
+
+
     }
 
+    public void FindCase(int clientID){
+
+        if(caseList.isEmpty()){
+            System.out.println("Empty");
+        }
+
+    }
+
+
+    public static void main(String[] arg){
+        ClientBean D = new ClientBean();
+        D.init();
+        D.FindCase(1);
+    }
 
 }

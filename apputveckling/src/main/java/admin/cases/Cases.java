@@ -16,6 +16,18 @@ public class Cases{
     private int CASE_ID;
     @Column(name = "CASE_DESC")
     private String CASE_DESC;
+
+    @Column(name = "MEMBER_ID")
+    private int MEMBER_ID;
+
+    public int getMEMBER_ID() {
+        return MEMBER_ID;
+    }
+
+    public void setMEMBER_ID(int MEMBER_ID) {
+        this.MEMBER_ID = MEMBER_ID;
+    }
+
     @Column(name = "STATUS")
     private String STATUS;
     @Column(name = "CASE_DATE_START")

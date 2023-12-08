@@ -52,12 +52,13 @@
                 </div>
 
                 <div class="col">
-                    <p class="card-text">#{client.clientDate}</p>
+                    <p class="card-text">#{clientBean.FindCase(client.clientId)} </p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">llll </p>
+                    <p class="card-text">#{client.clientDate}</p>
                 </div>
+
 
 
             </div>
@@ -75,8 +76,8 @@
 
     <h:form>
         <h5 style="margin-top:2px">Client List</h5>
-        <h:inputText styleClass="custom-input" value="#"/>
-        <h:commandButton styleClass="custom-button" value="Submit" action="#"/>
+        <h:inputText styleClass="custom-input" value="#{clientBean.searchName}"/>
+        <h:commandButton styleClass="custom-button" value="Submit" action="#{clientBean.SearchClient()}"/>
     </h:form>
 
     <div class="list-group list-group-action test">
@@ -85,9 +86,8 @@
             <ui:repeat value="#{clientBean.clientList}" var="client">
                 <h:commandLink action="#" styleClass="list-group-item list-group-item-action">
                     <f:param name="clientId" value="#{client.clientId}" />
-                    <f:param name="clientId" value="" />
 
-                  <!--  #{client.name}-->
+                  #{client.clientName}
                 </h:commandLink>
             </ui:repeat>
         </h:form>
