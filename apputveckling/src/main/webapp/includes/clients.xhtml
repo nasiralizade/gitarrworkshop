@@ -41,22 +41,22 @@
 
     <div class="card mt-3 history_list">
 
-        <ui:repeat value="#{clientBean.clients}" var="clients">
+        <ui:repeat value="" var="clients">
             <div class="row">
                 <div class="col">
-                    <p class="card-text">#{clients.clientID}</p>
+                    <p class="card-text">lll </p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">#{clients.name}</p>
+                    <p class="card-text"> llll</p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">#{clients.cas_type}</p>
+                    <p class="card-text">llll </p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">#{clients.date}</p>
+                    <p class="card-text">llll </p>
                 </div>
 
 
@@ -75,17 +75,19 @@
 
     <h:form>
         <h5 style="margin-top:2px">Client List</h5>
-        <h:inputText styleClass="custom-input" value="#{clientBean.searchName}"/>
-        <h:commandButton styleClass="custom-button" value="Submit" action="#{clientBean.Search}"/>
+        <h:inputText styleClass="custom-input" value="#"/>
+        <h:commandButton styleClass="custom-button" value="Submit" action="#"/>
     </h:form>
 
     <div class="list-group list-group-action test">
 
         <h:form>
-            <ui:repeat value="#{clientBean.clients}" var="client">
-                <h:commandLink action="#{clientBean.setClientToEdit(client.clientID)}" styleClass="list-group-item list-group-item-action">
-                    <f:param name="clientId" value="#{client.clientID}" />
-                    #{client.name}
+            <ui:repeat value="" var="client">
+                <h:commandLink action="#" styleClass="list-group-item list-group-item-action">
+                    <f:param name="clientId" value="" />
+                    <f:param name="clientId" value="" />
+
+                  <!--  #{client.name}-->
                 </h:commandLink>
             </ui:repeat>
         </h:form>
@@ -93,7 +95,7 @@
     </div>
 
     <h:form>
-        <p:commandButton styleClass="add_button m-3" value="Add New Client" action="#{clientBean.addClient()}" update=":addcilent"
+        <p:commandButton styleClass="add_button m-3" value="Add New Client" action="#" update=":addcilent"
                          oncomplete="PF('addcilent').show()"/>
 
     </h:form>

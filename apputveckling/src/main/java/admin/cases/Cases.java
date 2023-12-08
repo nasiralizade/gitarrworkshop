@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "CASES")
-
+@NamedQuery(name = "Cases.All", query = "SELECT cases FROM Cases cases")
 public class Cases{
     
     @Id

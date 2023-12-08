@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
@@ -18,7 +19,7 @@
 
         <h1>Client Details</h1>
         <h:form>
-            <h:commandButton  value="Delete Client" action="#{clientBean.deleteEntity(clientBean.clientToEdit.clientID)}"
+            <h:commandButton  value="Delete Client" action="#"
             style="color: white;border: none;font-size: 23px;margin-left: 2%;margin-top:2% ; background-color: red; border-radius: 5px"/>
 
             <p:commandButton styleClass="editClient" value="Edit Client" action="editMember" update=":editClient"
@@ -30,15 +31,18 @@
             <ui:include src="editMember.xhtml"/>
         </p:dialog>
 
-        <p style="margin-top : 2%"><strong>Name</strong>: #{clientBean.clientToEdit.name}</p>
-        <p><strong>Email :</strong>: #{clientBean.clientToEdit.email}</p>
-        <p><strong>Tel :</strong> #{clientBean.clientToEdit.phone}</p>
+        <p style="margin-top : 2%"><strong>Name</strong>: </p>
+
+        <p><strong>Email :</strong>: </p>
+
+
+
+        <p><strong>Tel :</strong> </p>
 
     </div>
 <hr/>
 
-<h:outputText> Här nere kommer jag har all information om admin och client, dvs konversationer och både gammla och
-pågående ärende</h:outputText>
+
 
 
 </body>
