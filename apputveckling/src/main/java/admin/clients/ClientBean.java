@@ -19,28 +19,32 @@ import java.util.logging.Logger;
 @Named
 @SessionScoped
 public class ClientBean implements Serializable {
-    private TypedQuery<Client> query;
+
     private String searchName;
+    List<Client> clientList;
+
 
     @PersistenceContext(unitName = "mysql_web")
     EntityManager em;
 
 
 
-    public TypedQuery<Client> getQuery() {
-        return query;
-    }
 
-    public void setQuery(TypedQuery<Client> query) {
-        this.query = query;
-    }
 
     @PostConstruct
     public void init() {
-       // query = em.createQuery("SELECT e FROM Client e WHERE e.clientId = :value", Client.class);
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c", Client.class);
+        clientList = query.getResultList();
 
     }
 
+    public List<Client> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
+    }
 
     public String getSearchName() {
         return searchName;

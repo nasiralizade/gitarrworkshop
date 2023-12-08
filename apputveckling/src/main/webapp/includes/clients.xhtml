@@ -41,18 +41,18 @@
 
     <div class="card mt-3 history_list">
 
-        <ui:repeat value="" var="clients">
+        <ui:repeat value="#{clientBean.clientList}" var="client">
             <div class="row">
                 <div class="col">
-                    <p class="card-text">lll </p>
+                    <p class="card-text">#{client.clientId}</p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text"> llll</p>
+                    <p class="card-text"> #{client.clientName}</p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">llll </p>
+                    <p class="card-text">#{client.clientDate}</p>
                 </div>
 
                 <div class="col">
@@ -82,9 +82,9 @@
     <div class="list-group list-group-action test">
 
         <h:form>
-            <ui:repeat value="" var="client">
+            <ui:repeat value="#{clientBean.clientList}" var="client">
                 <h:commandLink action="#" styleClass="list-group-item list-group-item-action">
-                    <f:param name="clientId" value="" />
+                    <f:param name="clientId" value="#{client.clientId}" />
                     <f:param name="clientId" value="" />
 
                   <!--  #{client.name}-->
