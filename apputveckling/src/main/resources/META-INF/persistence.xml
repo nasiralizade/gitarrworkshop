@@ -15,7 +15,7 @@
     <persistence-unit name="ProductImages" transaction-type="JTA">
         <jta-data-source>mysql_web</jta-data-source>
     </persistence-unit>
-    <persistence-unit name="APPOINTMENT" transaction-type="JTA">
+    <persistence-unit name="Events" transaction-type="JTA">
         <jta-data-source>mysql_web</jta-data-source>
     </persistence-unit>
 
