@@ -2,8 +2,7 @@ package admin.appointment;
 
 import jakarta.annotation.PostConstruct;
 
-import jakarta.ejb.Local;
-import jakarta.el.MethodExpression;
+
 import jakarta.enterprise.inject.Produces;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -14,7 +13,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.ServletContext;
 import jakarta.transaction.Transactional;
 
-import org.primefaces.event.MoveEvent;
+
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.schedule.ScheduleEntryMoveEvent;
 import org.primefaces.model.DefaultScheduleEvent;
@@ -25,17 +24,10 @@ import org.primefaces.model.ScheduleModel;
 import java.io.Serializable;
 import java.net.http.HttpRequest;
 import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.time.Instant;
 
 @Named
 @ViewScoped
@@ -128,7 +120,7 @@ public class ScheduleBean implements Serializable {
                 model.addEvent(event);
                 entityManager.persist(ny);
                 loadEventsFromDatabase();
-                response.setHeader("Refresh", "0; URL=" + request.getContextPath());
+                //response.setHeader("Refresh", "0; URL=" + request.getContextPath());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -178,7 +170,7 @@ public class ScheduleBean implements Serializable {
     @Transactional
     public void deleteEvent() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Event delete"));
-        String query =  "DELETE FROM EventEntity e WHERE e.id = " + event.getId();
+        String query = "DELETE FROM EventEntity e WHERE e.id = " + event.getId();
         entityManager.createQuery(query)
                 .executeUpdate();
         model.deleteEvent(event);
@@ -187,45 +179,40 @@ public class ScheduleBean implements Serializable {
     @Transactional
     public void setAvailableEvents() {
         List<LocalDateTime> timeSlots = new ArrayList<>();
+        LocalDateTime slot = LocalDateTime.of(time_from.getYear(), time_from.getMonth(), time_from.getDayOfMonth(), 10, 0);
 
-            LocalDateTime slot = LocalDateTime.of(time_from.getYear(),time_from.getMonth(),time_from.getDayOfMonth(),time_from.getHour(), 0,0);
-            while (!slot.isEqual(time_to)||!slot.isAfter(time_to) ){
-                LocalDateTime lunch = LocalDateTime.of(slot.getYear(),slot.getMonth(),slot.getDayOfMonth(), 13,0,0);
-                LocalDateTime closed = LocalDateTime.of(slot.getYear(),slot.getMonth(),slot.getDayOfMonth(), 18,0,0);
-                LocalDateTime opened= LocalDateTime.of(slot.getYear(),slot.getMonth(),slot.getDayOfMonth(), 10,0,0);
-//                if (slot.isBefore(opened) || slot.isAfter(closed) || slot.equals(closed)){
-//                    slot=slot.plusMinutes(60);
-//                    continue;
-//                }
-//                if (slot.isBefore(opened)){
-//                    slot=slot.plusMinutes(60);
-//                    continue;
-//                }
-//                if (slot.isAfter(closed)){
-//                    slot=slot.plusMinutes(60);
-//                    continue;
-//                }
-                if (slot.isEqual(closed)){
-                    slot=slot.plusMinutes(60);
-                    continue;
-                }
-                if (slot.isEqual(lunch)){
-                    slot=slot.plusMinutes(60);
-                    continue;
-                }
-
-
-                timeSlots.add(slot);
-                EventEntity nySlot= new EventEntity();
-                nySlot.setTitle("Available");
-                nySlot.setEnd_date(Timestamp.valueOf(slot.plusMinutes(45)));
-                nySlot.setStart_date(Timestamp.valueOf(slot));
-                nySlot.setAll_day(false);
-                entityManager.persist(nySlot);
-                slot=slot.plusMinutes(45).plusMinutes(15);
-
+        LocalTime openingTime = LocalTime.of(10, 0);
+        LocalTime closingTime = LocalTime.of(18, 0);
+        Duration slotDuration = Duration.ofMinutes(45);
+        Duration breakDuration = Duration.ofMinutes(15);
+        boolean isLunchBreakSkipped = false;
+        while (!slot.isAfter(time_to)) {
+            LocalDateTime closed = LocalDateTime.of(slot.toLocalDate(), closingTime);
+            LocalDateTime opened = LocalDateTime.of(slot.toLocalDate(), openingTime);
+            LocalDateTime lunchStart = LocalDateTime.of(slot.toLocalDate(), LocalTime.of(13, 0));
+            LocalDateTime lunchEnd = lunchStart.plusHours(1); //  lunch break is 1 hour
+                // Skip the lunch break
+            if (!isLunchBreakSkipped &&!slot.isBefore(lunchStart) && !slot.isAfter(lunchEnd)) {
+                slot = slot.plusHours(1);
+                isLunchBreakSkipped = true;
+                continue;
+            }
+            if (slot.isBefore(opened) || slot.isAfter(closed)) {
+                slot = slot.plusMinutes(60);
+                isLunchBreakSkipped = false;
+                continue;
             }
 
+
+            timeSlots.add(slot);
+            EventEntity newSlot = new EventEntity();
+            newSlot.setTitle("Available");
+            newSlot.setEnd_date(Timestamp.valueOf(slot.plus(slotDuration)));
+            newSlot.setStart_date(Timestamp.valueOf(slot));
+            newSlot.setAll_day(false);
+            entityManager.persist(newSlot);
+            slot = slot.plus(slotDuration).plus(breakDuration);
+        }
     }
 
     public static LocalDate convertToDateToLocalDate(Date date) {

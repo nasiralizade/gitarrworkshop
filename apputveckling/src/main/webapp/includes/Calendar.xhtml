@@ -1,8 +1,7 @@
-
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:h="http://xmlns.jcp.org/jsf/html"
      xmlns:f="http://xmlns.jcp.org/jsf/core"
-     xmlns:p="http://primefaces.org/ui">
+     xmlns:p="http://primefaces.org/ui" >
 
     <h:head>
         <title>Schemaläggning</title>
@@ -13,8 +12,8 @@
             <h:form>
                 <p:growl id="messages" showDetail="true" escape="false"/>
 
-                <p:schedule id="schedule" value="#{scheduleBean.model}" widgetVar="myschedule">
-                            disableWeekends="true" minTime="10:00:00" maxTime="18:00:00" showWeekNumbers="true">
+                <p:schedule id="schedule" value="#{scheduleBean.model}" widgetVar="myschedule" view="timeGridWeek" tooltip="true" resizable="true"
+                            disableWeekends="true" minTime="09:00:00" maxTime="19:00:00" showWeekNumbers="true">
                     <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}" update="eventDetails"
                             oncomplete="PF('eventDialog').show();"/>
                     <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}" update="eventDetails"
@@ -28,12 +27,13 @@
                         <p:inputText id="title" value="#{scheduleBean.event.title}" required="true"/>
 
                         <p:outputLabel for="from" value="From" styleClass="font-bold"/>
-                        <p:datePicker id="from" value="#{scheduleBean.event.startDate}" pattern="yyyy/MM/dd"
+                        <p:datePicker id="from" value="#{scheduleBean.event.startDate}" pattern="yyyy/MM/dd" timeInput="true"
                                       showTime="true" appendTo="@(body)"/>
 
                         <p:outputLabel for="to" value="To" styleClass="font-bold"/>
-                        <p:datePicker id="to" value="#{scheduleBean.event.endDate}" pattern="yyyy/MM/dd"
+                        <p:datePicker id="to" value="#{scheduleBean.event.endDate}" pattern="yyyy/MM/dd" timeInput="true"
                                       showTime="true" appendTo="@(body)"/>
+
 
 
                         <p:outputLabel for="allDay" value="All Day" styleClass="font-bold"/>
@@ -59,13 +59,13 @@
                 <h:panelGrid>
                     <p:commandButton id="freeEventCreate" styleClass="ui-button ui-button-success" value="Create times" onclick="PF('freeTime').show()"/>
                 </h:panelGrid>
-                <p:dialog header="Time picker" widgetVar="freeTime">
+                <p:dialog header="Time picker" widgetVar="freeTime" >
                     <p:outputLabel for="dateFrom" value="From" styleClass="font-bold"/><br/>
-                    <p:datePicker id="dateFrom" value="#{scheduleBean.time_from}" pattern="yyyy-MM-dd" required="true"
+                    <p:datePicker id="dateFrom" value="#{scheduleBean.time_from}" pattern="yyyy-MM-dd" required="true" timeInput="true"
                                   showTime="true"/><br/>
 
                     <p:outputLabel for="dateTo" value="To" styleClass="font-bold"/><br/>
-                    <p:datePicker id="dateTo" value="#{scheduleBean.time_to}" pattern="yyyy-MM-dd" required="true"
+                    <p:datePicker id="dateTo" value="#{scheduleBean.time_to}" pattern="yyyy-MM-dd" required="true" timeInput="true"
                                   showTime="true"/><br/>
                     <p:commandButton value="Send"  action="#{scheduleBean.setAvailableEvents}" oncomplete="PF('freeTime).hide()"/>
                 </p:dialog>
