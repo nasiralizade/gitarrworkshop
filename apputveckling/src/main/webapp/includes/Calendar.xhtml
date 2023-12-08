@@ -61,13 +61,13 @@
                 </h:panelGrid>
                 <p:dialog header="Time picker" widgetVar="freeTime">
                     <p:outputLabel for="dateFrom" value="From" styleClass="font-bold"/><br/>
-                    <p:datePicker id="dateFrom" value="#{scheduleBean.event.startDate}" pattern="yyyy-MM-dd" required="true"
-                                  showTime="true"/>
+                    <p:datePicker id="dateFrom" value="#{scheduleBean.time_from}" pattern="yyyy-MM-dd" required="true"
+                                  showTime="true"/><br/>
 
                     <p:outputLabel for="dateTo" value="To" styleClass="font-bold"/><br/>
-                    <p:datePicker id="dateTo" value="#{scheduleBean.event.endDate}" pattern="yyyy-MM-dd" required="true"
+                    <p:datePicker id="dateTo" value="#{scheduleBean.time_to}" pattern="yyyy-MM-dd" required="true"
                                   showTime="true"/><br/>
-                    <p:commandButton value="send" action="#{scheduleBean.setAvailableEvents}" oncomplete="PF('freeTime).hide()"/>
+                    <p:commandButton value="Send"  action="#{scheduleBean.setAvailableEvents}" oncomplete="PF('freeTime).hide()"/>
                 </p:dialog>
             </h:form>
         </div>

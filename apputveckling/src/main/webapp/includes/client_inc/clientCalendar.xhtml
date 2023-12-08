@@ -18,8 +18,7 @@
                             <p:outputLabel for="calendarClient" value="Select your date"/>
                             <p:datePicker id="calendarClient" value="#{calendarApplication.date}"
                                           inline="true"
-                                          mindate="#{'2023-12-09'}"
-                                          maxdate="#{'2023-12-09'}">
+                                          disabledDays="${scheduleBean.}">
                                 <p:ajax event="dateSelect" listener="#{calendarApplication.onDateSelect}"/>
                             </p:datePicker>
                         </h:panelGrid>
