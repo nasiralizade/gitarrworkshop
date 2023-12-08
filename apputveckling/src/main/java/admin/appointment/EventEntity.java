@@ -22,6 +22,10 @@ public class EventEntity {
     private Timestamp end_date;
     @Column(name = "all_day")
     private boolean all_day;
+    @Column(name = "url")
+    private String url;
+    @Column(name = "email")
+    private String email;
 
     public EventEntity() {
     }
@@ -29,7 +33,6 @@ public class EventEntity {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -37,7 +40,6 @@ public class EventEntity {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -45,7 +47,6 @@ public class EventEntity {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -53,7 +54,6 @@ public class EventEntity {
     public Timestamp getStart_date() {
         return start_date;
     }
-
     public void setStart_date(Timestamp start_date) {
         this.start_date = start_date;
     }
@@ -61,7 +61,6 @@ public class EventEntity {
     public Timestamp getEnd_date() {
         return end_date;
     }
-
     public void setEnd_date(Timestamp end_date) {
         this.end_date = end_date;
     }
@@ -69,8 +68,15 @@ public class EventEntity {
     public boolean isAll_day() {
         return all_day;
     }
-
     public void setAll_day(boolean all_day) {
         this.all_day = all_day;
     }
+
+    public void setUrl(String url) { this.url = url; }
+    public String getUrl() { return this.url; }
+
+    public void setEmail(String email) { this.email = email; }
+    public String getEmail() { return this.email; }
+
 }
+

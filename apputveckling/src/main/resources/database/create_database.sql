@@ -92,3 +92,16 @@ CREATE TABLE IF NOT EXISTS Events
     end_date            TIMESTAMP,
     all_day             BOOLEAN
 )
+-- Event table for calendar
+create table if not exists ProjectDB.Events
+(
+    id          int auto_increment
+    primary key,
+    url         varchar(250) null,
+    email       varchar(250) null,
+    title       varchar(255) not null,
+    description text         null,
+    start_date  timestamp    not null,
+    end_date    timestamp    not null,
+    all_day     tinyint(1)   not null
+);

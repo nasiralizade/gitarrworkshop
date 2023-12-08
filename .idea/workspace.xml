@@ -11,9 +11,23 @@
   <component name="ChangeListManager">
     <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/resources/database/create_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/resources/database/create_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/editFreeEvents.xhtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml" afterDir="false" />
     </list>
-    <list id="e3c9961d-4997-480a-8dcf-8afb05a28c93" name="Changes by serhad" comment="" />
-    <list id="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" name="Changes by tahakhudher" comment="" />
+    <list id="e3c9961d-4997-480a-8dcf-8afb05a28c93" name="Changes by serhad" comment="">
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/client_inc/clientCalendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/client_inc/clientCalendar.xhtml" afterDir="false" />
+    </list>
+    <list id="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" name="Changes by tahakhudher" comment="">
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/template.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/template.xhtml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,12 +48,19 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "LocalTweekez"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LocalTweekez&quot;
   }
-}]]></component>
+}</component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="client-page" />
+      </list>
+    </option>
+  </component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -47,6 +68,46 @@
         <option name="url" value="https://github.com/javaapputveckling/gitarrworkshop.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java">
+      <ranges>
+        <range start1="28" end1="28" start2="28" end2="29" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="29" end1="29" start2="30" end2="32" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="39" end1="42" start2="42" end2="49" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="47" end1="47" start2="54" end2="55" changelist="e3c9961d-4997-480a-8dcf-8afb05a28c93" />
+        <range start1="52" end1="52" start2="60" end2="62" changelist="e3c9961d-4997-480a-8dcf-8afb05a28c93" />
+        <range start1="58" end1="58" start2="68" end2="69" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
+        <range start1="59" end1="59" start2="70" end2="73" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
+        <range start1="62" end1="62" start2="76" end2="77" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="66" end1="66" start2="81" end2="83" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
+        <range start1="167" end1="168" start2="184" end2="210" changelist="e3c9961d-4997-480a-8dcf-8afb05a28c93" />
+        <range start1="172" end1="173" start2="214" end2="216" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="176" end1="177" start2="219" end2="220" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="180" end1="181" start2="223" end2="224" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="184" end1="185" start2="227" end2="228" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="188" end1="189" start2="231" end2="232" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="192" end1="193" start2="235" end2="236" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="195" end1="195" start2="238" end2="262" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml">
+      <ranges>
+        <range start1="0" end1="0" start2="0" end2="1" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="9" end1="10" start2="10" end2="12" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="14" end1="14" start2="16" end2="17" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="27" end1="28" start2="30" end2="31" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
+        <range start1="31" end1="32" start2="34" end2="35" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
+        <range start1="44" end1="50" start2="47" end2="52" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="53" end1="53" start2="55" end2="73" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml">
+      <ranges>
+        <range start1="0" end1="3" start2="0" end2="0" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
+        <range start1="14" end1="15" start2="11" end2="12" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+      </ranges>
+    </file>
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -73,36 +134,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Database Script.add_data.sql.executor": "Run",
-    "Database Script.create_database.sql.executor": "Run",
-    "GlassFish Server.GlassFish 7.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "temp__appointment",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Database Script.add_data.sql.executor&quot;: &quot;Run&quot;,
+    &quot;Database Script.create_database.sql.executor&quot;: &quot;Run&quot;,
+    &quot;GlassFish Server.GlassFish 7.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;temp__appointment&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "RunConfigurationTargetLRU": [
-      "58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be/schema/\"ProjectDB\""
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;58cc9ad1-aa79-406b-a75b-a2a4a1f2c7be/schema/\&quot;ProjectDB\&quot;&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="GlassFish Server.GlassFish 7">
     <configuration name="EventEntityBean" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="admin.appointment.EventEntityBean" />
@@ -226,10 +287,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Database Script.add_data.sql" />
-        <item itemvalue="Database Script.create_database.sql" />
         <item itemvalue="Application.EventEntityBean" />
         <item itemvalue="Application.ScheduleBean" />
+        <item itemvalue="Database Script.add_data.sql" />
+        <item itemvalue="Database Script.create_database.sql" />
         <item itemvalue="Node.js.calendar.js" />
       </list>
     </recent_temporary>

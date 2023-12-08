@@ -26,7 +26,10 @@ import java.net.http.HttpRequest;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -37,33 +40,47 @@ public class ScheduleBean implements Serializable {
     private EntityManager entityManager;
     private ScheduleModel model;
     private ScheduleEvent<?> event = new DefaultScheduleEvent<>();
-    private Timestamp time_from;
-    private Timestamp time_to;
-    private Date duration;
+    private LocalDateTime time_from;
+    private LocalDateTime time_to;
+    private LocalDate date;
+    private Date dateFrom;
+    private Date dateTo;
+    private int duration;
+
     private HttpRequest.Builder response;
     private ServletContext request;
 
     @PostConstruct
     public void init() {
+
         try {
             loadEventsFromDatabase();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+
     }
 
     private void loadEventsFromDatabase() {
         model = new DefaultScheduleModel();
         List<EventEntity> events = entityManager.createQuery("SELECT e FROM EventEntity e", EventEntity.class).getResultList();
         if (events != null && !events.isEmpty()) {
+            int i = 0;
             for (EventEntity eventEntity : events) {
+
+                String color;
+                color = "Available".equals(events.get(i).getTitle()) ? "green" : "red";
                 ScheduleEvent<?> event = DefaultScheduleEvent.builder()
                         .id(String.valueOf(eventEntity.getId()))
                         .title(eventEntity.getTitle())
+                        .backgroundColor(color)
                         .startDate(eventEntity.getStart_date().toLocalDateTime())
                         .endDate(eventEntity.getEnd_date().toLocalDateTime())
                         .allDay(eventEntity.isAll_day())
                         .build();
+                i++;
+
                 model.addEvent(event);
             }
         }
@@ -165,32 +182,82 @@ public class ScheduleBean implements Serializable {
     }
 
     @Transactional
-    public void loadAvailableEvents() {
+    public void setAvailableEvents() {
+        List<LocalDateTime> timeSlots = new ArrayList<>();
+
+        LocalDateTime slot = time_from;
+
+       while(!slot.isAfter(time_to)){
+           timeSlots.add(slot);
+           slot=slot.plusMinutes(duration).plusMinutes(15);
+           EventEntity nySlot= new EventEntity();
+           nySlot.setTitle("Ledig");
+           nySlot.setEnd_date(Timestamp.valueOf(slot.plusMinutes(45)));
+           nySlot.setStart_date(Timestamp.valueOf(slot));
+           nySlot.setAll_day(false);
+           entityManager.persist(nySlot);
+       }
+
+
+
+
+/*
+            ;
+        for (LocalDate i = date_from; i <= date_to; i.plusDays(1)){
+            
+            addEvent();
+        }
+        */
 
     }
 
 
-    public Timestamp getTime_from() {
+
+    public LocalDateTime getTime_from() {
         return time_from;
     }
 
-    public void setTime_from(Timestamp time_from) {
+    public void setTime_from(LocalDateTime time_from) {
         this.time_from = time_from;
     }
 
-    public Timestamp getTime_to() {
+    public LocalDateTime getTime_to() {
         return time_to;
     }
 
-    public void setTime_to(Timestamp time_to) {
+    public void setTime_to(LocalDateTime time_to) {
         this.time_to = time_to;
     }
 
-    public Date getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(Date duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
     }
 }

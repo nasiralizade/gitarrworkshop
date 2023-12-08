@@ -10,24 +10,26 @@
 <h:body>
     <div class="card">
         <div class="d-flex flex-row">
-            <div class="p-2">
-                <h:form>
-                    <p:growl id="messages" showDetail="true" escape="false"/>
+            <h:form>
+                <div class="p-2">
+                        <p:growl id="messages" showDetail="true" escape="false"/>
 
-                    <h:panelGrid columns="1" cellpadding="5">
-                        <p:calendar id="event"
-                                    value="#{calendarApplication.date}"
-                                    mode="inline">
-                            <p:ajax event="dateSelect" listener="#{calendarApplication.onDateSelect}" update="messages calendarDateSelectHeader"/>
-                        </p:calendar>
-                    </h:panelGrid>
-                </h:form>
-            </div>
-            <div class="p-2 client-calendar-selectTimeDiv">
-                <h2>
-                    <h:outputText id="calendarDateSelectHeader" value="#{calendarApplication.headerDate}"/>
-                </h2>
-            </div>
+                        <h:panelGrid columns="1" cellpadding="5">
+                            <p:outputLabel for="calendarClient" value="Select your date"/>
+                            <p:datePicker id="calendarClient" value="#{calendarApplication.date}"
+                                          inline="true"
+                                          mindate="#{'2023-12-09'}"
+                                          maxdate="#{'2023-12-09'}">
+                                <p:ajax event="dateSelect" listener="#{calendarApplication.onDateSelect}"/>
+                            </p:datePicker>
+                        </h:panelGrid>
+                </div>
+                <div class="p-2 client-calendar-selectTimeDiv">
+                    <h2>
+                        <h:outputText id="calendarDateSelectHeader" value="#{calendarApplication.headerDate}"/>
+                    </h2>
+                </div>
+            </h:form>
         </div>
 
     </div>

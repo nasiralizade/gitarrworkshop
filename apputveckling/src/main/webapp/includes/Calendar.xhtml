@@ -1,3 +1,4 @@
+
 <div xmlns="http://www.w3.org/1999/xhtml"
      xmlns:h="http://xmlns.jcp.org/jsf/html"
      xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -7,11 +8,13 @@
         <title>Schemaläggning</title>
     </h:head>
     <h:body>
-        <div class="card" style="width: 60%; height: 60%; margin: 2rem auto">
+        <div class="container-fluid row">
+            <div class="col-md-9">
             <h:form>
                 <p:growl id="messages" showDetail="true" escape="false"/>
 
                 <p:schedule id="schedule" value="#{scheduleBean.model}" widgetVar="myschedule">
+                            disableWeekends="true" minTime="10:00:00" maxTime="18:00:00" showWeekNumbers="true">
                     <p:ajax event="dateSelect" listener="#{scheduleBean.onDateSelect}" update="eventDetails"
                             oncomplete="PF('eventDialog').show();"/>
                     <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}" update="eventDetails"
@@ -25,11 +28,11 @@
                         <p:inputText id="title" value="#{scheduleBean.event.title}" required="true"/>
 
                         <p:outputLabel for="from" value="From" styleClass="font-bold"/>
-                        <p:datePicker id="from" value="#{scheduleBean.event.startDate}" pattern="dd/MM/yyyy"
+                        <p:datePicker id="from" value="#{scheduleBean.event.startDate}" pattern="yyyy/MM/dd"
                                       showTime="true" appendTo="@(body)"/>
 
                         <p:outputLabel for="to" value="To" styleClass="font-bold"/>
-                        <p:datePicker id="to" value="#{scheduleBean.event.endDate}" pattern="dd/MM/yyyy"
+                        <p:datePicker id="to" value="#{scheduleBean.event.endDate}" pattern="yyyy/MM/dd"
                                       showTime="true" appendTo="@(body)"/>
 
 
@@ -42,15 +45,32 @@
                                          ignoreAutoUpdate="false"/>
                         <p:commandButton id="addButton" value="Save" action="#{scheduleBean.addEvent}"
                                          oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
-                        <h:form>
-                            <p:commandButton id="deleteBtn" type="delete" value="Delete" style="float: right; background-color: red;"
-                                             styleClass="font-bold ui-button-danger "
-                                             action="#{scheduleBean.deleteEvent}"
-                                             oncomplete="PF('myschedule').update();P F('eventDialog').hide(); model.delete"/>
-                        </h:form>
+                        <p:commandButton id="deleteBtn" type="delete" value="Delete" style="float: right; background-color: red;"
+                                         styleClass="font-bold ui-button-danger "
+                                         action="#{scheduleBean.deleteEvent}"
+                                         oncomplete="PF('myschedule').update();P F('eventDialog').hide(); model.delete"/>
+
                     </div>
                 </p:dialog>
             </h:form>
+            </div>
+            <div class="col-md-3">
+            <h:form>
+                <h:panelGrid>
+                    <p:commandButton id="freeEventCreate" styleClass="ui-button ui-button-success" value="Create times" onclick="PF('freeTime').show()"/>
+                </h:panelGrid>
+                <p:dialog header="Time picker" widgetVar="freeTime">
+                    <p:outputLabel for="dateFrom" value="From" styleClass="font-bold"/><br/>
+                    <p:datePicker id="dateFrom" value="#{scheduleBean.event.startDate}" pattern="yyyy-MM-dd" required="true"
+                                  showTime="true"/>
+
+                    <p:outputLabel for="dateTo" value="To" styleClass="font-bold"/><br/>
+                    <p:datePicker id="dateTo" value="#{scheduleBean.event.endDate}" pattern="yyyy-MM-dd" required="true"
+                                  showTime="true"/><br/>
+                    <p:commandButton value="send" action="#{scheduleBean.setAvailableEvents}" oncomplete="PF('freeTime).hide()"/>
+                </p:dialog>
+            </h:form>
+        </div>
         </div>
     </h:body>
 </div>
