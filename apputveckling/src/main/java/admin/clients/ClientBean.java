@@ -111,7 +111,7 @@ public class ClientBean implements Serializable {
             try (PreparedStatement statement = connection.prepareStatement(sql2);
                  ResultSet resultSet2 = statement.executeQuery()) {
 
-               client.setCas_type(resultSet2.getString("CASE_TYPE"));
+               //client.setCase_type(resultSet2.getString("CASE_TYPE"));
                client.setDate(String.valueOf(resultSet2.getDate("CASE_DATE_START")));
             }
         } catch (SQLException e) {

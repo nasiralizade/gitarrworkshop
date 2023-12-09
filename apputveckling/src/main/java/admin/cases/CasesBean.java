@@ -1,17 +1,19 @@
 package admin.cases;
-
+import admin.product.Product;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
-import jakarta.servlet.http.Part;
 import jakarta.transaction.Transactional;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+
+import java.io.PushbackInputStream;
 import java.io.Serializable;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 
 @Named
 @Transactional
@@ -22,6 +24,7 @@ public class CasesBean implements Serializable{
     private EntityManager entityManager;
     List<Cases> cases;
     List<Cases> cases_details;
+    Cases caseToEdit;
     private String isShowProductDetails = "fales";
     Cases newCase = new Cases();
     private String newCaseDesc;
@@ -31,13 +34,15 @@ public class CasesBean implements Serializable{
     private String newCaseProfit;
     private int newCaseHours;
     private String newCaseType;
-
-    // Fields for adding a new journal
     private String newJournalDesc;
     private int newJournalId;
+    public Cases getCaseToEdit(){
+        return caseToEdit;
+    }
+    public void setCaseToEdit(Cases caseToEdit){
+        this.caseToEdit = caseToEdit;
+    }
 
-
-    // Getter and setter methods for the new case fields
     public String getNewCaseDesc() {
         return newCaseDesc;
     }
@@ -94,7 +99,6 @@ public class CasesBean implements Serializable{
         this.newCaseType = newCaseType;
     }
 
-    // Getter and setter methods for the new journal fields
     public String getNewJournalDesc() {
         return newJournalDesc;
     }
@@ -117,59 +121,41 @@ public class CasesBean implements Serializable{
         this.cases_details = cases_details;
     }
 
-    public void showProductDetails(int caseId){
-        cases_details = entityManager.createQuery("select p from Cases p where p.CASE_ID = :caseId", Cases.class)
-            .setParameter("caseId", caseId)
-                .getResultList();
-        isShowProductDetails = "true";
+    public String editCase(int caseId) {
+        caseToEdit = entityManager.createQuery("select p from Cases p where p.CASE_ID = :caseId", Cases.class)
+                .setParameter("caseId", caseId)
+                .getSingleResult();
+        return "/includes/editCase?faces-redirect=true&caseId=" + caseId;
     }
-
     public List<Cases> getCases(){
         cases = entityManager.createQuery("select p from Cases p", Cases.class).getResultList();
         return cases;
     }
-
     public void setCases(List<Cases> cases){
         this.cases = cases;
     }
-
     public void addCase() {
-        try {
-            // Create a new Cases instance
-            Cases newCase = new Cases();
-            newCase.setCASE_DESC(newCaseDesc);
-            newCase.setCASE_STATUS(newCaseStatus);
-            newCase.setCASE_DATE_START(newCaseDateStart);
-            newCase.setCASE_DATE_END(newCaseDateEnd);
-            newCase.setCASE_PROFIT(newCaseProfit);
-            newCase.setCASE_HOURS(newCaseHours);
-            newCase.setCASE_TYPE(newCaseType);
+        Cases newCase = new Cases();
+        newCase.setCASE_DESC(newCaseDesc);
+        newCase.setCASE_STATUS(newCaseStatus);
+        newCase.setCASE_DATE_START(newCaseDateStart);
+        newCase.setCASE_DATE_END(newCaseDateEnd);
+        newCase.setCASE_PROFIT(newCaseProfit);
+        newCase.setCASE_HOURS(newCaseHours);
+        newCase.setCASE_TYPE(newCaseType);
 
-            // Create a new CaseJournal instance
-            CaseJournal newJournal = new CaseJournal();
-            newJournal.setJOURNAL_DESC(newJournalDesc);
-            newJournal.setJOURNAL_ID(newJournalId);
-            newJournal.setaCase(newCase);
+        CaseJournal newJournal = new CaseJournal();
+        newJournal.setJOURNAL_DESC(newJournalDesc);
+        newJournal.setJOURNAL_ID(newJournalId);
+        newJournal.setaCase(newCase);
 
-            // Add the new CaseJournal to the list of case journals in the Cases object
-            newCase.getCaseJournals().add(newJournal);
+        newCase.getCaseJournals().add(newJournal);
 
-            // Persist the changes
-            entityManager.persist(newCase);
+        entityManager.persist(newCase);
+        resetInputFields();
 
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Case added successfully!", null));
-
-            // Reset input fields for future additions
-            resetInputFields();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error adding Case: " + e.getMessage(), null));
-        }
     }
-    private void resetInputFields() {
+    private String resetInputFields() {
         newCaseDesc = null;
         newCaseStatus = null;
         newCaseDateStart = null;
@@ -179,31 +165,15 @@ public class CasesBean implements Serializable{
         newCaseType = null;
         newJournalDesc = null;
         newJournalId = 0;
+        return "admin_cases";
     }
+    public String getStatusColor(String status) {
+        Map<String, String> colorMap = new HashMap<>();
+        colorMap.put("Done", "green");
+        colorMap.put("Open", "yellow");
+        colorMap.put("Closed", "gray");
 
-    public static void main(String[] args) {
-        // This main method can be used for testing the addCase functionality
-        // Create an instance of CasesBean using a CDI container
-        CasesBean casesBean = new CasesBean();
-
-        // Set values for the new case and journal (you may modify these as needed)
-        casesBean.setNewCaseDesc("Test Case");
-        casesBean.setNewCaseStatus("InProgress");
-        casesBean.setNewCaseDateStart("2023-01-01");
-        casesBean.setNewCaseDateEnd("2023-01-15");
-        casesBean.setNewCaseProfit("1000");
-        casesBean.setNewCaseHours(10);
-        casesBean.setNewCaseType("TypeA");
-
-        casesBean.setNewJournalDesc("Journal for Test Case");
-        casesBean.setNewJournalId(1);
-
-        // Call the addCase method
-        casesBean.addCase();
+        return colorMap.getOrDefault(status, "transparent");
     }
-    public String editCase(int caseId) {
-        return "/includes/editCase?faces-redirect=true&caseId=" + caseId;
-    }
-
-
 }
+
