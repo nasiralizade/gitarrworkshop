@@ -109,3 +109,10 @@
 .client-calendar-selectTimeDiv {
     width: 100%;
 }
+
+.client-calendar-selectDayEvents {
+    border-radius: 5px;
+    background-color: darkgreen;
+    text-align: center;
+    padding-top: 2px;
+}

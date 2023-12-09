@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Named
@@ -40,6 +42,7 @@ public class EventEntityBean implements Serializable {
     private LocalDate date;
     private int duration;
     private String email;
+    private final List<Date> DisabledEventList = new ArrayList<>();
 
 
     @PostConstruct
@@ -255,12 +258,6 @@ public class EventEntityBean implements Serializable {
         return localDate;
     }
 
-    @Transactional
-    private List<EventEntity> displayNonAvailableDays() {
-        return entityManager.createQuery("select e from EventEntity e where e.title='Available'", EventEntity.class).getResultList();
-    }
-
-
     public int getDuration() {
         return duration;
     }
@@ -300,4 +297,5 @@ public class EventEntityBean implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

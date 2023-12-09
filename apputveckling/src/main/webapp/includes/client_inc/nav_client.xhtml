@@ -2,20 +2,20 @@
     <div class="container d-flex justify-content-between align-items-center ">
         <div class="d-flex">
             <h:form>
-                <h:commandButton value="HOME"
+                <h:commandButton value="Hem"
                                  action="#{navigationBean.goToClientHome}"
                                  styleClass="#{navigationBean.selectedSection eq 'home' ? 'nav-link nav-item p-3 myactive':'nav-link nav-item p-3'}"/>
             </h:form>
             <h:form>
                 <h:commandButton action="#{navigationBean.goToClientProducts}"
                                  styleClass="#{navigationBean.selectedSection eq 'product' ? 'nav-link nav-item p-3 myactive':'nav-link nav-item p-3'}"
-                                 value="PRODUCT"
+                                 value="Produkter"
                 />
             </h:form>
             <h:form>
                 <h:commandButton action="#{navigationBean.goToClientReserve}"
                                  styleClass="#{navigationBean.selectedSection eq 'Reserve' ? 'nav-link nav-item p-3 myactive':'nav-link nav-item p-3'}"
-                                 value="Make an appointment"
+                                 value="Boka ett möte"
                 />
             </h:form>
         </div>
