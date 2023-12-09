@@ -3,6 +3,8 @@ import admin.product.Product;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
@@ -131,6 +133,15 @@ public class CasesBean implements Serializable{
         cases = entityManager.createQuery("select p from Cases p", Cases.class).getResultList();
         return cases;
     }
+    public void updateCase(int caseId){
+        try {
+            entityManager.merge(caseToEdit);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Changes saved successfully!", null));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error saving changes", null));
+        }
+    }
+
     public void setCases(List<Cases> cases){
         this.cases = cases;
     }
