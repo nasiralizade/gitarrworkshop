@@ -22,11 +22,9 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import java.io.Serializable;
-import java.net.http.HttpRequest;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named
