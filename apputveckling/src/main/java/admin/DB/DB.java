@@ -197,6 +197,40 @@ public class DB implements Serializable {
     }
 
     public String GetDescByID(int id) {
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = "SELECT CASE_DESC FROM CASES WHERE MEMBER_ID = ?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            StringBuilder caseDescription = new StringBuilder();
+
+            while (rs.next()) {
+                // Retrieve the result and append to the StringBuilder
+                String partialDescription = rs.getString("CASE_DESC");
+                caseDescription.append(partialDescription).append(" ");
+            }
+            caseDescription.append("\n");
+
+            // Close resources
+            rs.close();
+            preparedStatement.close();
+            con.close();
+
+            // Convert StringBuilder to String and return
+            String fullDescription = caseDescription.toString().trim();
+            //System.out.println(fullDescription);
+            return fullDescription;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*
+    public String GetDescByID(int id) {
 
         try {
             Connection con = dataSource.getConnection();
@@ -226,6 +260,8 @@ public class DB implements Serializable {
             throw new RuntimeException(e);
         }
     }
+
+ */
     public String getNameById(int id) {
 
         try {
@@ -264,7 +300,7 @@ public class DB implements Serializable {
 
         try {
             Connection con = dataSource.getConnection();
-            String sql = "SELECT CLIENT_NAME FROM CLIENT WHERE CLIENT_ID = ?";
+            String sql = "SELECT CLIENT_ID FROM CLIENT WHERE CLIENT_NAME = ?";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
@@ -279,9 +315,7 @@ public class DB implements Serializable {
                 // Retrieve the result
                 id = rs.getInt("CLIENT_ID");
                 //System.out.println(id);
-            } /*else {
-                System.out.println("User with ID " + name + " not found.");
-            }*/
+            }
 
             // Close resources
             rs.close();

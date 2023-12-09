@@ -7,23 +7,29 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <title>My Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link rel="stylesheet" href="#{request.contextPath}/assets/styles.css"/>
+    <link rel="stylesheet" href="#{request.contextPath}/assets/client.css"/>
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="https://www.google.com/jsapi"> </script><!-- Google Charts -->
+    <script src="#{request.contextPath}/resources/js/statistics.js" type=""> </script>
+    <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
 </h:head>
 <h:body>
-    <ui:composition xmlns="http://www.w3.org/1999/xhtml">
+    <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
+    <div class="container" style="margin: 20%">
         <h:outputLabel value="My cases:"/>
-        <p > hej </p>
-
-        <h:outputText value="User ID: #{signup.userId}" />
-
-        <div>
-            <h:outputText  value="#{db.getNameById(1)}" />
-            Description for case: #{case.CASE_DESC}
-            <br />
+        <p> hej #{signup.name}</p>
+        <div style="height: 100%" align="left">
+            <h:outputText/>
+            Description for case:
+            <br/>
+            #{signup.description}
         </div>
+    </div>
 
-        <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
 
-    </ui:composition>
+    <ui:include src="../../includes/client_inc/footer.xhtml"/>
 </h:body>
 </html>

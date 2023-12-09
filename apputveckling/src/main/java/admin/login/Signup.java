@@ -107,9 +107,15 @@ public class Signup implements Serializable {
         if(Objects.equals(databaseExample.GetNameByName(name), name) && Objects.equals(databaseExample.GetPasswordByName(name), password) ){
             //return "/Login";
             session.setAttribute("username", name);
-            return "/includes/loggedinpage";
-            //return "client/home";
+            //return "/includes/loggedinpage";
+            return "client/home";
         }
         return "SignUp";
+    }
+
+    public String getDescription(){
+        int id=databaseExample.GetIdByName(name);
+        String desc= databaseExample.GetDescByID(id);
+        return desc;
     }
 }
