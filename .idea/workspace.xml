@@ -9,25 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
+    <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="lite ändringar på sidoliämkar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/resources/database/create_database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/resources/database/create_database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntityBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntityBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/editFreeEvents.xhtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml" afterDir="false" />
     </list>
     <list id="e3c9961d-4997-480a-8dcf-8afb05a28c93" name="Changes by serhad" comment="">
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/client_inc/clientCalendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/client_inc/clientCalendar.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntityBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntityBean.java" afterDir="false" />
     </list>
-    <list id="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" name="Changes by tahakhudher" comment="">
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/template.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/template.xhtml" afterDir="false" />
-    </list>
+    <list id="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" name="Changes by tahakhudher" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,42 +60,15 @@
     </option>
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/ScheduleBean.java">
+    <file path="$PROJECT_DIR$/apputveckling/src/main/java/admin/appointment/EventEntityBean.java">
       <ranges>
-        <range start1="28" end1="28" start2="28" end2="29" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="29" end1="29" start2="30" end2="32" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="39" end1="42" start2="42" end2="49" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="47" end1="47" start2="54" end2="55" changelist="e3c9961d-4997-480a-8dcf-8afb05a28c93" />
-        <range start1="52" end1="52" start2="60" end2="62" changelist="e3c9961d-4997-480a-8dcf-8afb05a28c93" />
-        <range start1="58" end1="58" start2="68" end2="69" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
-        <range start1="59" end1="59" start2="70" end2="73" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
-        <range start1="62" end1="62" start2="76" end2="77" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="66" end1="66" start2="81" end2="83" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
-        <range start1="167" end1="168" start2="184" end2="210" changelist="e3c9961d-4997-480a-8dcf-8afb05a28c93" />
-        <range start1="172" end1="173" start2="214" end2="216" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="176" end1="177" start2="219" end2="220" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="180" end1="181" start2="223" end2="224" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="184" end1="185" start2="227" end2="228" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="188" end1="189" start2="231" end2="232" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="192" end1="193" start2="235" end2="236" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="195" end1="195" start2="238" end2="262" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml">
-      <ranges>
-        <range start1="0" end1="0" start2="0" end2="1" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="9" end1="10" start2="10" end2="12" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="14" end1="14" start2="16" end2="17" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="27" end1="28" start2="30" end2="31" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
-        <range start1="31" end1="32" start2="34" end2="35" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
-        <range start1="44" end1="50" start2="47" end2="52" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-        <range start1="53" end1="53" start2="55" end2="73" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_calendar.xhtml">
-      <ranges>
-        <range start1="0" end1="3" start2="0" end2="0" changelist="a4cd9bb2-72e5-40b9-9d89-9ea7d86d81b5" />
-        <range start1="14" end1="15" start2="11" end2="12" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="44" end1="46" start2="44" end2="44" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="113" end1="126" start2="111" end2="112" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="132" end1="132" start2="118" end2="128" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="134" end1="134" start2="130" end2="131" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="136" end1="136" start2="133" end2="148" changelist="e3c9961d-4997-480a-8dcf-8afb05a28c93" />
+        <range start1="199" end1="201" start2="211" end2="213" changelist="90764d02-e937-4ed8-8daf-3aad08b97eeb" />
+        <range start1="210" end1="210" start2="222" end2="230" changelist="e3c9961d-4997-480a-8dcf-8afb05a28c93" />
       </ranges>
     </file>
   </component>
@@ -178,8 +141,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ScheduleBean" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="admin.appointment.ScheduleBean" />
+    <configuration name="EventEntityBean" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="admin.appointment.EventEntityBean" />
       <module name="apputveckling" />
       <extension name="coverage">
         <pattern>
@@ -279,7 +242,6 @@
     </configuration>
     <list>
       <item itemvalue="Application.EventEntityBean" />
-      <item itemvalue="Application.ScheduleBean" />
       <item itemvalue="Database Script.add_data.sql" />
       <item itemvalue="Database Script.create_database.sql" />
       <item itemvalue="GlassFish Server.GlassFish 7" />
@@ -288,7 +250,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.EventEntityBean" />
-        <item itemvalue="Application.ScheduleBean" />
+        <item itemvalue="Application.EventEntityBean" />
         <item itemvalue="Database Script.add_data.sql" />
         <item itemvalue="Database Script.create_database.sql" />
         <item itemvalue="Node.js.calendar.js" />
@@ -315,6 +277,10 @@
       <workItem from="1701886136530" duration="839000" />
       <workItem from="1701905596944" duration="9436000" />
       <workItem from="1701953222971" duration="21095000" />
+      <workItem from="1702061418637" duration="2829000" />
+      <workItem from="1702064346064" duration="1753000" />
+      <workItem from="1702066204356" duration="13966000" />
+      <workItem from="1702124348437" duration="4328000" />
     </task>
     <task id="LOCAL−00001" summary="inte helt klar med att fixa db:n">
       <option name="closed" value="true" />
@@ -359,7 +325,35 @@
       <option name="presentableId" value="LOCAL−00006" />
       <updated>1701959918068</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL−00007" summary="default week vy">
+      <option name="closed" value="true" />
+      <created>1702076094407</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1702076094407</updated>
+    </task>
+    <task id="LOCAL−00008" summary="namnet ScheduleBean.java änrats till EventEntityBean">
+      <option name="closed" value="true" />
+      <created>1702076403337</created>
+      <option name="number" value="LOCAL−00008" />
+      <option name="presentableId" value="LOCAL−00008" />
+      <updated>1702076403337</updated>
+    </task>
+    <task id="LOCAL−00009" summary="rätt länk till clien page&#10;email finns inte  schedule&lt;?&gt; event">
+      <option name="closed" value="true" />
+      <created>1702086733827</created>
+      <option name="number" value="LOCAL−00009" />
+      <option name="presentableId" value="LOCAL−00009" />
+      <updated>1702086733827</updated>
+    </task>
+    <task id="LOCAL−00010" summary="lite ändringar på sidoliämkar">
+      <option name="closed" value="true" />
+      <created>1702125039875</created>
+      <option name="number" value="LOCAL−00010" />
+      <option name="presentableId" value="LOCAL−00010" />
+      <updated>1702125039875</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,7 +364,11 @@
     <MESSAGE value="börjar med calender funktioner för att lägga till och spara events samt att visa de." />
     <MESSAGE value="ni kan testa primeface kalender här" />
     <MESSAGE value="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db." />
-    <option name="LAST_COMMIT_MESSAGE" value="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db." />
+    <MESSAGE value="default week vy" />
+    <MESSAGE value="namnet ScheduleBean.java änrats till EventEntityBean" />
+    <MESSAGE value="rätt länk till clien page&#10;email finns inte  schedule&lt;?&gt; event" />
+    <MESSAGE value="lite ändringar på sidoliämkar" />
+    <option name="LAST_COMMIT_MESSAGE" value="lite ändringar på sidoliämkar" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gitarrworkshop$GlassFish_7.ic" NAME="GlassFish 7 Coverage Results" MODIFIED="1701793687814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -9,7 +9,7 @@
         <div class="container-fluid row">
             <div class="col-md-9">
             <h:form>
-                <p:growl id="messages" showDetail="true" escape="false"/>
+                <p:growl id="messages" showDetail="true" escape="false" noOpener="false"/>
                 <p:schedule id="schedule" value="#{eventEntityBean.model}" widgetVar="myschedule" view="timeGridWeek" tooltip="true" resizable="true"
                             disableWeekends="true" minTime="09:00:00" maxTime="19:00:00" showWeekNumbers="true" urlTarget="false">
                     <p:ajax event="dateSelect" listener="#{eventEntityBean.onDateSelect}" update="eventDetails"

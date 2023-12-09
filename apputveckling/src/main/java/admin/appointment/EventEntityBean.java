@@ -42,8 +42,6 @@ public class EventEntityBean implements Serializable {
     private String email;
 
 
-
-
     @PostConstruct
     public void init() {
 
@@ -111,29 +109,43 @@ public class EventEntityBean implements Serializable {
         }
         if (event.getId() == null) {
             try {
-                EventEntity ny = new EventEntity();
-                ny.setTitle(event.getTitle());
-                Timestamp start = Timestamp.valueOf(event.getStartDate());
-                Timestamp end = Timestamp.valueOf(event.getEndDate());
-                ny.setStart_date(start);
-                ny.setEnd_date(end);
-                ny.setAll_day(event.isAllDay());
-                ny.setEmail(email);
-                ny.setDescription(event.getDescription());
-                ny.setUrl(event.getUrl());
-                model.addEvent(event);
-                entityManager.persist(ny);
-                loadEventsFromDatabase();
+                entityManager.persist(dbPostEvent());
                 //response.setHeader("Refresh", "0; URL=" + request.getContextPath());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
             model.updateEvent(event);
+            EventEntity event2 = entityManager.find(EventEntity.class, Integer.parseInt(event.getId()));
+            event2.setTitle(event.getTitle());
+            event2.setStart_date(Timestamp.valueOf(event.getStartDate()));
+            event2.setEnd_date(Timestamp.valueOf(event.getEndDate()));
+            event2.setUrl(event.getUrl());
+            event2.setAll_day(event.isAllDay());
+            event2.setDescription(event.getDescription());
+            event2.setEmail(email);
+            entityManager.merge(event2);
+
         }
         event = new DefaultScheduleEvent<>();
+
     }
 
+    public EventEntity dbPostEvent() {
+        EventEntity ny = new EventEntity();
+        ny.setTitle(event.getTitle());
+        Timestamp start = Timestamp.valueOf(event.getStartDate());
+        Timestamp end = Timestamp.valueOf(event.getEndDate());
+        ny.setStart_date(start);
+        ny.setEnd_date(end);
+        ny.setAll_day(event.isAllDay());
+        ny.setEmail(email);
+        ny.setDescription(event.getDescription());
+        ny.setUrl(event.getUrl());
+        model.addEvent(event);
+
+        return ny;
+    }
 
     public void onEventSelect(SelectEvent<ScheduleEvent<?>> selectEvent) {
         event = selectEvent.getObject();
@@ -197,8 +209,8 @@ public class EventEntityBean implements Serializable {
             LocalDateTime opened = LocalDateTime.of(slot.toLocalDate(), openingTime);
             LocalDateTime lunchStart = LocalDateTime.of(slot.toLocalDate(), LocalTime.of(13, 0));
             LocalDateTime lunchEnd = lunchStart.plusHours(1); //  lunch break is 1 hour
-                // Skip the lunch break
-            if (!isLunchBreakSkipped &&!slot.isBefore(lunchStart) && !slot.isAfter(lunchEnd)) {
+            // Skip the lunch break
+            if (!isLunchBreakSkipped && !slot.isBefore(lunchStart) && !slot.isAfter(lunchEnd)) {
                 slot = slot.plusHours(1);
                 isLunchBreakSkipped = true;
                 continue;
@@ -207,6 +219,14 @@ public class EventEntityBean implements Serializable {
                 slot = slot.plusMinutes(60);
                 isLunchBreakSkipped = false;
                 continue;
+            }
+            if (slot.getDayOfWeek() == DayOfWeek.SATURDAY) {
+                slot = slot.plusDays(2);
+                continue;
+            } else if (slot.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                slot = slot.plusDays(1);
+                continue;
+
             }
             // Check if the slot is already in the database
             List<EventEntity> events = entityManager.createQuery("SELECT e FROM EventEntity e WHERE e.start_date = :start_date", EventEntity.class)
