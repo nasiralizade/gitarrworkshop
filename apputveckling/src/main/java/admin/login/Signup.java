@@ -3,10 +3,14 @@ package admin.login;
 import admin.DB.DB;
 import admin.DB.SetDB;
 import jakarta.annotation.Resource;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.security.enterprise.credential.Password;
+import jakarta.servlet.http.HttpSession;
 
 import javax.sql.DataSource;
 import java.io.Serializable;
@@ -19,6 +23,7 @@ public class Signup implements Serializable {
     private DB databaseExample;
     private String name;
     private String password;
+    private int userId;  // Add a field to store the user ID
 
 
 
@@ -29,6 +34,14 @@ public class Signup implements Serializable {
 
     public Signup(){
 
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     public String getPassword2() {
         return password2;
@@ -79,17 +92,23 @@ public class Signup implements Serializable {
             }else return "SignUp";
         }else return "SignUp";
 
-        return "/includes/loggedinpage";
+        return "LogIn";
     }
 
     public String LogIn() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        HttpSession session = (HttpSession) externalContext.getSession(true);
 
-        if (Objects.equals(name, "admin")) {
+        if (Objects.equals(name, "admin") && Objects.equals(password,databaseExample.GetPasswordByName("admin"))) {
             return "admin_home.xhtml";
         }
 
         if(Objects.equals(databaseExample.GetNameByName(name), name) && Objects.equals(databaseExample.GetPasswordByName(name), password) ){
+            //return "/Login";
+            session.setAttribute("username", name);
             return "/includes/loggedinpage";
+            //return "client/home";
         }
         return "SignUp";
     }

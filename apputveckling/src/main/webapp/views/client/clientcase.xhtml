@@ -12,7 +12,16 @@
 <h:body>
     <ui:composition xmlns="http://www.w3.org/1999/xhtml">
         <h:outputLabel value="My cases:"/>
-        <p></p>
+        <p > hej </p>
+
+        <h:outputText value="User ID: #{signup.userId}" />
+
+        <div>
+            <h:outputText  value="#{db.getNameById(1)}" />
+            Description for case: #{case.CASE_DESC}
+            <br />
+        </div>
+
         <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
 
     </ui:composition>

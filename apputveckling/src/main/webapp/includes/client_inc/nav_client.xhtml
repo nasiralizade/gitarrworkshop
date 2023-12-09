@@ -18,6 +18,12 @@
                                  value="Make an appointment"
                 />
             </h:form>
+            <h:form>
+                <h:commandButton action="/views/client/clientcase.xhtml"
+                                 styleClass="#{navigationBean.selectedSection eq 'Reserve' ? 'nav-link nav-item p-3 myactive':'nav-link nav-item p-3'}"
+                                 value="My appointments"
+                />
+            </h:form>
         </div>
         <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavRight"
                 aria-controls="navbarNavRight" aria-expanded="false" aria-label="Toggle navigation">
