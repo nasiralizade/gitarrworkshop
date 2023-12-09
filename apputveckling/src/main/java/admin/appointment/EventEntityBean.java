@@ -41,9 +41,10 @@ public class EventEntityBean implements Serializable {
     private LocalDateTime time_to;
     private LocalDate date;
     private int duration;
+    private String email;
 
-    private HttpRequest.Builder response;
-    private ServletContext request;
+
+
 
     @PostConstruct
     public void init() {
@@ -69,6 +70,8 @@ public class EventEntityBean implements Serializable {
                 ScheduleEvent<?> event = DefaultScheduleEvent.builder()
                         .id(String.valueOf(eventEntity.getId()))
                         .title(eventEntity.getTitle())
+                        .description(eventEntity.getDescription())
+                        .url(eventEntity.getUrl())
                         .backgroundColor(color)
                         .startDate(eventEntity.getStart_date().toLocalDateTime())
                         .endDate(eventEntity.getEnd_date().toLocalDateTime())
@@ -117,6 +120,9 @@ public class EventEntityBean implements Serializable {
                 ny.setStart_date(start);
                 ny.setEnd_date(end);
                 ny.setAll_day(event.isAllDay());
+                ny.setEmail(email);
+                ny.setDescription(event.getDescription());
+                ny.setUrl(event.getUrl());
                 model.addEvent(event);
                 entityManager.persist(ny);
                 loadEventsFromDatabase();
@@ -176,11 +182,13 @@ public class EventEntityBean implements Serializable {
         model.deleteEvent(event);
     }
 
+    /**
+     * This method is used to set the available events
+     * It is called from the admin/Calendar.xhtml page
+     */
     @Transactional
     public void setAvailableEvents() {
-        List<LocalDateTime> timeSlots = new ArrayList<>();
         LocalDateTime slot = LocalDateTime.of(time_from.getYear(), time_from.getMonth(), time_from.getDayOfMonth(), 10, 0);
-
         LocalTime openingTime = LocalTime.of(10, 0);
         LocalTime closingTime = LocalTime.of(18, 0);
         Duration slotDuration = Duration.ofMinutes(45);
@@ -202,9 +210,14 @@ public class EventEntityBean implements Serializable {
                 isLunchBreakSkipped = false;
                 continue;
             }
-
-
-            timeSlots.add(slot);
+            // Check if the slot is already in the database
+            List<EventEntity> events = entityManager.createQuery("SELECT e FROM EventEntity e WHERE e.start_date = :start_date", EventEntity.class)
+                    .setParameter("start_date", Timestamp.valueOf(slot))
+                    .getResultList();
+            if (events != null && !events.isEmpty()) {
+                slot = slot.plus(slotDuration).plus(breakDuration);
+                continue;
+            }
             EventEntity newSlot = new EventEntity();
             newSlot.setTitle("Available");
             newSlot.setEnd_date(Timestamp.valueOf(slot.plus(slotDuration)));
@@ -213,6 +226,7 @@ public class EventEntityBean implements Serializable {
             entityManager.persist(newSlot);
             slot = slot.plus(slotDuration).plus(breakDuration);
         }
+        loadEventsFromDatabase(); // refresh the calendar
     }
 
     public static LocalDate convertToDateToLocalDate(Date date) {
@@ -260,5 +274,13 @@ public class EventEntityBean implements Serializable {
 
     public void setTime_to(LocalDateTime time_to) {
         this.time_to = time_to;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

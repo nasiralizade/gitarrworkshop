@@ -5,7 +5,6 @@
 
 <h:head>
     <title>Schemaläggning</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"/>
 </h:head>
 <h:body>
     <div class="card">
@@ -18,7 +17,7 @@
                             <p:outputLabel for="calendarClient" value="Select your date"/>
                             <p:datePicker id="calendarClient" value="#{calendarApplication.date}"
                                           inline="true"
-                                          disabledDays="${eventEntityBean}">
+                                          disabledDays="${eventEntityBean.time_from}">
                                 <p:ajax event="dateSelect" listener="#{calendarApplication.onDateSelect}"/>
                             </p:datePicker>
                         </h:panelGrid>
