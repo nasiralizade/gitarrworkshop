@@ -250,7 +250,6 @@ public class EventEntityBean implements Serializable {
     public static LocalDate convertToDateToLocalDate(Date date) {
         // Convert Date to Instant
         Instant instant = date.toInstant();
-
         // Convert Instant to LocalDate using the default time zone
         LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
         return localDate;
