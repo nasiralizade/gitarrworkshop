@@ -79,6 +79,14 @@
          align-self: flex-end;
          margin-top: 20px;
       }
+      .edit-button {
+         position: absolute;
+         top: 5px;
+         right: 5px;
+         cursor: pointer;
+         color: #007bff;
+         text-decoration: underline;
+      }
    </style>
    <script>
       function toggleDescription(caseId) {
@@ -214,6 +222,9 @@
       <span id="arrow_#{case.CASE_ID}" class="arrow"></span>
       <span class="case-number" onclick="collapseDescription(#{case.CASE_ID})">Case #{case.CASE_ID}</span>
       <div id="case_des_#{case.CASE_ID}" class="case_des">
+         <h:form>
+         <h:commandButton class = "edit-button" value="Edit" action="#{casesBean.editCase(case.CASE_ID)}"/>
+         </h:form>
          Description for case: #{case.CASE_DESC}
          <br />
          Case Type: #{case.CASE_TYPE}
@@ -228,7 +239,6 @@
          <div id="description_#{case.CASE_ID}" class="description" onclick="collapseDescription(#{case.CASE_ID})">
             #{caseJournal.JOURNAL_DESC}
             <h:form>
-               <h:commandButton class = "edit-button" value="Edit" action="#{casesBean.editCase(case.CASE_ID)}"/>
             </h:form>
          </div>
       </ui:repeat>

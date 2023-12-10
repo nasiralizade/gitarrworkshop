@@ -6,8 +6,8 @@ import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
+//import jakarta.faces.application.FacesMessage;
+//import jakarta.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.List;
 @Named
@@ -25,7 +25,7 @@ public class CaseJournalBean implements Serializable{
     public void setCases(List<CaseJournal> casejournlas){
         this.casejournlas = casejournlas;
     }
-    public void saveCaseJournalWithCase(int caseId, String caseJournalDescription, int caseJournalId) {
+  /*  public void saveCaseJournalWithCase(int caseId, String caseJournalDescription, int caseJournalId) {
         try {
             Cases aCase = entityManager.find(Cases.class, caseId);
 
@@ -47,5 +47,5 @@ public class CaseJournalBean implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error adding Case Journal: " + e.getMessage(), null));
         }
-    }
+    }*/
 }

@@ -51,13 +51,8 @@
         }
     </style>
     <script>
-        function toggleDescription(caseId) {
-            var description = document.getElementById("description_" + caseId);
-            description.style.display = (description.style.display === 'none') ? 'block' : 'none';
-        }
-        function editCase(caseId) {
-            alert("Edit Case " + caseId);
-            // You can implement your edit functionality here
+        function goBack() {
+            window.location.href = 'editCase.xhtml';
         }
     </script>
 </h:head>
@@ -66,8 +61,8 @@
     <h:form>
         <div class="container mt-4">
             <h2>Case Details</h2>
-            <label for="caseId" class="font-weight-bold mb-2">Case ID:</label>
-            <h:outputLabel id="caseId" value="#{casesBean.caseToEdit.CASE_ID}" class="d-block font-weight-bold mb-2" />
+            <label for="caseId" class="font-weight-bold mb-2"></label>
+            <h:outputLabel id="caseId" value="Case ID: #{casesBean.caseToEdit.CASE_ID}" class="d-block font-weight-bold mb-2" />
             <label for="status" class="font-weight-bold mb-2">Case Status:</label>
             <h:selectOneMenu id="status" value="#{casesBean.caseToEdit.CASE_STATUS}" class="form-control mb-2">
                 <f:selectItem itemValue="Done" itemLabel="Done" />
@@ -90,8 +85,8 @@
                 <h:outputLabel for="casejournal" value="Case Journal:" class="d-block font-weight-bold mb-2" />
                 <h:inputTextarea id="casejournal" value="#{caseJournal.JOURNAL_DESC}" rows="5" cols="50" class="form-control mb-2" />
             </ui:repeat>
-            <h:commandButton value="Save Changes" action="#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" class="btn btn-primary mb-2"
-            onclick="location.href='editCase.xhtml'; return false;" />
+            <h:commandButton value="Go Back" class="btn btn-secondary mb-2" onclick="goBack();" />
+            <h:commandButton value="Save Changes" action="#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" class="btn btn-primary mb-2"></h:commandButton>
         </div>
     </h:form>
 
