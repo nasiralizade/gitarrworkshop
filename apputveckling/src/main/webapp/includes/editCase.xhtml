@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -7,35 +8,95 @@
 
 <h:head>
     <title>Case Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .journal {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            position: relative;
+            border-radius: 10px;
+            width: 300px;
+            transition: background-color 0.3s ease;
+        }
+
+        .j_description {
+            display: none;
+            padding: 10px;
+            margin: 5px;
+            background-color: #e0e0e0;
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-right: 5px;
+            border: solid #333;
+            border-width: 0 2px 2px 0;
+            padding: 3px;
+            transform: rotate(45deg);
+        }
+
+        .edit-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #007bff; /* Bootstrap primary color for links */
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function toggleDescription(caseId) {
+            var description = document.getElementById("description_" + caseId);
+            description.style.display = (description.style.display === 'none') ? 'block' : 'none';
+        }
+        function editCase(caseId) {
+            alert("Edit Case " + caseId);
+            // You can implement your edit functionality here
+        }
+    </script>
 </h:head>
 
 <h:body>
     <h:form>
-        <h2>Case Details</h2>
-        <h:outputLabel id="caseId" value="#{casesBean.caseToEdit.CASE_ID}" />
-        <br/>
-        <h:outputLabel for="caseDesc" value="Case Description:" />
-        <h:inputTextarea id="caseDesc" value="#{casesBean.caseToEdit.CASE_DESC}" rows="5" cols="50" />
-        <br/>
-        <h:outputLabel for="caseHours" value="Case Hours" />
-        <h:inputText id="caseHours" value="#{casesBean.caseToEdit.CASE_HOURS}" />
-        <br/>
-        <h:outputLabel for="caseProfit" value="Case Profit" />
-        <h:inputText id="caseProfit" value="#{casesBean.caseToEdit.CASE_PROFIT}" />
-        <br/>
-        <h:selectOneMenu id="status" value="#{casesBean.caseToEdit.CASE_STATUS}">
-            <f:selectItem itemValue="Done" itemLabel="Done" />
-            <f:selectItem itemValue="Closed" itemLabel="Closed" />
-            <f:selectItem itemValue="Open" itemLabel="Open" />
-        </h:selectOneMenu>
-        <br/>
-        <h:selectOneMenu id="tpye" value="#{casesBean.caseToEdit.CASE_TYPE}">
-            <f:selectItem itemValue="Rented" itemLabel="Rented" />
-            <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
-        </h:selectOneMenu>
-        <br/>
-        <h:commandButton value="Save Changes" action="#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" />
-        <br/>
+        <div class="container mt-4">
+            <h2>Case Details</h2>
+            <label for="caseId" class="font-weight-bold mb-2">Case ID:</label>
+            <h:outputLabel id="caseId" value="#{casesBean.caseToEdit.CASE_ID}" class="d-block font-weight-bold mb-2" />
+            <label for="status" class="font-weight-bold mb-2">Case Status:</label>
+            <h:selectOneMenu id="status" value="#{casesBean.caseToEdit.CASE_STATUS}" class="form-control mb-2">
+                <f:selectItem itemValue="Done" itemLabel="Done" />
+                <f:selectItem itemValue="Closed" itemLabel="Closed" />
+                <f:selectItem itemValue="Open" itemLabel="Open" />
+            </h:selectOneMenu>
+
+            <label for="type" class="font-weight-bold mb-2">Case Type:</label>
+            <h:selectOneMenu id="type" value="#{casesBean.caseToEdit.CASE_TYPE}" class="form-control mb-2">
+                <f:selectItem itemValue="Rented" itemLabel="Rented" />
+                <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
+            </h:selectOneMenu>
+            <h:outputLabel for="caseHours" value="Case Hours" class="d-block font-weight-bold mb-2" />
+            <h:inputText id="caseHours" value="#{casesBean.caseToEdit.CASE_HOURS}" class="form-control mb-2" />
+            <h:outputLabel for="caseProfit" value="Case Profit" class="d-block font-weight-bold mb-2" />
+            <h:inputText id="caseProfit" value="#{casesBean.caseToEdit.CASE_PROFIT}" class="form-control mb-2" />
+            <h:outputLabel for="caseDesc" value="Case Description:" class="d-block font-weight-bold mb-2" />
+            <h:inputTextarea id="caseDesc" value="#{casesBean.caseToEdit.CASE_DESC}" rows="5" cols="50" class="form-control mb-2" />
+            <ui:repeat var="caseJournal" value="#{casesBean.caseToEdit.caseJournals}">
+                <h:outputLabel for="casejournal" value="Case Journal:" class="d-block font-weight-bold mb-2" />
+                <h:inputTextarea id="casejournal" value="#{caseJournal.JOURNAL_DESC}" rows="5" cols="50" class="form-control mb-2" />
+            </ui:repeat>
+            <h:commandButton value="Save Changes" action="#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" class="btn btn-primary mb-2"
+            onclick="location.href='editCase.xhtml'; return false;" />
+        </div>
     </h:form>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </h:body>
 </html>

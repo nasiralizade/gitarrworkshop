@@ -228,7 +228,7 @@
          <div id="description_#{case.CASE_ID}" class="description" onclick="collapseDescription(#{case.CASE_ID})">
             #{caseJournal.JOURNAL_DESC}
             <h:form>
-               <h:commandButton value="Edit" action="#{casesBean.editCase(case.CASE_ID)}"/>
+               <h:commandButton class = "edit-button" value="Edit" action="#{casesBean.editCase(case.CASE_ID)}"/>
             </h:form>
          </div>
       </ui:repeat>
