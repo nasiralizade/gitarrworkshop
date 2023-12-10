@@ -25,6 +25,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,7 +36,7 @@ import java.util.List;
 public class CalendarApplication implements Serializable {
     private LocalDateTime date;
     private List<Date> invalidDates;
-    private String headerDate = "Choose your date";
+    private String headerDate = "Choose an available appointment";
     private List<EventEntity> events;
     @Produces
     @PersistenceContext(unitName = "Events")
@@ -71,6 +72,10 @@ public class CalendarApplication implements Serializable {
                 .setParameter("endTime", endTime)
                 .getResultList();
         this.events=events2;
+
+        // Update the headerDate field with the selected date
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        this.headerDate = "Selected date: " + dateFormat.format(Date.from(date.atZone(ZoneId.systemDefault()).toInstant()));
 
 
 

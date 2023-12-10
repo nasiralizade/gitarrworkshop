@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.inject.Produces;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.ValueChangeEvent;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
@@ -94,6 +95,7 @@ public class EventEntityBean implements Serializable {
 
     public void setEvent(ScheduleEvent<?> event) {
         this.event = event;
+        System.out.println("setEvent called with: " + event);
     }
 
     public void onDateSelect(SelectEvent<LocalDateTime> selectEvent) {
@@ -119,15 +121,7 @@ public class EventEntityBean implements Serializable {
             }
         } else {
             model.updateEvent(event);
-            EventEntity event2 = entityManager.find(EventEntity.class, Integer.parseInt(event.getId()));
-            event2.setTitle(event.getTitle());
-            event2.setStart_date(Timestamp.valueOf(event.getStartDate()));
-            event2.setEnd_date(Timestamp.valueOf(event.getEndDate()));
-            event2.setUrl(event.getUrl());
-            event2.setAll_day(event.isAllDay());
-            event2.setDescription(event.getDescription());
-            event2.setEmail(email);
-            entityManager.merge(event2);
+            mapEntityAttributes();
 
         }
         event = new DefaultScheduleEvent<>();
@@ -163,7 +157,9 @@ public class EventEntityBean implements Serializable {
         Timestamp start = event.getStart_date();
         Timestamp end = event.getEnd_date();
         boolean all_day = event.isAll_day();
-
+        String email = event.getEmail();
+        String description = event.getDescription();
+        String url = event.getUrl();
     }
 
 
@@ -254,9 +250,42 @@ public class EventEntityBean implements Serializable {
         // Convert Date to Instant
         Instant instant = date.toInstant();
         // Convert Instant to LocalDate using the default time zone
-        LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-        return localDate;
+        return instant.atZone(ZoneId.systemDefault()).toLocalDate();
     }
+
+    private void mapEntityAttributes() {
+        EventEntity eventEntity = entityManager.find(EventEntity.class, Integer.parseInt(event.getId()));
+        eventEntity.setTitle(event.getTitle());
+        eventEntity.setStart_date(Timestamp.valueOf(event.getStartDate()));
+        eventEntity.setEnd_date(Timestamp.valueOf(event.getEndDate()));
+        eventEntity.setUrl(event.getUrl());
+        eventEntity.setAll_day(event.isAllDay());
+        eventEntity.setDescription(event.getDescription());
+        eventEntity.setEmail(email);
+        entityManager.merge(eventEntity);
+    }
+
+    @Transactional
+    public void updateEventEntity() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Event updated"));
+
+        // Find the existing EventEntity in the database
+        EventEntity eventEntity = entityManager.find(EventEntity.class, Integer.parseInt(event.getId()));
+
+        // Update the fields of the EventEntity
+        eventEntity.setTitle(event.getTitle());
+        eventEntity.setDescription(event.getDescription());
+        eventEntity.setEmail(email);
+
+        // Merge the updated EventEntity
+        entityManager.merge(eventEntity);
+    }
+
+    public void onCommandLinkAction(String eventId) {
+        event = model.getEvent(eventId);
+    }
+
+
 
     public int getDuration() {
         return duration;

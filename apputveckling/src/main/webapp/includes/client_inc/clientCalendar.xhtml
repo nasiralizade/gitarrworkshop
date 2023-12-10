@@ -6,45 +6,133 @@
     <h:head>
         <title>Schemaläggning</title>
     </h:head>
+    <script>
+        //<![CDATA[
+        function dateTemplateFunc(date) {
+            return '<span style="background-color:' + ((date.day < 21 && date.day > 10) ? '#81C784' : 'inherit') + ';border-radius:50%;width: 2.5rem;height: 2.5rem;line-height: 2.5rem;display: flex;align-items: center;justify-content: center;">' + date.day + '</span>';
+        }
+
+        //]]>
+    </script>
     <h:body>
-        <div class="container-fluid">
-
-            <h:form>
-                <div class="row">
-                    <div class="p-2 col-4">
-                        <p:growl id="messages" showDetail="true" escape="false"/>
-                        <h:panelGrid columns="1" cellpadding="5">
-                            <p:outputLabel for="calendarClient" value="Select your date"/>
-                            <p:datePicker id="calendarClient" value="#{calendarApplication.date}"
-                                          inline="true"
-                                          disabledDays="${[6,7]}"
-                                          disabledDates="${calendarApplication.invalidDates}">
-                                <p:ajax event="dateSelect" listener="#{calendarApplication.onDateSelect}"
-                                        update="messages"/>
-
-                            </p:datePicker>
-                        </h:panelGrid>
-                    </div>
-                    <div class=" col-4 p-2 client-calendar-selectTimeDiv">
-                        <h:panelGrid id="message">
-                            <h2>
-                                <h:outputText id="calendarDateSelectHeader" value="#{calendarApplication.headerDate}"/>
-                            </h2>
-                            <div>
-                                <ui:repeat value="#{calendarApplication.events}" var="ent">
-                                    <p:outputPanel>
-                                        <div class="client-calendar-selectDayEvents">
-                                            <h6 style="color: white">#{ent.start_date} - #{ent.end_date}</h6>
-                                        </div>
-                                    </p:outputPanel>
-                                </ui:repeat>
-
+        <h:form>
+            <div class="row">
+                <div class="field col-md-6">
+                    <p:growl id="messages" showDetail="true" escape="false"/>
+                    <h4>
+                        <p:outputLabel for="calendarClient" value="Select a date"/>
+                    </h4>
+                    <p:datePicker
+                            id="calendarClient" value="#{calendarApplication.date}"
+                            inline="false"
+                            showIcon="true"
+                            pattern="yyyy-MM-dd"
+                            disabledDays="${[6,7]}"
+                            showTime="false"
+                            disabledDates="${calendarApplication.invalidDates}">
+                        <p:ajax
+                                event="dateSelect" listener="#{calendarApplication.onDateSelect}"
+                                update="messages, calendarDateSelectHeader, appointmentTimes, appointmentLabels"/>
+                    </p:datePicker>
+                </div>
+                <div class="col-md-6">
+                    <div id="chooseAppointmentDiv">
+                        <h5>
+                            <h:outputText id="calendarDateSelectHeader" value="#{calendarApplication.headerDate}"/>
+                        </h5>
+                        <p:outputPanel id="appointmentLabels">
+                            <div class="row">
+                                <div class="col-6 text-left ps-4 ms-0">
+                                    <h:outputText value="Start Time"
+                                                  rendered="#{not empty calendarApplication.events}"/>
+                                </div>
+                                <div class="col-6 text-right ps-5 me-0">
+                                    <h:outputText value="End Time" rendered="#{not empty calendarApplication.events}"/>
+                                </div>
                             </div>
-                        </h:panelGrid>
+                            <h:outputText value="No available appointments"
+                                          rendered="#{empty calendarApplication.events}"/>
+                        </p:outputPanel>
+                        <p:panelGrid columns="1" layout="grid" styleClass="ui-grid ui-grid-responsive"
+                                     id="appointmentTimes">
+                            <ui:repeat value="#{calendarApplication.events}" var="event">
+                                <p:commandLink
+                                        styleClass="btn btn-primary text-white btn-block d-flex justify-content-between mt-1"
+                                        actionListener="#{eventEntityBean.setEvent(event)}"
+                                        onclick="PF('bookAppointmentDialog').show(); return false;"
+                                        update="bookAppointmentDialog">
+                                    <p:ajax event="click" listener="#{eventEntityBean.setEvent(event)}" update="bookAppointmentDialog"
+                                            oncomplete="PF('bookAppointmentDialog').show();"/>                                    <div>
+                                        <h:outputText value="#{event.start_date}">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT"/>
+                                        </h:outputText>
+                                    </div>
+                                    <div>
+                                        <h:outputText value="#{event.end_date}">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT"/>
+                                        </h:outputText>
+                                    </div>
+                                    <div>
+                                        <!-- Check if the event ID is not null or empty before displaying it -->
+                                        <h:outputText value="#{not empty event.id ? event.id : 'N/A'}"/>
+                                    </div>
+                                </p:commandLink>
+
+
+                            </ui:repeat>
+
+                        </p:panelGrid>
                     </div>
                 </div>
-            </h:form>
+            </div>
 
-        </div>
+
+        </h:form>
+        <!-- Dialog -->
+        <p:dialog header="Book Appointment" widgetVar="bookAppointmentDialog" id="bookAppointmentDialog" modal="true" closeOnEscape="true">
+            <h:panelGrid columns="1">
+                <!-- Display the id -->
+                <h:outputLabel for="id" value="ID:"/>
+                <div>
+                    <!-- Check if the event ID is not null or empty before displaying it -->
+                    <h:outputText value="#{not empty event.id ? event.id : 'N/A'}"/>
+                </div>
+                <h:outputText id="id" value="#{eventEntityBean.event.id}"/>
+
+                <!-- Display the start date time -->
+                <h:outputLabel for="start_date" value="Start Date Time:"/>
+                <h:outputText id="start_date" value="#{eventEntityBean.event.startDate}">
+                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm" timeZone="GMT"/>
+                </h:outputText>
+
+                <!-- Display the end date time -->
+                <h:outputLabel for="end_date" value="End Date Time:"/>
+                <h:outputText id="end_date" value="#{eventEntityBean.event.endDate}">
+                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm" timeZone="GMT"/>
+                </h:outputText>
+                <!-- Dropdown for type -->
+                <h:outputLabel for="type" value="Type:"/>
+                <p:selectOneMenu id="type" value="#{eventEntityBean.event.title}">
+                    <f:selectItem itemLabel="Reparation" itemValue="Reparation"/>
+                    <f:selectItem itemLabel="Reservation" itemValue="Reservation"/>
+                </p:selectOneMenu>
+
+                <!-- Input for url -->
+                <h:outputLabel for="url" value="URL:"/>
+                <p:inputText id="url" value="#{eventEntityBean.event.url}"/>
+
+                <!-- Input for email -->
+                <h:outputLabel for="email" value="Email:"/>
+                <p:inputText id="email" value="#{eventEntityBean.email}"/>
+
+                <!-- Input for description -->
+                <h:outputLabel for="description" value="Description:"/>
+                <p:inputText id="description" value="#{eventEntityBean.event.description}"/>
+            </h:panelGrid>
+
+            <!-- Button to submit the form -->
+            <p:commandButton value="Submit" action="#{eventEntityBean.updateEventEntity}"
+                             oncomplete="PF('bookAppointmentDialog').hide()"/>
+        </p:dialog>
     </h:body>
 </div>
