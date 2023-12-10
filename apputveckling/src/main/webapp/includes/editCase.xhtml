@@ -11,41 +11,31 @@
 
 <h:body>
     <h:form>
-        <h2>Client Details</h2>
-
+        <h2>Case Details</h2>
         <h:outputLabel id="caseId" value="#{casesBean.caseToEdit.CASE_ID}" />
         <br/>
-
         <h:outputLabel for="caseDesc" value="Case Description:" />
         <h:inputTextarea id="caseDesc" value="#{casesBean.caseToEdit.CASE_DESC}" rows="5" cols="50" />
         <br/>
-
         <h:outputLabel for="caseHours" value="Case Hours" />
         <h:inputText id="caseHours" value="#{casesBean.caseToEdit.CASE_HOURS}" />
         <br/>
-
-        <h:outputLabel for="caseProfit" value="Case Hours" />
+        <h:outputLabel for="caseProfit" value="Case Profit" />
         <h:inputText id="caseProfit" value="#{casesBean.caseToEdit.CASE_PROFIT}" />
         <br/>
-
-        <h:selectOneMenu id="status" value="Case Status: #{casesBean.caseToEdit.CASE_STATUS}">
+        <h:selectOneMenu id="status" value="#{casesBean.caseToEdit.CASE_STATUS}">
             <f:selectItem itemValue="Done" itemLabel="Done" />
             <f:selectItem itemValue="Closed" itemLabel="Closed" />
             <f:selectItem itemValue="Open" itemLabel="Open" />
         </h:selectOneMenu>
         <br/>
-
-        <h:selectOneMenu id="tpye" value=" Case Type: #{casesBean.caseToEdit.CASE_TYPE}">
+        <h:selectOneMenu id="tpye" value="#{casesBean.caseToEdit.CASE_TYPE}">
             <f:selectItem itemValue="Rented" itemLabel="Rented" />
             <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
         </h:selectOneMenu>
-
         <br/>
-
         <h:commandButton value="Save Changes" action="#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" />
-
         <br/>
     </h:form>
-
 </h:body>
 </html>

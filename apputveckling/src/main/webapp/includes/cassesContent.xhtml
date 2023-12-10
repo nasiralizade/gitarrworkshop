@@ -9,11 +9,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <head>
-   <h:outputScript library="js" name="cases.js"></h:outputScript>
-
    <title>Work Cases</title>
    <style>
-
       .case {
          cursor: pointer;
          padding: 10px;
@@ -23,7 +20,6 @@
          border-radius: 10px;
          transition: background-color 0.3s ease;
       }
-
       .description {
          display: none;
          padding: 10px;
@@ -35,7 +31,6 @@
       .case_des{
          display: none;
       }
-
       .arrow {
          display: inline-block;
          margin-right: 5px;
@@ -45,14 +40,11 @@
          transform: rotate(45deg);
          transition: transform 0.3s ease;
       }
-
-
       .status-container {
          display: flex;
          align-items: center;
          margin-bottom: 10px;
       }
-
       .status-indicator {
          display: inline-block;
          width: 10px;
@@ -60,27 +52,12 @@
          border-radius: 50%;
          margin-right: 5px;
       }
-
-      .edit-button {
-         position: absolute;
-         top: 10px;
-         right: 10px;
-         cursor: pointer;
-         color: blue;
-         text-decoration: underline;
-      }
-
       .status-text {
          font-weight: bold;
       }
-
-      .status-done { background-color: green; }
-      .status-in-progress { background-color: yellow; }
-      .status-pending { background-color: rgb(128, 128, 128); }
       .search-filter-container{
          margin: 10px;
       }
-
       .modal-content {
          background-color: #fefefe;
          padding: 40px;
@@ -90,25 +67,14 @@
          margin: auto;
          position: relative;
       }
-
       .add-case-container label {
          display: block;
          margin-bottom: 5px;
       }
-
-
-      #journalDesc {
-         height: 100px;
-         width: 100%;
-         box-sizing: border-box;
-         resize: vertical;
-      }
-
       .add-case-container {
          display: flex;
          flex-direction: column;
       }
-
       .add-case-container button {
          align-self: flex-end;
          margin-top: 20px;
@@ -139,12 +105,10 @@
          des_title.style.display = 'none';
          arrow.style.transform = 'rotate(45deg)';
       }
-
       function showAddCaseModal() {
          var modal = document.getElementById("addCaseModal");
          modal.style.display = "block";
       }
-
       function closeAddCaseModal() {
          var modal = document.getElementById("addCaseModal");
          modal.style.display = "none";
@@ -153,7 +117,6 @@
          var modal = document.getElementById("addCaseModal");
          modal.style.display = "flex";
       }
-
       function closeAddCaseModal() {
          var modal = document.getElementById("addCaseModal");
          modal.style.display = "none";
@@ -196,9 +159,6 @@
          var filterOptions = document.getElementById("filterOptions");
          filterOptions.style.display = (filterOptions.style.display === "none" || filterOptions.style.display === "") ? "block" : "none";
       }
-
-
-
    </script>
 </head>
 <body>
@@ -214,13 +174,10 @@
       <option value="Closed">Closed</option>
       <option value="Open">Open</option>
    </select>
-
-   <!-- Add filter options for case_type -->
    <select id="type_filter" onchange="filterCase()">
       <option value="">All Types</option>
       <option value="Rented">Rented</option>
       <option value="Repairment">Reperment</option>
-      <!-- Add additional options for case_type as needed -->
    </select>
 </div>
 <div id="addCaseModal" class="modal">
@@ -234,12 +191,15 @@
                <f:selectItem itemValue="Closed" itemLabel="Closed" />
                <f:selectItem itemValue="Open" itemLabel="Open" />
             </h:selectOneMenu>
-
+            <label for="type">Type:</label>
+            <h:selectOneMenu id="type" value="#{casesBean.newCaseType}">
+               <f:selectItem itemValue="Rented" itemLabel="Rented" />
+               <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
+            </h:selectOneMenu>
             <label for="description">Description:</label>
             <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" />
             <label for="journalDesc">Journal Description:</label>
             <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" />
-
             <h:commandButton value="Add" action="#{casesBean.addCase}" />
          </div>
       </h:form>
@@ -272,9 +232,7 @@
             </h:form>
          </div>
       </ui:repeat>
-
    </div>
-
 </c:forEach>
 </body>
 </html>

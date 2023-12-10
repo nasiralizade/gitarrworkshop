@@ -1,21 +1,16 @@
 package admin.cases;
-import admin.product.Product;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-
-import java.io.PushbackInputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
-
 
 @Named
 @Transactional
@@ -27,8 +22,6 @@ public class CasesBean implements Serializable{
     List<Cases> cases;
     List<Cases> cases_details;
     Cases caseToEdit;
-    private String isShowProductDetails = "fales";
-    Cases newCase = new Cases();
     private String newCaseDesc;
     private String newCaseStatus;
     private String newCaseDateStart;
@@ -44,85 +37,64 @@ public class CasesBean implements Serializable{
     public void setCaseToEdit(Cases caseToEdit){
         this.caseToEdit = caseToEdit;
     }
-
     public String getNewCaseDesc() {
         return newCaseDesc;
     }
-
     public void setNewCaseDesc(String newCaseDesc) {
         this.newCaseDesc = newCaseDesc;
     }
-
     public String getNewCaseStatus() {
         return newCaseStatus;
     }
-
     public void setNewCaseStatus(String newCaseStatus) {
         this.newCaseStatus = newCaseStatus;
     }
-
     public String getNewCaseDateStart() {
         return newCaseDateStart;
     }
-
     public void setNewCaseDateStart(String newCaseDateStart) {
         this.newCaseDateStart = newCaseDateStart;
     }
-
     public String getNewCaseDateEnd() {
         return newCaseDateEnd;
     }
-
     public void setNewCaseDateEnd(String newCaseDateEnd) {
         this.newCaseDateEnd = newCaseDateEnd;
     }
-
     public String getNewCaseProfit() {
         return newCaseProfit;
     }
-
     public void setNewCaseProfit(String newCaseProfit) {
         this.newCaseProfit = newCaseProfit;
     }
-
     public int getNewCaseHours() {
         return newCaseHours;
     }
-
     public void setNewCaseHours(int newCaseHours) {
         this.newCaseHours = newCaseHours;
     }
-
     public String getNewCaseType() {
         return newCaseType;
     }
-
     public void setNewCaseType(String newCaseType) {
         this.newCaseType = newCaseType;
     }
-
     public String getNewJournalDesc() {
         return newJournalDesc;
     }
-
     public void setNewJournalDesc(String newJournalDesc) {
         this.newJournalDesc = newJournalDesc;
     }
-
     public int getNewJournalId() {
         return newJournalId;
     }
-
     public void setNewJournalId(int newJournalId) {
         this.newJournalId = newJournalId;
     }
-
     public CasesBean(){}
-
     public void setCasesDetails(List<Cases> cases_details){
         this.cases_details = cases_details;
     }
-
     public String editCase(int caseId) {
         caseToEdit = entityManager.createQuery("select p from Cases p where p.CASE_ID = :caseId", Cases.class)
                 .setParameter("caseId", caseId)
@@ -141,7 +113,6 @@ public class CasesBean implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error saving changes", null));
         }
     }
-
     public void setCases(List<Cases> cases){
         this.cases = cases;
     }
@@ -149,7 +120,7 @@ public class CasesBean implements Serializable{
         Cases newCase = new Cases();
         newCase.setCASE_DESC(newCaseDesc);
         newCase.setCASE_STATUS(newCaseStatus);
-        newCase.setCASE_DATE_START(newCaseDateStart);
+        newCase.setCASE_DATE_START(String.valueOf(LocalDate.now()));
         newCase.setCASE_DATE_END(newCaseDateEnd);
         newCase.setCASE_PROFIT(newCaseProfit);
         newCase.setCASE_HOURS(newCaseHours);
@@ -164,7 +135,6 @@ public class CasesBean implements Serializable{
 
         entityManager.persist(newCase);
         resetInputFields();
-
     }
     private String resetInputFields() {
         newCaseDesc = null;
