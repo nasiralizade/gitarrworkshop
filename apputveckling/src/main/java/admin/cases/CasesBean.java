@@ -110,13 +110,14 @@ public class CasesBean implements Serializable{
         cases = entityManager.createQuery("select p from Cases p", Cases.class).getResultList();
         return cases;
     }
-    public void updateCase(int caseId){
+    public String updateCase(int caseId){
         try {
             entityManager.merge(caseToEdit);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Changes saved successfully!", null));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error saving changes", null));
         }
+        return "/views/admin_cases?faces-redirect=true";
     }
     public void setCases(List<Cases> cases){
         this.cases = cases;
