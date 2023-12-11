@@ -88,7 +88,7 @@ public class Signup implements Serializable {
             }else return "SignUp";
         }else return "SignUp";
 
-        return "LogIn";
+        return "/views/LogIn.xhtml";
     }
 
     public String LogIn() {
@@ -153,7 +153,6 @@ public class Signup implements Serializable {
         //return "views/LogIn.xhtml";
         //return "/LogIn.xhtml";
         return "/views/client/home.xhtml?faces-redirect=true";
-
 
     }
 
