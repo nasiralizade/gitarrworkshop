@@ -152,8 +152,7 @@ public class Signup implements Serializable {
         //return "../LogIn.xhtml?faces-redirect=true";
         //return "views/LogIn.xhtml";
         //return "/LogIn.xhtml";
-        return "/views/client/home.xhtml?faces-redirect=true";
-
+        return "/views/client/ClientHome?faces-redirect=true";
     }
 
 }
