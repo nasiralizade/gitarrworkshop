@@ -1,5 +1,6 @@
 package admin.clients;
 
+import admin.cases.Cases;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Model;
 import jakarta.inject.Named;
@@ -7,6 +8,8 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -31,6 +34,7 @@ public class Client implements Serializable {
     @Basic
     @Column(name = "PASSWORD")
     private String password;
+
 
     public int getClientId() {
         return clientId;

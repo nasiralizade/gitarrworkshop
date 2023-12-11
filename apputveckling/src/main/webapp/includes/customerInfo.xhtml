@@ -29,11 +29,13 @@
             <ui:include src="editMember.xhtml"/>
         </p:dialog>
 
-        <p style="margin-top : 2%"><strong>Name :</strong> #{clientBean.clientTOedit.clientName}</p>
+        <p style="margin-top: 2%;"><strong>Client ID :</strong>  #{clientBean.clientTOedit.clientId}</p>
 
-        <p><strong>Email :</strong>  #{clientBean.clientTOedit.clientEmail}</p>
+        <p ><strong>Client Name :</strong> #{clientBean.clientTOedit.clientName}</p>
 
-        <p><strong>Tel :</strong> #{clientBean.clientTOedit.clientPhone} </p>
+        <p><strong>Client Email :</strong>  #{clientBean.clientTOedit.clientEmail}</p>
+
+        <p><strong>Client Tel :</strong> #{clientBean.clientTOedit.clientPhone} </p>
 
     </div>
 <hr/>
@@ -70,26 +72,26 @@
 
     <div class="card mt-3 history_list">
 
-        <ui:repeat value="#{clientBean.clientList}" var="client">
+        <ui:repeat value="#{clientBean.caseList}" var="client">
             <div class="row">
                 <div class="col">
-                    <p class="card-text">#{client.clientId}</p>
+                    <p class="card-text">#{client.CASE_ID}</p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">#{clientBean.FindCase(client.clientId)} </p>
+                    <p class="card-text">#{client.CASE_TYPE} </p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">#{client.clientDate}</p>
+                    <p class="card-text">#{client.CASE_DATE_START}</p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">#{client.clientDate}</p>
+                    <p class="card-text">#{client.CASE_DATE_END}</p>
                 </div>
 
                 <div class="col">
-                    <p class="card-text">Done</p>
+                    <p class="card-text">#{client.CASE_STATUS}</p>
                 </div>
 
             </div>

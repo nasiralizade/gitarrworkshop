@@ -1,14 +1,15 @@
 package admin.clients;
+import admin.DB.DB;
 import admin.cases.Cases;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -17,27 +18,35 @@ import java.util.Objects;
 @SessionScoped
 public class ClientBean implements Serializable {
     private Client clientTOedit;
-
     private String passwordTemp;
+    private Cases caseData = new Cases();
 
     private String searchName;
-    private String case_typ;
     private List<Client> clientList;
     private   List<Cases> caseList;
+
+    private List<Client> historyClientList;
+
+
 
     @PersistenceContext(unitName = "mysql_web")
     EntityManager em;
 
-    @PostConstruct
-    public void init() {
 
-        clientTOedit = new Client();
-        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c", Client.class);
-        TypedQuery<Cases> query2 = em.createQuery("SELECT a FROM Cases a", Cases.class);
+    public Cases getCaseData() {
+        return caseData;
+    }
 
-        clientList = query.getResultList();
-        caseList = query2.getResultList();
+    public void setCaseData(Cases caseData) {
+        this.caseData = caseData;
+    }
 
+    public List<Cases> getCaseList() {
+        return caseList;
+    }
+
+    public void setCaseList(List<Cases> caseList) {
+        this.caseList = caseList;
     }
     public String getPasswordTemp() {
         return passwordTemp;
@@ -53,14 +62,6 @@ public class ClientBean implements Serializable {
 
     public void setClientTOedit(Client clientTOedit) {
         this.clientTOedit = clientTOedit;
-    }
-
-    public String getCase_typ() {
-        return case_typ;
-    }
-
-    public void setCase_typ(String case_typ) {
-        this.case_typ = case_typ;
     }
 
 
@@ -80,12 +81,53 @@ public class ClientBean implements Serializable {
         this.searchName = searchName;
     }
 
+    public List<Client> getHistoryClientList() {
+        return historyClientList;
+    }
 
+    public void setHistoryClientList(List<Client> historyClientList) {
+        this.historyClientList = historyClientList;
+    }
+
+    public void newClient(){
+        clientTOedit = new Client();
+    }
+    @PostConstruct
+    public void init() {
+
+        TypedQuery<Client> query2 = em.createQuery(
+                "SELECT c FROM Client c WHERE EXISTS " +
+                        "(SELECT 1 FROM Cases ca WHERE c.clientId = ca.MEMBER_ID AND ca.STATUS = 'Closed')",
+                Client.class);
+
+        historyClientList = query2.getResultList();
+
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c", Client.class);
+        clientList = query.getResultList();
+
+    }
+
+
+    @Transactional
     public String editClient() {
+
+        Client temp = em.find(Client.class, clientTOedit.getClientId());
+        temp.setClientDate(clientTOedit.getClientDate());
+        temp.setClientEmail(clientTOedit.getClientEmail());
+        temp.setClientName(clientTOedit.getClientName());
+        temp.setClientPhone(clientTOedit.getClientPhone());
+
+        em.merge(clientTOedit);
+        init();
         return "customerInfo.xhtml";
     }
 
     public String collectClientInfo(int clientID){
+
+        caseList.clear();
+
+        caseList = em.createQuery("select p from Cases p where p.MEMBER_ID = " + clientID +" ORDER BY p.CASE_DATE_START DESC", Cases.class)
+                .getResultList();
 
         Query query = em.createQuery("SELECT c FROM Client c WHERE c.clientId =:clientID", Client.class);
         query.setParameter("clientID", clientID);
@@ -94,9 +136,12 @@ public class ClientBean implements Serializable {
         return "customerInfo.xhtml";
     }
 
-
+    @Transactional
     public String addClient() {
         int count = 0;
+
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c", Client.class);
+        clientList = query.getResultList();
 
         for (Client x : clientList) {
             if (clientTOedit.getClientEmail().equals(x.getClientEmail()) || clientTOedit.getClientPhone().equals(x.getClientPhone())) {
@@ -108,11 +153,12 @@ public class ClientBean implements Serializable {
             em.persist(clientTOedit);
         }
 
-        return "admin_clients.xhtml";
+        init();
+        return "admin_clients";
     }
 
 
-
+    @Transactional
     public String deleteEntity(int clientID) {
         // Find the entity by ID
         Client entityToDelete = em.find(Client.class, clientID);
@@ -122,6 +168,8 @@ public class ClientBean implements Serializable {
             // Remove the entity from the database
             em.remove(entityToDelete);
         }
+
+        init();
 
         return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
@@ -146,22 +194,11 @@ public class ClientBean implements Serializable {
 
     public void FindCase(int clientID){
 
-        caseList = em.createQuery("select p from Cases p where p.CASE_ID = :caseId", Cases.class)
-                .setParameter("caseId", clientID)
+        caseList = em.createQuery("select p from Cases p where p.MEMBER_ID = " + clientID +" ORDER BY p.CASE_DATE_START DESC", Cases.class)
                 .getResultList();
-       // case_typ = caseList.get(0).getCASE_TYPE();
+        caseData = caseList.get(0);
 
     }
 
-    public void NewInstans(){
-        clientTOedit = new Client();
-    }
-
-
-    public static void main(String[] arg){
-        ClientBean D = new ClientBean();
-        D.init();
-        D.FindCase(1);
-    }
 
 }
