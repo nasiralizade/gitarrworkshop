@@ -30,9 +30,16 @@ public class CasesBean implements Serializable{
     private String newCaseDateEnd;
     private String newCaseProfit;
     private int newCaseHours;
+    private int newMemberId;
     private String newCaseType;
     private String newJournalDesc;
     private int newJournalId;
+    public void setNewMemberId(int newMemberId){
+        this.newMemberId = newMemberId;
+    }
+    public int getNewMemberId(){
+        return newMemberId;
+    }
     public Cases getCaseToEdit(){
         return caseToEdit;
     }
@@ -131,6 +138,7 @@ public class CasesBean implements Serializable{
         newCase.setCASE_PROFIT(newCaseProfit);
         newCase.setCASE_HOURS(newCaseHours);
         newCase.setCASE_TYPE(newCaseType);
+        newCase.setMEMBER_ID(newMemberId);
 
         CaseJournal newJournal = new CaseJournal();
         newJournal.setJOURNAL_DESC(newJournalDesc);
