@@ -54,8 +54,6 @@ public class EventEntityBean implements Serializable {
     private int duration;
     private String email;
     private String client_name;
-    private final List<Date> DisabledEventList = new ArrayList<>();
-
 
     @PostConstruct
     public void init() {
@@ -192,20 +190,6 @@ public class EventEntityBean implements Serializable {
                 .getSingleResult();
     }
 
-    @Transactional
-    public void onUpdate(EventEntity event) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Event updated"));
-        int id = event.getId();
-        EventEntity ny = new EventEntity();
-        String title = event.getTitle();
-        Timestamp start = event.getStart_date();
-        Timestamp end = event.getEnd_date();
-        boolean all_day = event.isAll_day();
-        String email = event.getEmail();
-        String client_name = event.getClient_name();
-        String description = event.getDescription();
-        String url = event.getUrl();
-    }
 
 
     @Transactional
@@ -325,9 +309,7 @@ public class EventEntityBean implements Serializable {
         entityManager.merge(eventEntity);
     }
 
-    public void onCommandLinkAction(String eventId) {
-        event = model.getEvent(eventId);
-    }
+
 
 
     public int getDuration() {
