@@ -30,6 +30,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * This class is used to manage the events of the calendar
+ * It is called from the admin/Calendar.xhtml page
+ * @see EventEntity
+ * @see EventEntityBean
+ * @see ScheduleModel
+ * @see ScheduleEvent
+ * @see DefaultScheduleEvent
+ * @see SelectEvent
+ * @see ScheduleEntryMoveEvent
+ * @see ValueChangeEvent
+ */
 @Named
 @ViewScoped
 public class EventEntityBean implements Serializable {
@@ -58,6 +70,10 @@ public class EventEntityBean implements Serializable {
 
     }
 
+    /**
+     * This method is used to load the events from the database
+     * It is called from the admin/Calendar.xhtml page
+     */
     private void loadEventsFromDatabase() {
         model = new DefaultScheduleModel();
         List<EventEntity> events = entityManager.createQuery("SELECT e FROM EventEntity e", EventEntity.class).getResultList();
@@ -128,6 +144,10 @@ public class EventEntityBean implements Serializable {
 
     }
 
+    /**
+     * This method is used to add an event to the database
+     * @return the event added
+     */
     public EventEntity dbPostEvent() {
         EventEntity ny = new EventEntity();
         ny.setTitle(event.getTitle());
@@ -144,8 +164,25 @@ public class EventEntityBean implements Serializable {
         return ny;
     }
 
+    /**
+     * This method is used to get the event selected
+     * @param selectEvent the event selected
+     */
     public void onEventSelect(SelectEvent<ScheduleEvent<?>> selectEvent) {
         event = selectEvent.getObject();
+        setEmail(getEmailEvent(Integer.parseInt(event.getId())));
+    }
+
+    /**
+     * This method is used to get the email of the event
+     * @param id the id of the event
+     * @return the email of the event
+     */
+    private String getEmailEvent(int id) {
+        String query = "SELECT e.email FROM EventEntity e WHERE e.id = " + id;
+        return entityManager.createQuery(query, String.class)
+                .getSingleResult();
+
     }
 
     @Transactional
@@ -284,7 +321,6 @@ public class EventEntityBean implements Serializable {
     public void onCommandLinkAction(String eventId) {
         event = model.getEvent(eventId);
     }
-
 
 
     public int getDuration() {
