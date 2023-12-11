@@ -12,6 +12,8 @@ public class EventEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+    @Column(name="client_name")
+    private String client_name;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
@@ -78,5 +80,12 @@ public class EventEntity {
     public void setEmail(String email) { this.email = email; }
     public String getEmail() { return this.email; }
 
+    public String getClient_name() {
+        return client_name;
+    }
+
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
+    }
 }
 
