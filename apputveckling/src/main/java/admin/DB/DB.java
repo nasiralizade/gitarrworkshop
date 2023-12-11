@@ -213,7 +213,7 @@ public class DB implements Serializable {
                 String partialDescription = rs.getString("CASE_DESC");
                 caseDescription.append(partialDescription).append(" ");
             }
-            caseDescription.append("\n");
+            //caseDescription.append("\n");
 
             // Close resources
             rs.close();
