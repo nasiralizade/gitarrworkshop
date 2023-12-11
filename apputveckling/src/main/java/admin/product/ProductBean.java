@@ -2,6 +2,9 @@ package admin.product;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.Flash;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -9,9 +12,16 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.Part;
 import jakarta.transaction.Transactional;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.logging.Logger;
+
+
 
 /**
  * this class is used to get the list of products from the database
@@ -20,7 +30,7 @@ import java.util.logging.Logger;
  * @see Product for the product entity
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class ProductBean implements Serializable {
     @Produces
     @PersistenceContext(unitName = "PRODUCT")
@@ -33,6 +43,17 @@ public class ProductBean implements Serializable {
     List<ProductImages> productImagesList; // used to get the list of product images from the database
     private Part saveProductImages; // used to save the product images to the database
 
+    private boolean showForm = false;
+    private int product_id;
+
+
+    public boolean getShowForm() {
+        return showForm;
+    }
+
+    public void setShowForm(boolean showForm) {
+        this.showForm = showForm;
+    }
     public Product getNewProduct() {
         return newProduct;
     }
@@ -53,10 +74,6 @@ public class ProductBean implements Serializable {
     public void setIsShowProductDetails(String isShowProductDetails) {
         this.isShowProductDetails = isShowProductDetails;
     }
-
-    public ProductBean() {
-    }
-
 
     public void setProductsDetails(List<Product> productsDetails) {
         this.productsDetails = productsDetails;
@@ -79,7 +96,7 @@ public class ProductBean implements Serializable {
      * @see Product for the product entity
      */
     public void showProductDetails(int productId) {
-        productsDetails = entityManager.createQuery("select p from Product p where p.PRODUCT_ID = :productId", Product.class)
+        productsDetails = entityManager.createQuery("SELECT p FROM Product p WHERE p.PRODUCT_ID = :productId", Product.class)
                 .setParameter("productId", productId)
                 .getResultList();
         isShowProductDetails = "true";
@@ -87,7 +104,7 @@ public class ProductBean implements Serializable {
     }
 
     public List<ProductImages> getProductImagesList() {
-        productImagesList = entityManager.createQuery("select p from ProductImages p", ProductImages.class).getResultList();
+        productImagesList = entityManager.createQuery("SELECT p FROM ProductImages p", ProductImages.class).getResultList();
         return productImagesList;
     }
 
@@ -101,7 +118,7 @@ public class ProductBean implements Serializable {
      * @return the list of products
      */
     public List<Product> getProducts() {
-        products = entityManager.createQuery("select p from Product p", Product.class).getResultList();
+        products = entityManager.createQuery("SELECT p FROM Product p", Product.class).getResultList();
         return products;
     }
 
@@ -132,10 +149,49 @@ public class ProductBean implements Serializable {
      */
     @Transactional
     public void deleteProduct(int productId) {
-        entityManager.createQuery("delete from Product p where p.PRODUCT_ID = :productId")
-                .setParameter("productId", productId)
-                .executeUpdate();
+        entityManager.createQuery("DELETE FROM Product p WHERE p.PRODUCT_ID = :productId")
+                .setParameter("productId", productId).executeUpdate();
     }
+
+    @Transactional
+    public void getProductImages(Product product) throws IOException{
+        try {
+            for(Part image: imageFile) {
+                ProductImages productImages = new ProductImages();
+                String filename = image.getSubmittedFileName();
+                String path = productImages.getImgPathStringToSave();
+                saveImage(filename, path, image);
+                productImages.setImgPathString(filename);
+                productImages.setProduct(product);
+                product.getProductImages().add(productImages);
+            }
+        }catch (Exception e) {
+            throw e;
+        }
+    }
+
+
+    @Transactional
+    public void updateProduct(int product_id) throws IOException {
+        try {
+
+            Product product = entityManager.find(Product.class, product_id);
+            product.setPRODUCT_NAME(productsDetails.get(0).getPRODUCT_NAME());
+            product.setPRODUCT_YEAR(productsDetails.get(0).getPRODUCT_YEAR());
+            product.setPRODUCT_HISTORY_DESC(productsDetails.get(0).getPRODUCT_HISTORY_DESC());
+            product.setPRODUCT_MAIN_DESC(productsDetails.get(0).getPRODUCT_MAIN_DESC());
+            product.setPRODUCT_PRICE(productsDetails.get(0).getPRODUCT_PRICE());
+
+            getProductImages(product);
+            entityManager.merge(product);
+            reload();
+            setIsShowProductDetails("false");
+
+        }catch (Exception e) {
+            throw e;
+        }
+    }
+
 
     /**
      *
@@ -144,14 +200,46 @@ public class ProductBean implements Serializable {
     @Transactional
     public void addProduct() throws IOException {
         try {
+            Product product = new Product();
+            product.setPRODUCT_NAME(newProduct.getPRODUCT_NAME());
+            product.setPRODUCT_YEAR(newProduct.getPRODUCT_YEAR());
+            product.setPRODUCT_HISTORY_DESC(newProduct.getPRODUCT_HISTORY_DESC());
+            product.setPRODUCT_MAIN_DESC(newProduct.getPRODUCT_MAIN_DESC());
+            product.setPRODUCT_PRICE(newProduct.getPRODUCT_PRICE());
 
-            entityManager.persist(newProduct);
-            //ProductImagesBean imagesBean =new ProductImagesBean();
-           // imagesBean.addProductImages(newProduct.getPRODUCT_ID(), imageFile);
+            getProductImages(product);
+            entityManager.persist(product);
+            reload();
+            showForm=false;
+
+
         }catch (Exception e){
             throw e;
         }
 
     }
 
+    private void reload() {
+        products = entityManager.createQuery("SELECT p FROM Product p", Product.class).getResultList();
+    }
+
+    private void saveImage(String filename, String path, Part image) throws IOException {
+        try {
+            File dir = new File(path);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            InputStream inputStream = image.getInputStream();
+            File file = new File(dir, filename);
+
+            Files.copy(inputStream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("Error saving file: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void changeShowForm(){
+        this.showForm =! showForm;
+    }
 }
