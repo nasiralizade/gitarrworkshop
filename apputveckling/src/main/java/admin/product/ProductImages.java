@@ -1,5 +1,6 @@
 package admin.product;
 
+import jakarta.faces.context.FacesContext;
 import jakarta.persistence.*;
 
 /**
@@ -36,11 +37,22 @@ public class ProductImages {
         this.product = product;
     }
 
+    public void setImgPathString(String imgPathString) {
+        this.imgPathString = imgPathString;
+    }
+
     public String getImgPathString() {
         return imgPathString;
     }
 
-    public void setImgPathString(String imgPathString) {
-        this.imgPathString = imgPathString;
+    /**
+     *
+     * @return
+     */
+    public String getImgPathStringToSave() {
+        String webapp = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        return webapp+"../../src/main/webapp/img";
+
     }
+
 }
