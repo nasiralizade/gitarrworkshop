@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS CLIENT
     CLIENT_NAME  VARCHAR(255),
     CLIENT_PHONE VARCHAR(20),
     CLIENT_EMAIL VARCHAR(255),
-    PASSWORD VARCHAR(200),
+    PASSWORD     VARCHAR(200),
     CLIENT_DATE  DATE
 );
 
@@ -81,4 +81,27 @@ CREATE TABLE IF NOT EXISTS APPOINTMENT
     APPOINTMENT_DESC     TEXT,
     FOREIGN KEY (CLIENT_ID) REFERENCES CLIENT (CLIENT_ID),
     FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT (PRODUCT_ID)
+);
+
+CREATE TABLE IF NOT EXISTS Events
+(
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(255),
+    title       VARCHAR(50),
+    start_date  TIMESTAMP,
+    end_date    TIMESTAMP,
+    all_day     BOOLEAN
+);
+-- Event table for calendar
+create table if not exists ProjectDB.Events
+(
+    id          int auto_increment
+        primary key,
+    url         varchar(250) null,
+    email       varchar(250) null,
+    title       varchar(255) not null,
+    description text         null,
+    start_date  timestamp    not null,
+    end_date    timestamp    not null,
+    all_day     tinyint(1)   not null
 );

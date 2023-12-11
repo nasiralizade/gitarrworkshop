@@ -91,12 +91,15 @@ public class AppointmentResource {
         appointmentAPI.setId(resultSet.getInt("APPOINTMENT_ID"));
         appointmentAPI.setTitle(resultSet.getString("APPOINTMENT_TYPE"));
         appointmentAPI.setColor(resultSet.getString("APPOINTMENT_COLOR"));
+
         // Get date and time from resultSet
         Date appointmentDate = resultSet.getDate("APPOINTMENT_DATE");
         Time appointmentTime = resultSet.getTime("APPOINTMENT_TIME");
         Time appointmentDuration = resultSet.getTime("APPOINTMENT_DURATION");
+
         // Combine date and time into a from string
         appointmentAPI.setFrom(appointmentDate.toString() + "T" + appointmentTime.toString() + "Z");
+
         // Calculate the to time by adding the duration to the start time
         LocalDateTime startDateTime = LocalDateTime.of(appointmentDate.toLocalDate(), appointmentTime.toLocalTime());
         LocalTime duration = appointmentDuration.toLocalTime();

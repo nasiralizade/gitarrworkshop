@@ -13,4 +13,5 @@ import java.util.logging.Logger;
 @SessionScoped
 public class CalendarBean implements Serializable {
 
+
 }
