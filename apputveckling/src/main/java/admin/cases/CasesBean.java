@@ -6,6 +6,8 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -101,6 +103,9 @@ public class CasesBean implements Serializable{
                 .getSingleResult();
         return "/includes/editCase?faces-redirect=true&caseId=" + caseId;
     }
+    public String goBack() {
+        return "/views/admin_cases?faces-redirect=true";
+    }
     public List<Cases> getCases(){
         cases = entityManager.createQuery("select p from Cases p", Cases.class).getResultList();
         return cases;
@@ -116,7 +121,7 @@ public class CasesBean implements Serializable{
     public void setCases(List<Cases> cases){
         this.cases = cases;
     }
-    public void addCase() {
+    public String addCase() {
         Cases newCase = new Cases();
         newCase.setCASE_DESC(newCaseDesc);
         newCase.setCASE_STATUS(newCaseStatus);
@@ -135,6 +140,7 @@ public class CasesBean implements Serializable{
 
         entityManager.persist(newCase);
         resetInputFields();
+        return"admin_cases?faces-redirect=true";
     }
     private String resetInputFields() {
         newCaseDesc = null;

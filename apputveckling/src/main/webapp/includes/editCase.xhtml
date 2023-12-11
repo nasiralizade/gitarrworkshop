@@ -80,7 +80,7 @@
                 <h:outputLabel for="casejournal" value="Case Journal:" class="d-block font-weight-bold mb-2" />
                 <h:inputTextarea id="casejournal" value="#{caseJournal.JOURNAL_DESC}" rows="5" cols="50" class="form-control mb-2" />
             </ui:repeat>
-            <h:commandButton value="Go Back" class="btn btn-secondary mb-2" onclick="#{navigationBean.goToCasesPage()}" />
+            <h:commandButton value="Go Back" class="btn btn-secondary mb-2" action="#{casesBean.goBack()}" />
             <h:commandButton value="Save Changes" action="#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" class="btn btn-primary mb-2"></h:commandButton>
         </div>
     </h:form>
