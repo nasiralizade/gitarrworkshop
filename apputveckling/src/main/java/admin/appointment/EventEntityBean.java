@@ -11,7 +11,6 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.servlet.ServletContext;
 import jakarta.transaction.Transactional;
 
 
@@ -27,7 +26,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -55,6 +53,7 @@ public class EventEntityBean implements Serializable {
     private LocalDate date;
     private int duration;
     private String email;
+    private String client_name;
     private final List<Date> DisabledEventList = new ArrayList<>();
 
 
@@ -157,6 +156,7 @@ public class EventEntityBean implements Serializable {
         ny.setEnd_date(end);
         ny.setAll_day(event.isAllDay());
         ny.setEmail(email);
+        ny.setClient_name(client_name);
         ny.setDescription(event.getDescription());
         ny.setUrl(event.getUrl());
         model.addEvent(event);
@@ -171,6 +171,7 @@ public class EventEntityBean implements Serializable {
     public void onEventSelect(SelectEvent<ScheduleEvent<?>> selectEvent) {
         event = selectEvent.getObject();
         setEmail(getEmailEvent(Integer.parseInt(event.getId())));
+        setClient_name(getClientNameEvent(Integer.parseInt(event.getId())));
     }
 
     /**
@@ -185,6 +186,12 @@ public class EventEntityBean implements Serializable {
 
     }
 
+    private String getClientNameEvent(int id) {
+        String query = "SELECT e.client_name FROM EventEntity e WHERE e.id = " + id;
+        return entityManager.createQuery(query, String.class)
+                .getSingleResult();
+    }
+
     @Transactional
     public void onUpdate(EventEntity event) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Event updated"));
@@ -195,6 +202,7 @@ public class EventEntityBean implements Serializable {
         Timestamp end = event.getEnd_date();
         boolean all_day = event.isAll_day();
         String email = event.getEmail();
+        String client_name = event.getClient_name();
         String description = event.getDescription();
         String url = event.getUrl();
     }
@@ -295,6 +303,7 @@ public class EventEntityBean implements Serializable {
         eventEntity.setUrl(event.getUrl());
         eventEntity.setAll_day(event.isAllDay());
         eventEntity.setDescription(event.getDescription());
+        eventEntity.setClient_name(client_name);
         eventEntity.setEmail(email);
         entityManager.merge(eventEntity);
     }
@@ -309,6 +318,7 @@ public class EventEntityBean implements Serializable {
         // Update the fields of the EventEntity
         eventEntity.setTitle(event.getTitle());
         eventEntity.setDescription(event.getDescription());
+        eventEntity.setClient_name(client_name);
         eventEntity.setEmail(email);
 
         // Merge the updated EventEntity
@@ -358,6 +368,13 @@ public class EventEntityBean implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getClient_name() {
+        return client_name;
+    }
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
     }
 
 }

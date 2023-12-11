@@ -97,11 +97,12 @@ create table if not exists ProjectDB.Events
 (
     id          int auto_increment
         primary key,
+    client_name varchar(255) null,
     url         varchar(250) null,
     email       varchar(250) null,
     title       varchar(255) not null,
     description text         null,
-    start_date  timestamp    not null,
-    end_date    timestamp    not null,
+    start_date  timestamp    null,
+    end_date    timestamp    null,
     all_day     tinyint(1)   not null
 );
