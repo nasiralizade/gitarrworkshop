@@ -151,7 +151,9 @@ public class Signup implements Serializable {
         // Redirect to the login page or any other desired page after sign out
         //return "../LogIn.xhtml?faces-redirect=true";
         //return "views/LogIn.xhtml";
-        return "/apputveckling-1.0-SNAPSHOT/views/LogIn.xhtml";
+        //return "/LogIn.xhtml";
+        return "/views/client/home.xhtml?faces-redirect=true";
+
 
     }
 
