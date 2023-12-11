@@ -22,6 +22,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * This class is used to create a schedule model for the client to book an appointment
+ */
 @Named
 @ViewScoped
 public class ClientEventEntityBean implements Serializable {
@@ -44,8 +47,14 @@ public class ClientEventEntityBean implements Serializable {
         }
 
     }
+
+    /**
+     * This method is used to add an event to the schedule model
+     * @return a string to redirect to the client appointments page
+     */
     @Transactional
     public String addEvent() {
+        model.deleteEvent(event);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Event booked"));
         EventEntity event2 = entityManager.find(EventEntity.class, Integer.parseInt(event.getId()));
         event2.setTitle(event.getTitle());
@@ -56,8 +65,10 @@ public class ClientEventEntityBean implements Serializable {
         event2.setDescription(event.getDescription());
         event2.setEmail(email);
         entityManager.merge(event2);
-        model.deleteEvent(event);
+
         event = new DefaultScheduleEvent<>();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "You have successfully booked a time."));
+
         return "ClientAppointments.xhtml?faces-redirect=true";
 
     }
@@ -74,6 +85,7 @@ public class ClientEventEntityBean implements Serializable {
                 .endDate(event2.getEndDate())
                 .allDay(event2.isAllDay())
                 .build();
+        model.deleteEvent(event2);
     }
     private void availableTime() {
         model = new DefaultScheduleModel();
