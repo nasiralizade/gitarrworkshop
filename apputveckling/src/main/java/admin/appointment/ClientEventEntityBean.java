@@ -38,6 +38,7 @@ public class ClientEventEntityBean implements Serializable {
     private LocalDate date;
     private int duration;
     private String email;
+    private String client_name;
     @PostConstruct
     public void init(){
         try {
@@ -54,7 +55,6 @@ public class ClientEventEntityBean implements Serializable {
      */
     @Transactional
     public String addEvent() {
-        model.deleteEvent(event);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Event booked"));
         EventEntity event2 = entityManager.find(EventEntity.class, Integer.parseInt(event.getId()));
         event2.setTitle(event.getTitle());
@@ -64,20 +64,21 @@ public class ClientEventEntityBean implements Serializable {
         event2.setAll_day(false);
         event2.setDescription(event.getDescription());
         event2.setEmail(email);
+        event2.setClient_name(client_name);
         entityManager.merge(event2);
+
+        model.deleteEvent(model.getEvent(event.getId())); // delete the old event from the model
 
         event = new DefaultScheduleEvent<>();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "You have successfully booked a time."));
-
         return "ClientAppointments.xhtml?faces-redirect=true";
-
     }
 
     public void onEventSelect(SelectEvent<ScheduleEvent<?>> selectEvent) {
         ScheduleEvent<?> event2 = selectEvent.getObject();
         event = DefaultScheduleEvent.builder()
                 .id(String.valueOf(event2.getId()))
-                .title("")                                  // set the title to empty string to hide it from the client
+                .title("") // set the title to empty string to hide it from the client
                 .description(event2.getDescription())
                 .url(event2.getUrl())
                 .backgroundColor("red")
@@ -85,8 +86,8 @@ public class ClientEventEntityBean implements Serializable {
                 .endDate(event2.getEndDate())
                 .allDay(event2.isAllDay())
                 .build();
-        model.deleteEvent(event2);
     }
+
     private void availableTime() {
         model = new DefaultScheduleModel();
         List<EventEntity> events = entityManager.createQuery("SELECT e FROM EventEntity e WHERE e.title = 'Available'", EventEntity.class).getResultList();
@@ -161,5 +162,13 @@ public class ClientEventEntityBean implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getClient_name() {
+        return client_name;
+    }
+
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
     }
 }
