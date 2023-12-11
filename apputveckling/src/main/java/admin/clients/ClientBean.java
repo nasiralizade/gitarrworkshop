@@ -1,46 +1,77 @@
 package admin.clients;
 import admin.DB.DB;
+import admin.cases.Cases;
 import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
-import javax.sql.DataSource;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Objects;
 
 @Named
 @SessionScoped
 public class ClientBean implements Serializable {
-    @Resource(name = "mysql_web")
-    private DataSource dataSource;
-    @Inject
-    private DB databaseExample;
-    private Client clientToEdit;
+    private Client clientTOedit;
+    private String passwordTemp;
+    private Cases caseData = new Cases();
 
     private String searchName;
-    private static final Logger LOGGER = Logger.getLogger(ClientBean.class.getName());
-    private List<Client> clients;
+    private List<Client> clientList;
+    private   List<Cases> caseList;
 
-    @PostConstruct
-    public void init() {
+    private List<Client> historyClientList;
 
-        // Load member data from the database during bean initialization
-        loadClients();
+
+
+    @PersistenceContext(unitName = "mysql_web")
+    EntityManager em;
+
+
+    public Cases getCaseData() {
+        return caseData;
     }
 
-    // Encapsulate the logic for mapping a row in the result set to a Member object
+    public void setCaseData(Cases caseData) {
+        this.caseData = caseData;
+    }
+
+    public List<Cases> getCaseList() {
+        return caseList;
+    }
+
+    public void setCaseList(List<Cases> caseList) {
+        this.caseList = caseList;
+    }
+    public String getPasswordTemp() {
+        return passwordTemp;
+    }
+
+    public void setPasswordTemp(String passwordTemp) {
+        this.passwordTemp = passwordTemp;
+    }
+
+    public Client getClientTOedit() {
+        return clientTOedit;
+    }
+
+    public void setClientTOedit(Client clientTOedit) {
+        this.clientTOedit = clientTOedit;
+    }
+
+
+    public List<Client> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
+    }
 
     public String getSearchName() {
         return searchName;
@@ -50,194 +81,124 @@ public class ClientBean implements Serializable {
         this.searchName = searchName;
     }
 
-    public String setClientToEdit(String client_id) {
+    public List<Client> getHistoryClientList() {
+        return historyClientList;
+    }
+
+    public void setHistoryClientList(List<Client> historyClientList) {
+        this.historyClientList = historyClientList;
+    }
+
+    public void newClient(){
+        clientTOedit = new Client();
+    }
+    @PostConstruct
+    public void init() {
+
+        TypedQuery<Client> query2 = em.createQuery(
+                "SELECT c FROM Client c WHERE EXISTS " +
+                        "(SELECT 1 FROM Cases ca WHERE c.clientId = ca.MEMBER_ID AND ca.STATUS = 'Closed')",
+                Client.class);
+
+        historyClientList = query2.getResultList();
+
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c", Client.class);
+        clientList = query.getResultList();
+
+    }
 
 
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CLIENT where CLIENT_ID="+ client_id;
+    @Transactional
+    public String editClient() {
 
+        Client temp = em.find(Client.class, clientTOedit.getClientId());
+        temp.setClientDate(clientTOedit.getClientDate());
+        temp.setClientEmail(clientTOedit.getClientEmail());
+        temp.setClientName(clientTOedit.getClientName());
+        temp.setClientPhone(clientTOedit.getClientPhone());
 
-            try (PreparedStatement statement = connection.prepareStatement(sql);
-                 ResultSet resultSet = statement.executeQuery()) {
-
-                while (resultSet.next()) {
-                    clientToEdit =mapResultSetToClient(resultSet);
-                }
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
-        }
+        em.merge(clientTOedit);
+        init();
         return "customerInfo.xhtml";
     }
 
-    public void setClientToEdit(Client clientToEdit) {
-        this.clientToEdit = clientToEdit;
+    public String collectClientInfo(int clientID){
+
+        caseList.clear();
+
+        caseList = em.createQuery("select p from Cases p where p.MEMBER_ID = " + clientID +" ORDER BY p.CASE_DATE_START DESC", Cases.class)
+                .getResultList();
+
+        Query query = em.createQuery("SELECT c FROM Client c WHERE c.clientId =:clientID", Client.class);
+        query.setParameter("clientID", clientID);
+        clientTOedit = (Client) query.getSingleResult();
+
+        return "customerInfo.xhtml";
     }
 
-    public Client getClientToEdit() {
-        return clientToEdit;
-    }
-
-
-    private void loadClients() {
-        clients = new ArrayList<>();
-
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CLIENT";
-
-
-            try (PreparedStatement statement = connection.prepareStatement(sql);
-                 ResultSet resultSet = statement.executeQuery()) {
-
-                while (resultSet.next()) {
-                    clients.add(mapResultSetToClient(resultSet));
-                }
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
-        }
-    }
-
-
-    private Client mapResultSetToClient(ResultSet resultSet) throws SQLException {
-
-        Client client = new Client();
-        client.setClientID(resultSet.getInt("CLIENT_ID"));
-        client.setName(resultSet.getString("CLIENT_NAME"));
-        client.setPhone(resultSet.getString("CLIENT_PHONE"));
-        client.setEmail(resultSet.getString("CLIENT_EMAIL"));
-        client.setDate(resultSet.getString("CLIENT_DATE"));
-
-        try (Connection connection = dataSource.getConnection()) {
-            String sql2 = "SELECT * FROM CASES WHERE MEMBER_ID ="+ client.getClientID();
-
-
-            try (PreparedStatement statement = connection.prepareStatement(sql2);
-                 ResultSet resultSet2 = statement.executeQuery()) {
-
-               client.setCas_type(resultSet2.getString("CASE_TYPE"));
-               client.setDate(String.valueOf(resultSet2.getDate("CASE_DATE_START")));
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
-        }
-        return client;
-    }
-
-
-
-    public void editClient(int clientID) {
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CLIENT WHERE CLIENT_ID = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, clientID);
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    if (resultSet.next()) {
-                        clientToEdit = mapResultSetToClient(resultSet);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
-        }
-        //return "editClient"; // Return the name of the page where the user can edit the member data
-    }
-
-
-    public String saveOrUpdateClient() {
-        //DB databaseExample= new DB();
-
-        try (Connection connection = dataSource.getConnection()) {
-            String sql;
-            if (clientToEdit.getClientID() == -1 && databaseExample.GetNameByName(clientToEdit.getName()).isEmpty()) {
-                sql = "INSERT INTO CLIENT (CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL,PASSWORD, CLIENT_DATE) VALUES (?, ?, ?,?, CURRENT_DATE)";
-            } else {
-                sql = "UPDATE CLIENT SET CLIENT_NAME = ?, CLIENT_PHONE = ?, CLIENT_EMAIL= ?, PASSWORD=? WHERE CLIENT_ID = ?";
-            }
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, clientToEdit.getName());
-                statement.setString(2, clientToEdit.getPhone());
-                statement.setString(3, clientToEdit.getEmail());
-                statement.setString(4, clientToEdit.getPassword());
-                if (clientToEdit.getClientID() != -1) {
-                    statement.setInt(5, clientToEdit.getClientID());
-                }
-                statement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
-        }
-        loadClients();
-
-        return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
-    }
-
+    @Transactional
     public String addClient() {
-        clientToEdit = new Client(); // Create a new Member object
-        clientToEdit.setClientID(-1); // Set memberID to -1 to represent a new member
-        return "Add Client Info"; // Return the name of the page where the user can input the data for the new member
-    }
+        int count = 0;
 
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c", Client.class);
+        clientList = query.getResultList();
 
-    public String deleteEntity(int clientID) {
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "DELETE FROM CLIENT WHERE CLIENT_ID ="+ clientID;
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.executeUpdate();
+        for (Client x : clientList) {
+            if (clientTOedit.getClientEmail().equals(x.getClientEmail()) || clientTOedit.getClientPhone().equals(x.getClientPhone())) {
+                count = count + 1;
             }
-        } catch (SQLException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("An error occurred while deleting the member."));
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
-        }
-        loadClients();
-        return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
-    }
-
-    // Getter method for the members list
-    public List<Client> getClients() {
-        return clients;
-    }
-
-
-    public String Search() {
-        List<Client> matchingName = new ArrayList<>();
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CLIENT WHERE CLIENT_NAME LIKE '%" + this.searchName + "%'";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
-                ResultSet resultSet = statement.executeQuery();
-
-                while (resultSet.next()) {
-                    Client name = mapResultSetToClient(resultSet);
-                    matchingName.add(name);
-                }
-
-                Iterator<Client> iterator = clients.iterator();
-                while (iterator.hasNext()) {
-                    Client match = iterator.next();
-                    if (matchingName.stream().anyMatch(name -> name.getName().equals(match.getName()))) {
-                        iterator.remove(); // Remove the matching client
-                    }
-                }
-
-                clients.addAll(0, matchingName);
-
-            }
-        } catch (SQLException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("An error occurred while searching for clients."));
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
 
+        if (count == 0) {
+            em.persist(clientTOedit);
+        }
 
+        init();
         return "admin_clients";
     }
 
-    public static void main(String[] arg){
-        ClientBean D=new ClientBean();
 
-        D.deleteEntity(1);
+    @Transactional
+    public String deleteEntity(int clientID) {
+        // Find the entity by ID
+        Client entityToDelete = em.find(Client.class, clientID);
+
+        // Check if the entity exists before attempting to delete
+        if (entityToDelete != null) {
+            // Remove the entity from the database
+            em.remove(entityToDelete);
+        }
+
+        init();
+
+        return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
 
+    public void SearchClient(){
+
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c WHERE c.clientName LIKE :searchName", Client.class);
+        query.setParameter("searchName", "%" + searchName + "%");
+        List<Client> matchList = query.getResultList();
+
+        Iterator<Client> iterator = clientList.iterator();
+        while (iterator.hasNext()) {
+            Client match = iterator.next();
+            if (matchList.stream().anyMatch(name -> name.getClientName().equals(match.getClientName()))) {
+                iterator.remove(); // Remove the matching client
+            }
+        }
+
+        clientList.addAll(0, matchList);
+
+    }
+
+    public void FindCase(int clientID){
+
+        caseList = em.createQuery("select p from Cases p where p.MEMBER_ID = " + clientID +" ORDER BY p.CASE_DATE_START DESC", Cases.class)
+                .getResultList();
+        caseData = caseList.get(0);
+
+    }
 
 
 }

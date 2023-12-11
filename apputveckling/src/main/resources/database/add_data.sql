@@ -2,8 +2,14 @@ USE
     ProjectDB;
 -- Insert data into CLIENT table
 INSERT INTO CLIENT (CLIENT_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL, CLIENT_DATE)
-VALUES (1, 'John Doe', '123-456-7890', 'john.doe@example.com', '2023-01-01'),
-       (2, 'Jane Smith', '987-654-3210', 'jane.smith@example.com', '2023-02-15');
+VALUES (1, 'Isaac Kanda', '123-456-1111', 'Isaac@example.com', '2016-11-01'),
+       (2, 'Johannes Joujo', '987-654-2222', 'Johannes@example.com', '2017-02-15'),
+       (3, 'Nasir Alizade', '123-456-3333', 'Nasir@example.com', '2018-01-08'),
+       (4, 'Bashar Levin Goat', '123-456-4444', 'Bashar@example.com', '2019-05-01'),
+       (5, 'Amarildo Rajta', '123-456-5555', 'Amarildo@example.com', '2020-07-01'),
+       (6, 'Taha Khudher', '123-456-6666', 'Taha@example.com', '2021-01-01'),
+       (7, 'Serhad Yildirim', '123-456-7777', 'Serhad@example.com', '2021-12-01'),
+       (8, 'Emanuel Strid', '123-456-8888', 'Emanuel@example.com', '2023-09-01');
 
 -- Insert data into PRODUCT table
 
@@ -21,7 +27,12 @@ VALUES (49.99, 'Product A history', 'Product A main description', 2022, 'Product
 INSERT INTO CASES (CASE_ID, MEMBER_ID, PRODUCT_ID, STATUS, CASE_DATE_START, CASE_DATE_END, CASE_PROFIT, CASE_DESC,
                    CASE_HOURS, CASE_TYPE)
 VALUES (1, 1, 1, 'Open', '2023-01-10', '2023-01-20', 500.00, 'Project A description', 30, 'Rented'),
-       (2, 2, NULL, 'Closed', '2023-02-01', '2023-02-28', 800.00, 'Project B description', 40, 'Repairment');
+       (2, 2, NULL, 'Closed', '2023-02-01', '2023-02-28', 800.00, 'Project B description', 40, 'Repairment'),
+       (3, 1, 1, 'Closed', '2023-01-10', '2023-03-21', 500.00, 'Project A description', 30, 'Rented'),
+       (4, 2, 1, 'Open', '2023-01-10', '2023-05-12', 500.00, 'Project A description', 30, 'Rented'),
+       (5, 3, 1, 'Open', '2023-01-10', '2023-06-07', 500.00, 'Project A description', 30, 'Rented'),
+       (6, 3, 1, 'Closed', '2023-01-10', '2023-11-17', 500.00, 'Project A description', 30, 'Rented'),
+       (7, 5, 1, 'Open', '2023-01-10', '2023-12-24', 500.00, 'Project A description', 30, 'Rented');
 
 
 -- Insert data into CASE_JOURNAL table
