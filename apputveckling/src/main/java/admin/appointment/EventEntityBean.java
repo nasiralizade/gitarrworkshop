@@ -256,14 +256,11 @@ public class EventEntityBean implements Serializable {
                 isLunchBreakSkipped = false;
                 continue;
             }
-            if (slot.getDayOfWeek() == DayOfWeek.SATURDAY) {
-                slot = slot.plusDays(2);
+            if (slot.getDayOfWeek() == DayOfWeek.SATURDAY || slot.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                slot = slot.plusDays(1 + (slot.getDayOfWeek() == DayOfWeek.SATURDAY ? 1 : 0));
                 continue;
-            } else if (slot.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                slot = slot.plusDays(1);
-                continue;
-
             }
+
             // Check if the slot is already in the database
             List<EventEntity> events = entityManager.createQuery("SELECT e FROM EventEntity e WHERE e.start_date = :start_date", EventEntity.class)
                     .setParameter("start_date", Timestamp.valueOf(slot))
