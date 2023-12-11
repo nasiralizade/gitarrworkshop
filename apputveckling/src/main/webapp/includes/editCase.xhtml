@@ -13,7 +13,6 @@
         body {
             background-color: #f8f9fa;
         }
-
         .journal {
             cursor: pointer;
             padding: 10px;
@@ -24,14 +23,12 @@
             width: 300px;
             transition: background-color 0.3s ease;
         }
-
         .j_description {
             display: none;
             padding: 10px;
             margin: 5px;
             background-color: #e0e0e0;
         }
-
         .arrow {
             display: inline-block;
             margin-right: 5px;
@@ -40,7 +37,6 @@
             padding: 3px;
             transform: rotate(45deg);
         }
-
         .edit-button {
             position: absolute;
             top: 10px;
@@ -56,7 +52,6 @@
         }
     </script>
 </h:head>
-
 <h:body>
     <h:form>
         <div class="container mt-4">
@@ -85,11 +80,10 @@
                 <h:outputLabel for="casejournal" value="Case Journal:" class="d-block font-weight-bold mb-2" />
                 <h:inputTextarea id="casejournal" value="#{caseJournal.JOURNAL_DESC}" rows="5" cols="50" class="form-control mb-2" />
             </ui:repeat>
-            <h:commandButton value="Go Back" class="btn btn-secondary mb-2" onclick="goBack();" />
+            <h:commandButton value="Go Back" class="btn btn-secondary mb-2" onclick="#{navigationBean.goToCasesPage()}" />
             <h:commandButton value="Save Changes" action="#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" class="btn btn-primary mb-2"></h:commandButton>
         </div>
     </h:form>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
