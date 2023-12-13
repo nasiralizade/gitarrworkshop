@@ -24,6 +24,7 @@ public class CasesBean implements Serializable{
     private EntityManager entityManager;
     List<Cases> cases;
     List<Cases> cases_details;
+    List <Cases> ClientCases;
     Cases caseToEdit;
     private String newCaseDesc;
     private String newCaseStatus;

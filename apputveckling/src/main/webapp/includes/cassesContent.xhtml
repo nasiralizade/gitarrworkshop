@@ -170,7 +170,7 @@
       }
    </script>
 </h:head>
-<body onload="checkMemberEmail()">
+<h:body onload="checkMemberEmail()">
 <div class="search-filter-container">
    <input type="text" id="search_bar" placeholder="Search id..." oninput="searchCase()"/>
    <button type="button" class="btn btn-primary" onclick="toggleFilterOptions()">Filter</button>
@@ -192,7 +192,6 @@
 <div id="addCaseModal" class="modal">
    <div class="modal-content">
       <span class="close" onclick="closeAddCaseModal()">&times;</span>
-      <p:messages id="errorMessages" showDetail="true" autoUpdate="true" closable="true" />
       <h:form id="addCaseForm">
          <div class="add-case-container">
             <label for="status">Status:</label>
@@ -212,17 +211,8 @@
             <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" class="form-control mb-2"  />
             <label for="journalDesc">Journal Description:</label>
             <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" class="form-control mb-2"  />
-            <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="#{casesBean.newMemberId == -1}">
-               <p:ajax execute="@form" render="@form" />
-               <script>
-                  function handleAddEvent() {
-                     var successMessage = document.getElementById('addCaseForm:errorMessages');
-                     if (successMessage === null) {
-                        window.location.href = "admin_cases?faces-redirect=true";
-                     }
-                  }
-               </script>
-            </h:commandButton>
+            <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="#{casesBean.newMemberId == -1}"></h:commandButton>
+            <p:messages id="errorMessages" showDetail="true" autoUpdate="true" closable="true" />
 
          </div>
       </h:form>
@@ -262,5 +252,5 @@
       </ui:repeat>
    </div>
 </c:forEach>
-</body>
+</h:body>
 </html>
