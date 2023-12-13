@@ -1,4 +1,5 @@
 package admin.cases;
+import admin.clients.Client;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.faces.application.FacesMessage;
@@ -34,6 +35,13 @@ public class CasesBean implements Serializable{
     private String newCaseType;
     private String newJournalDesc;
     private int newJournalId;
+    private String newMemberEmail;
+    public void setNewMemberEmail(String newMemberEmail){
+        this.newMemberEmail = newMemberEmail;
+    }
+    public String getNewMemberEmail(){
+        return newMemberEmail;
+    }
     public void setNewMemberId(int newMemberId){
         this.newMemberId = newMemberId;
     }
@@ -110,6 +118,13 @@ public class CasesBean implements Serializable{
                 .getSingleResult();
         return "/includes/editCase?faces-redirect=true&caseId=" + caseId;
     }
+    public int getMember_id(String email){
+        Client client = entityManager.createQuery("SELECT c FROM Client c WHERE c.clientEmail = :email", Client.class)
+                .setParameter("email", email)
+                .getSingleResult();
+
+        return client.getClientId();
+    }
     public String goBack() {
         return "/views/admin_cases?faces-redirect=true";
     }
@@ -138,7 +153,8 @@ public class CasesBean implements Serializable{
         newCase.setCASE_PROFIT(newCaseProfit);
         newCase.setCASE_HOURS(newCaseHours);
         newCase.setCASE_TYPE(newCaseType);
-        newCase.setMEMBER_ID(newMemberId);
+        int memberId = getMember_id(newMemberEmail);
+        newCase.setMEMBER_ID(memberId);
 
         CaseJournal newJournal = new CaseJournal();
         newJournal.setJOURNAL_DESC(newJournalDesc);
