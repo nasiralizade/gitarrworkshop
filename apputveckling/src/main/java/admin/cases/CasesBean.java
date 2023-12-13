@@ -170,8 +170,9 @@ public class CasesBean implements Serializable{
         newCase.setCASE_TYPE(newCaseType);
         int memberId = getMember_id(newMemberEmail);
         if (memberId == -1) {
-            FacesContext.getCurrentInstance().addMessage("addCaseForm:errorMessages",
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client with email does not exist!", null));
+            FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client with email does not exist!", null);
+            FacesContext.getCurrentInstance().addMessage("addCaseForm:errorMessages", errorMessage);
+            // Return null to stay on the same page (popup won't close)
             return null;
         }
         newCase.setMEMBER_ID(memberId);

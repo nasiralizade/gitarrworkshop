@@ -131,14 +131,6 @@
          var modal = document.getElementById("addCaseModal");
          modal.style.display = "none";
       }
-      function showAddCaseModal() {
-         var modal = document.getElementById("addCaseModal");
-         modal.style.display = "flex";
-      }
-      function closeAddCaseModal() {
-         var modal = document.getElementById("addCaseModal");
-         modal.style.display = "none";
-      }
       function searchCase() {
          var searchInput = document.getElementById("search_bar").value.toLowerCase();
          var cases = document.querySelectorAll(".case");
@@ -146,7 +138,6 @@
          cases.forEach(function (caseElement) {
             var caseId = caseElement.getAttribute("data-case-id").toLowerCase();
 
-            // Check if the caseId contains the search input
             if (caseId.includes(searchInput)) {
                caseElement.style.display = "block";
             } else {
@@ -179,7 +170,7 @@
       }
    </script>
 </h:head>
-<body>
+<body onload="checkMemberEmail()">
 <div class="search-filter-container">
    <input type="text" id="search_bar" placeholder="Search id..." oninput="searchCase()"/>
    <button type="button" class="btn btn-primary" onclick="toggleFilterOptions()">Filter</button>
@@ -216,12 +207,23 @@
                <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
             </h:selectOneMenu>
             <label for="Client_email">Client Email:</label>
-            <h:inputText id="Client_email" value="#{casesBean.newMemberEmail}" placeholder="Client_Email*" onchange="checkMemberEmail()" class="form-control mb-2" />
+            <h:inputText id="Client_email" value="#{casesBean.newMemberEmail}" placeholder="Client_Email*" onchange="checkMemberEmail()" oninput="checkMemberEmail()" class="form-control mb-2" />
             <label for="description">Description:</label>
             <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" class="form-control mb-2"  />
             <label for="journalDesc">Journal Description:</label>
             <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" class="form-control mb-2"  />
-            <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="#{casesBean.newMemberId == -1}" />
+            <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="#{casesBean.newMemberId == -1}">
+               <p:ajax execute="@form" render="@form" />
+               <script>
+                  function handleAddEvent() {
+                     var successMessage = document.getElementById('addCaseForm:errorMessages');
+                     if (successMessage === null) {
+                        window.location.href = "admin_cases?faces-redirect=true";
+                     }
+                  }
+               </script>
+            </h:commandButton>
+
          </div>
       </h:form>
 
