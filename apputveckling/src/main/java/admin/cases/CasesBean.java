@@ -116,6 +116,11 @@ public class CasesBean implements Serializable{
         caseToEdit = entityManager.createQuery("select p from Cases p where p.CASE_ID = :caseId", Cases.class)
                 .setParameter("caseId", caseId)
                 .getSingleResult();
+        if (caseToEdit.getCASE_STATUS().equalsIgnoreCase("Closed")) {
+            if (caseToEdit.getCASE_DATE_END() == null) {
+                caseToEdit.setCASE_DATE_END(String.valueOf(LocalDate.now()));
+            }
+        }
         return "/includes/editCase?faces-redirect=true&caseId=" + caseId;
     }
     public int getMember_id(String email){
@@ -138,6 +143,11 @@ public class CasesBean implements Serializable{
     }
     public String updateCase(int caseId){
         try {
+            if (caseToEdit.getCASE_STATUS().equalsIgnoreCase("Closed")) {
+                if (caseToEdit.getCASE_DATE_END() == null) {
+                    caseToEdit.setCASE_DATE_END(String.valueOf(LocalDate.now()));
+                }
+            }
             entityManager.merge(caseToEdit);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Changes saved successfully!", null));
         } catch (Exception e) {
