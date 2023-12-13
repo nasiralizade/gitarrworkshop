@@ -197,21 +197,21 @@
          <div class="add-case-container">
             <label for="status">Status:</label>
             <h:selectOneMenu id="status" value="#{casesBean.newCaseStatus}">
+               <f:selectItem itemValue="Open" itemLabel="Open" />
                <f:selectItem itemValue="Done" itemLabel="Done" />
                <f:selectItem itemValue="Closed" itemLabel="Closed" />
-               <f:selectItem itemValue="Open" itemLabel="Open" />
             </h:selectOneMenu>
             <label for="type">Type:</label>
             <h:selectOneMenu id="type" value="#{casesBean.newCaseType}">
                <f:selectItem itemValue="Rented" itemLabel="Rented" />
                <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
             </h:selectOneMenu>
+            <label for="Client_email">Member Email:</label>
+            <h:inputText id = "Client_email" value="#{casesBean.newMemberEmail}" placeholder = "Client_Email"/>
             <label for="description">Description:</label>
             <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" />
             <label for="journalDesc">Journal Description:</label>
             <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" />
-            <label for="Member_email">Member Email:</label>
-            <h:inputTextarea id = "Member_email" value="#{casesBean.newMemberEmail}" placeholder = "Member_Email"/>
             <h:commandButton value="Add" action="#{casesBean.addCase}" />
          </div>
       </h:form>
