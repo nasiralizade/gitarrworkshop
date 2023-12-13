@@ -186,13 +186,13 @@
    <button type="button" class="btn btn-primary" onclick="showAddCaseModal()">Add</button>
 </div>
 <div id="filterOptions" style="display: none;">
-   <select id="status_filter" onchange="filterCase()">
+   <select id="status_filter" onchange="filterCase()" class="form-control mb-2">
       <option value="">All Status</option>
       <option value="Done">Done</option>
       <option value="Closed">Closed</option>
       <option value="Open">Open</option>
    </select>
-   <select id="type_filter" onchange="filterCase()">
+   <select id="type_filter" onchange="filterCase()" class="form-control mb-2">
       <option value="">All Types</option>
       <option value="Rented">Rented</option>
       <option value="Repairment">Reperment</option>
@@ -204,22 +204,22 @@
       <h:form id="addCaseForm">
          <div class="add-case-container">
             <label for="status">Status:</label>
-            <h:selectOneMenu id="status" value="#{casesBean.newCaseStatus}">
+            <h:selectOneMenu id="status" value="#{casesBean.newCaseStatus}" class="form-control mb-2">
                <f:selectItem itemValue="Open" itemLabel="Open" />
                <f:selectItem itemValue="Done" itemLabel="Done" />
                <f:selectItem itemValue="Closed" itemLabel="Closed" />
             </h:selectOneMenu>
             <label for="type">Type:</label>
-            <h:selectOneMenu id="type" value="#{casesBean.newCaseType}">
+            <h:selectOneMenu id="type" value="#{casesBean.newCaseType}" class="form-control mb-2">
                <f:selectItem itemValue="Rented" itemLabel="Rented" />
                <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
             </h:selectOneMenu>
-            <label for="Client_email">Member Email:</label>
-            <h:inputText id="Client_email" value="#{casesBean.newMemberEmail}" placeholder="Client_Email" onchange="checkMemberEmail()" />
+            <label for="Client_email">Client Email:</label>
+            <h:inputText id="Client_email" value="#{casesBean.newMemberEmail}" placeholder="Client_Email*" onchange="checkMemberEmail()" class="form-control mb-2" />
             <label for="description">Description:</label>
-            <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" />
+            <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" class="form-control mb-2"  />
             <label for="journalDesc">Journal Description:</label>
-            <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" />
+            <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" class="form-control mb-2"  />
             <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="true" />
          </div>
       </h:form>
