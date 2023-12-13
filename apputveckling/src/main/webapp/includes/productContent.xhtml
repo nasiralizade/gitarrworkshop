@@ -4,6 +4,9 @@
 
     <div class="container-fluid row menu">
         <h:form styleClass="d-flex justify-content-end">
+            <!-- Upload the first product images to the database. Only do this once. After doing this, it's necessary to
+            redeploy glassfish to refresh the cached images. When uploading files from the page manually, the images refresh
+              without needing to redeploy. -->
             <h:commandButton styleClass="btn btn-danger" value="⚠️ Don't press"
                              action="#{productImagesBean.firstTimeInsertion()}"/>
         </h:form>
