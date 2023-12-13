@@ -40,8 +40,8 @@ INSERT INTO CASE_JOURNAL (JOURNAL_ID, CASE_ID, JOURNAL_DESC)
 VALUES (1, 1, 'Journal entry for Project A'),
        (2, 2, 'Journal entry for Project B');
 
--- Insert data into PROD_IMG table
-INSERT INTO PROD_IMG (PRODUCT_ID, IMG_PATH_STRING)
+-- Insert data into PROD_IMG table (MOVED TO firstTimeInsertion() in ProductImagesBean.java)
+/*INSERT INTO PROD_IMG (PRODUCT_ID, IMG_PATH_STRING)
 VALUES (1, 'BobMarley.JPG'),
        (1, 'IMG_1186.JPG'),
        (1, 'IMG_1187.JPG'),
@@ -54,7 +54,7 @@ VALUES (1, 'BobMarley.JPG'),
        (4, 'IMG_1189.JPG'),
        (5, 'BobMarley.JPG'),
        (6, 'IMG_1186.JPG'),
-       (7, 'IMG_1187.JPG');
+       (7, 'IMG_1187.JPG');*/
 
 
 -- Insert data into JOURNAL_IMG table
