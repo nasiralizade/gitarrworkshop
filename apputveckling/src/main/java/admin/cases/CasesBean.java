@@ -119,11 +119,15 @@ public class CasesBean implements Serializable{
         return "/includes/editCase?faces-redirect=true&caseId=" + caseId;
     }
     public int getMember_id(String email){
-        Client client = entityManager.createQuery("SELECT c FROM Client c WHERE c.clientEmail = :email", Client.class)
-                .setParameter("email", email)
-                .getSingleResult();
+        try {
+            Client client = entityManager.createQuery("SELECT c FROM Client c WHERE c.clientEmail = :email", Client.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
 
-        return client.getClientId();
+            return client.getClientId();
+        } catch (NoResultException e) {
+            return -1;
+        }
     }
     public String goBack() {
         return "/views/admin_cases?faces-redirect=true";
@@ -145,6 +149,7 @@ public class CasesBean implements Serializable{
         this.cases = cases;
     }
     public String addCase() {
+
         Cases newCase = new Cases();
         newCase.setCASE_DESC(newCaseDesc);
         newCase.setCASE_STATUS(newCaseStatus);
@@ -154,6 +159,11 @@ public class CasesBean implements Serializable{
         newCase.setCASE_HOURS(newCaseHours);
         newCase.setCASE_TYPE(newCaseType);
         int memberId = getMember_id(newMemberEmail);
+        if (memberId == -1) {
+            FacesContext.getCurrentInstance().addMessage("addCaseForm:errorMessages",
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client with email does not exist!", null));
+            return null;
+        }
         newCase.setMEMBER_ID(memberId);
 
         CaseJournal newJournal = new CaseJournal();

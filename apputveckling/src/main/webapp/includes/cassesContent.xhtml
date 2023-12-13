@@ -8,7 +8,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<head>
+<h:head>
    <title>Work Cases</title>
    <style>
       .case {
@@ -178,7 +178,7 @@
          filterOptions.style.display = (filterOptions.style.display === "none" || filterOptions.style.display === "") ? "block" : "none";
       }
    </script>
-</head>
+</h:head>
 <body>
 <div class="search-filter-container">
    <input type="text" id="search_bar" placeholder="Search id..." oninput="searchCase()"/>
@@ -201,6 +201,7 @@
 <div id="addCaseModal" class="modal">
    <div class="modal-content">
       <span class="close" onclick="closeAddCaseModal()">&times;</span>
+      <p:messages id="errorMessages" showDetail="true" autoUpdate="true" closable="true" />
       <h:form id="addCaseForm">
          <div class="add-case-container">
             <label for="status">Status:</label>
@@ -220,7 +221,7 @@
             <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" class="form-control mb-2"  />
             <label for="journalDesc">Journal Description:</label>
             <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" class="form-control mb-2"  />
-            <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="true" />
+            <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="#{casesBean.newMemberId == -1}" />
          </div>
       </h:form>
 
