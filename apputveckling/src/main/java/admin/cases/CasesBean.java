@@ -18,7 +18,7 @@ import java.util.Map;
 @Named
 @Transactional
 @SessionScoped
-public class CasesBean implements Serializable{
+public class CasesBean implements Serializable {
     @Produces
     @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
@@ -36,87 +36,104 @@ public class CasesBean implements Serializable{
     private int newMemberId;
     private String newCaseType;
     private String newJournalDesc;
-    private int newJournalId;
     private String newMemberEmail;
 
     public List<Cases> getCases_details() {
         return cases_details;
     }
 
-    public void setNewMemberEmail(String newMemberEmail){
+    public void setNewMemberEmail(String newMemberEmail) {
         this.newMemberEmail = newMemberEmail;
     }
-    public String getNewMemberEmail(){
+
+    public String getNewMemberEmail() {
         return newMemberEmail;
     }
-    public void setNewMemberId(int newMemberId){
+
+    public void setNewMemberId(int newMemberId) {
         this.newMemberId = newMemberId;
     }
-    public int getNewMemberId(){
+
+    public int getNewMemberId() {
         return newMemberId;
     }
-    public Cases getCaseToEdit(){
+
+    public Cases getCaseToEdit() {
         return caseToEdit;
     }
-    public void setCaseToEdit(Cases caseToEdit){
+
+    public void setCaseToEdit(Cases caseToEdit) {
         this.caseToEdit = caseToEdit;
     }
+
     public String getNewCaseDesc() {
         return newCaseDesc;
     }
+
     public void setNewCaseDesc(String newCaseDesc) {
         this.newCaseDesc = newCaseDesc;
     }
+
     public String getNewCaseStatus() {
         return newCaseStatus;
     }
+
     public void setNewCaseStatus(String newCaseStatus) {
         this.newCaseStatus = newCaseStatus;
     }
+
     public String getNewCaseDateStart() {
         return newCaseDateStart;
     }
+
     public void setNewCaseDateStart(String newCaseDateStart) {
         this.newCaseDateStart = newCaseDateStart;
     }
+
     public String getNewCaseDateEnd() {
         return newCaseDateEnd;
     }
+
     public void setNewCaseDateEnd(String newCaseDateEnd) {
         this.newCaseDateEnd = newCaseDateEnd;
     }
+
     public String getNewCaseProfit() {
         return newCaseProfit;
     }
+
     public void setNewCaseProfit(String newCaseProfit) {
         this.newCaseProfit = newCaseProfit;
     }
+
     public int getNewCaseHours() {
         return newCaseHours;
     }
+
     public void setNewCaseHours(int newCaseHours) {
         this.newCaseHours = newCaseHours;
     }
+
     public String getNewCaseType() {
         return newCaseType;
     }
+
     public void setNewCaseType(String newCaseType) {
         this.newCaseType = newCaseType;
     }
+
     public String getNewJournalDesc() {
         return newJournalDesc;
     }
+
     public void setNewJournalDesc(String newJournalDesc) {
         this.newJournalDesc = newJournalDesc;
     }
-    public int getNewJournalId() {
-        return newJournalId;
+
+    public CasesBean() {
     }
-    public void setNewJournalId(int newJournalId) {
-        this.newJournalId = newJournalId;
-    }
-    public CasesBean(){}
-    public void setCasesDetails(List<Cases> cases_details){
+
+    public void setCasesDetails(List<Cases> cases_details) {
         this.cases_details = cases_details;
     }
 
@@ -135,10 +152,25 @@ public class CasesBean implements Serializable{
         }
         return "/includes/editCase?faces-redirect=true&caseId=" + caseId;
     }
-    public void addNewJournal(){
 
+    public void addNewCaseJournal() {
+        try {
+            CaseJournal newJournal = new CaseJournal();
+            newJournal.setJOURNAL_DESC(newJournalDesc);
+            if (caseToEdit != null) {
+                newJournal.setaCase(caseToEdit);
+                caseToEdit.getCaseJournals().add(newJournal);
+                entityManager.persist(newJournal);
+                newJournalDesc = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error adding new case journal: " + e.getMessage(), null));
+        }
     }
-    public int getMember_id(String email){
+
+    public int getMember_id(String email) {
         try {
             Client client = entityManager.createQuery("SELECT c FROM Client c WHERE c.clientEmail = :email", Client.class)
                     .setParameter("email", email)
@@ -149,20 +181,24 @@ public class CasesBean implements Serializable{
             return -1;
         }
     }
+
     public String goBack() {
         return "/views/admin_cases?faces-redirect=true";
     }
-    public List<Cases> getCases(){
+
+    public List<Cases> getCases() {
         cases = entityManager.createQuery("select p from Cases p", Cases.class).getResultList();
         return cases;
     }
-    public String getClientCases(int member_id){
+
+    public String getClientCases(int member_id) {
         cases_details = entityManager.createQuery("select p from Cases p WHERE p.MEMBER_ID = :id", Cases.class)
-                .setParameter("id" , member_id)
+                .setParameter("id", member_id)
                 .getResultList();
         return "/views/client/clientcase.xhtml";
     }
-    public String updateCase(int caseId){
+
+    public String updateCase(int caseId) {
         try {
             if (caseToEdit.getCASE_STATUS().equalsIgnoreCase("Closed")) {
                 if (caseToEdit.getCASE_DATE_END() == null) {
@@ -176,9 +212,11 @@ public class CasesBean implements Serializable{
         }
         return "/views/admin_cases?faces-redirect=true";
     }
-    public void setCases(List<Cases> cases){
+
+    public void setCases(List<Cases> cases) {
         this.cases = cases;
     }
+
     public String addCase() {
 
         Cases newCase = new Cases();
@@ -206,8 +244,9 @@ public class CasesBean implements Serializable{
 
         entityManager.persist(newCase);
         resetInputFields();
-        return"admin_cases?faces-redirect=true";
+        return "admin_cases?faces-redirect=true";
     }
+
     private String resetInputFields() {
         newCaseDesc = null;
         newCaseStatus = null;
@@ -217,9 +256,9 @@ public class CasesBean implements Serializable{
         newCaseHours = 0;
         newCaseType = null;
         newJournalDesc = null;
-        newJournalId = 0;
         return "admin_cases";
     }
+
     public String getStatusColor(String status) {
         Map<String, String> colorMap = new HashMap<>();
         colorMap.put("Done", "green");
@@ -227,6 +266,9 @@ public class CasesBean implements Serializable{
         colorMap.put("Closed", "gray");
 
         return colorMap.getOrDefault(status, "transparent");
+    }
+    public static void main(String[] args){
+
     }
 }
 

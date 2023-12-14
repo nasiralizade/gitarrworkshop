@@ -39,10 +39,13 @@
             <h:inputText id="caseProfit" value="#{casesBean.caseToEdit.CASE_PROFIT}" class="form-control mb-2" />
             <h:outputLabel for="caseDesc" value="Case Description:" class="d-block font-weight-bold mb-2" />
             <h:inputTextarea id="caseDesc" value="#{casesBean.caseToEdit.CASE_DESC}" rows="5" cols="50" class="form-control mb-2" />
+            <h:outputLabel for="newJournalDesc" value="New Case Journal:" class="d-block font-weight-bold mb-2" />
+            <h:inputTextarea id="newJournalDesc" value="#{casesBean.newJournalDesc}" rows="5" cols="50" class="form-control mb-2" />
             <ui:repeat var="caseJournal" value="#{casesBean.caseToEdit.caseJournals}">
-                <h:outputLabel for="casejournal" value="Case Journal:" class="d-block font-weight-bold mb-2" />
+                <h:outputLabel for="casejournal" value="Case Journal With id #{caseJournal.JOURNAL_ID}:" class="d-block font-weight-bold mb-2" />
                 <h:inputTextarea id="casejournal" value="#{caseJournal.JOURNAL_DESC}" rows="5" cols="50" class="form-control mb-2" />
             </ui:repeat>
+            <h:commandButton value="Add New Journal" action="#{casesBean.addNewCaseJournal()}" class="btn btn-success mb-2" />
             <h:commandButton value="Go Back" class="btn btn-secondary mb-2" action="#{casesBean.goBack()}" />
             <h:commandButton value="Save Changes" action="#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" class="btn btn-primary mb-2"></h:commandButton>
         </div>
