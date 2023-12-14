@@ -16,7 +16,7 @@
     <style>
         .case {
             cursor: pointer;
-            padding: 10px;
+            padding: 30px;
             margin: 10px;
             background-color: #f0f0f0;
             position: relative;
@@ -53,10 +53,16 @@
         .search-filter-container{
             margin: 10px;
         }
+        .description {
+            display: none;
+            transition: max-height 0.3s ease;
+            overflow: hidden;
+        }
     </style>
     <script type="text/javascript" src="https://www.google.com/jsapi"> </script><!-- Google Charts -->
     <script src="#{request.contextPath}/resources/js/statistics.js" type=""> </script>
     <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type=""> </script>
     <script>
         function toggleDescription(caseId) {
         var description = document.getElementById("description_" + caseId);
@@ -86,7 +92,7 @@
 </h:head>
 <h:body>
     <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
-    <div class="container">
+    <div class="container" style="padding: 90px">
         <h:outputLabel value="My cases:"/>
         <p> hej #{signup.name}</p>
         <c:forEach var="case" items="#{casesBean.cases_details}">
@@ -98,7 +104,6 @@
                 <span id="arrow_#{case.CASE_ID}" class="arrow"></span>
                 <span class="case-number" onclick="collapseDescription(#{case.CASE_ID})">Case #{case.CASE_ID}</span>
                 <div id="case_des_#{case.CASE_ID}" class="case_des">
-                    Description for case: #{case.CASE_DESC}
                     <br />
                     Case Type: #{case.CASE_TYPE}
                     <br />
@@ -106,17 +111,13 @@
                     <br />
                     Case End Date: #{case.CASE_DATE_END}
                     <br />
+                    Case Description:
                 </div>
-                <ui:repeat var="caseJournal" value="#{case.caseJournals}">
-                    <div id="description_#{case.CASE_ID}" class="description" onclick="collapseDescription(#{case.CASE_ID})">
-                        #{caseJournal.JOURNAL_DESC}
-                        <h:form>
-                        </h:form>
-                    </div>
-                </ui:repeat>
+                <div id="description_#{case.CASE_ID}" class="description" onclick="collapseDescription(#{case.CASE_ID})">
+                            #{case.CASE_DESC}
+                </div>
             </div>
         </c:forEach>
-
     </div>
 </h:body>
 </html>
