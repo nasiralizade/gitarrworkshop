@@ -135,6 +135,9 @@ public class CasesBean implements Serializable{
         }
         return "/includes/editCase?faces-redirect=true&caseId=" + caseId;
     }
+    public void addNewJournal(){
+
+    }
     public int getMember_id(String email){
         try {
             Client client = entityManager.createQuery("SELECT c FROM Client c WHERE c.clientEmail = :email", Client.class)
