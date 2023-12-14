@@ -117,6 +117,10 @@ public class Signup implements Serializable {
         }
         return desc;
     }
+    public int getId(){
+        int id=databaseExample.GetIdByName(name);
+        return id;
+    }
 
     /*
     public String IfNameNotExists(){
