@@ -38,7 +38,8 @@ VALUES (1, 1, 1, 'Open', '2023-01-10', '2023-01-20', 500.00, 'Project A descript
 -- Insert data into CASE_JOURNAL table
 INSERT INTO CASE_JOURNAL (JOURNAL_ID, CASE_ID, JOURNAL_DESC)
 VALUES (1, 1, 'Journal entry for Project A'),
-       (2, 2, 'Journal entry for Project B');
+       (2, 2, 'Journal entry for Project B'),
+       (3,1, 'test add to Journal');
 
 -- Insert data into PROD_IMG table
 INSERT INTO PROD_IMG (PRODUCT_ID, IMG_PATH_STRING)

@@ -23,9 +23,10 @@ public class CasesBean implements Serializable{
     @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
     List<Cases> cases;
+    List<Cases> client_cases;
     List<Cases> cases_details;
-    List <Cases> ClientCases;
     Cases caseToEdit;
+    int member_id;
     private String newCaseDesc;
     private String newCaseStatus;
     private String newCaseDateStart;
@@ -37,6 +38,11 @@ public class CasesBean implements Serializable{
     private String newJournalDesc;
     private int newJournalId;
     private String newMemberEmail;
+
+    public List<Cases> getCases_details() {
+        return cases_details;
+    }
+
     public void setNewMemberEmail(String newMemberEmail){
         this.newMemberEmail = newMemberEmail;
     }
@@ -113,6 +119,11 @@ public class CasesBean implements Serializable{
     public void setCasesDetails(List<Cases> cases_details){
         this.cases_details = cases_details;
     }
+
+    public void setCases_details(List<Cases> cases_details) {
+        this.cases_details = cases_details;
+    }
+
     public String editCase(int caseId) {
         caseToEdit = entityManager.createQuery("select p from Cases p where p.CASE_ID = :caseId", Cases.class)
                 .setParameter("caseId", caseId)
@@ -141,6 +152,12 @@ public class CasesBean implements Serializable{
     public List<Cases> getCases(){
         cases = entityManager.createQuery("select p from Cases p", Cases.class).getResultList();
         return cases;
+    }
+    public String getClientCases(int member_id){
+        cases_details = entityManager.createQuery("select p from Cases p WHERE p.MEMBER_ID = :id", Cases.class)
+                .setParameter("id" , member_id)
+                .getResultList();
+        return "/views/client/clientcase.xhtml";
     }
     public String updateCase(int caseId){
         try {
@@ -180,7 +197,6 @@ public class CasesBean implements Serializable{
 
         CaseJournal newJournal = new CaseJournal();
         newJournal.setJOURNAL_DESC(newJournalDesc);
-        newJournal.setJOURNAL_ID(newJournalId);
         newJournal.setaCase(newCase);
 
         newCase.getCaseJournals().add(newJournal);

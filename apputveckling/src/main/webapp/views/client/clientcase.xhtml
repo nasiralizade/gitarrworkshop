@@ -25,13 +25,12 @@
         <p> hej #{signup.name}</p>
         <div style="height: 100%" align="left">
             <h:outputText/>
-            Description for case:
-            <br/>
-            #{signup.description}
+            <ui:repeat value="#{casesBean.cases_details}" var="cases">
+                <p>case id: #{cases.CASE_ID}</p>
+                <p>case Desc: #{cases.CASE_DESC}</p>
+            </ui:repeat>
+
         </div>
     </div>
-
-
-    <ui:include src="../../includes/client_inc/footer.xhtml"/>
 </h:body>
 </html>
