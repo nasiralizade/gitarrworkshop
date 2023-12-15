@@ -7,6 +7,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import org.primefaces.PrimeFaces;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -154,13 +155,21 @@ public class CasesBean implements Serializable {
 
     public void addNewCaseJournal() {
         try {
-            CaseJournal newJournal = new CaseJournal();
-            newJournal.setJOURNAL_DESC(newJournalDesc);
             if (caseToEdit != null) {
+                CaseJournal newJournal = new CaseJournal();
+                newJournal.setJOURNAL_DESC(newJournalDesc);
                 newJournal.setaCase(caseToEdit);
+
                 caseToEdit.getCaseJournals().add(newJournal);
                 entityManager.persist(newJournal);
-                newJournalDesc = null;
+
+                newJournalDesc = null; // Clear the input field after adding the journal
+
+                // Hide the dialog
+                PrimeFaces.current().executeScript("PF('addjournal').hide();");
+
+                // Refresh the page
+                PrimeFaces.current().ajax().update(":myform"); // Replace "formId" with the actual ID of your form
             }
         } catch (Exception e) {
             e.printStackTrace();
