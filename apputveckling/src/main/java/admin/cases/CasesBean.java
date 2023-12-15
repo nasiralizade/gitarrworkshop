@@ -8,7 +8,6 @@ import jakarta.inject.Named;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
