@@ -44,9 +44,9 @@
                 <h:outputLabel for="casejournal" value="Case Journal With id #{caseJournal.JOURNAL_ID}:" class="d-block font-weight-bold mb-2" />
                 <h:inputTextarea id="casejournal" value="#{caseJournal.JOURNAL_DESC}" rows="5" cols="50" class="form-control mb-2" />
             </ui:repeat>
-            <p:commandButton value="Go Back" styleClass="btn btn-secondary m-2" action="#{casesBean.goBack()}" />
-            <p:commandButton value="Save Changes" styleClass="btn btn-primary m-2" action= "#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" update="caseProfit"/>
-            <p:commandButton styleClass="btn btn-primary m-2" value="Add New Case Journal"
+            <p:commandButton value="Go Back" styleClass="ui-button ui-button-secondary m-2" icon="pi pi-step-backward-alt" action="#{casesBean.goBack()}" />
+            <p:commandButton value="Save Changes" styleClass="ui-button ui-button-primary m-2" icon="pi pi-save"  action= "#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" update="caseProfit"/>
+            <p:commandButton styleClass="ui-button ui-button-primary m-2" icon="pi pi-plus"   value="Add New Case Journal"
                              update=":addjournal" oncomplete="PF('addjournal').show()"/>
         </div>
     </h:form>
