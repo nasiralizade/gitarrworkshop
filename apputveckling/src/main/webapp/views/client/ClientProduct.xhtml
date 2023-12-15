@@ -17,7 +17,8 @@
 </h:head>
 <h:body>
     <div class="" id="HomeClient" style="margin-top: 130px">
-        <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
+        <ui:include src="#{signup.correctnav()}"> </ui:include>
+        <!-- <ui:include src="../../includes/client_inc/nav_client.xhtml"/> -->
         <ui:include src="../../includes/client_inc/productDetails.xhtml"/>
         <ui:include src="../../includes/client_inc/productClient.xhtml"/>
     </div>

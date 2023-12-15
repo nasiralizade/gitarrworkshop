@@ -17,7 +17,8 @@
     <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
 </h:head>
 <h:body>
-    <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
+    <ui:include src="#{signup.correctnav()}"> </ui:include>
+    <!-- <ui:include src="../../includes/client_inc/nav_client.xhtml"/> -->
     <div class="" id="ClientCalendar" style="width: 60%; height: 60%; position: relative; margin: 10rem auto">
         <ui:include src="../../includes/client_inc/clientCalendar.xhtml"/>
     </div>

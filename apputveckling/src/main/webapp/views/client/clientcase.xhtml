@@ -91,7 +91,9 @@
     </script>
 </h:head>
 <h:body>
-    <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
+    #{signup.IfNameNotExists()}
+    <ui:include src="#{signup.correctnav()}"> </ui:include>
+    <!-- <ui:include src="../../includes/client_inc/nav_client.xhtml"/> -->
     <div class="container" style="padding: 90px">
         <h:outputLabel value="My cases:"/>
         <p> hej #{signup.name}</p>

@@ -163,6 +163,7 @@ public class Signup implements Serializable {
             ExternalContext externalContext = context.getExternalContext();
             externalContext.getFlash().setKeepMessages(true);
             externalContext.redirect(externalContext.getRequestContextPath() + "/views/LogIn.xhtml");
+            //externalContext.redirect(externalContext.getRequestContextPath() + "LogIn.xhtml");
             context.responseComplete();
             return null;  // You can return null in this case since the redirect is handled manually
         }
@@ -180,7 +181,22 @@ public class Signup implements Serializable {
         }
 
         // Redirect to the login page or any other desired page after sign out
-        return "../LogIn.xhtml";
+        //return "../LogIn.xhtml";
+        return "ClientHome.xhtml";
+    }
+
+    public String inloggad(){
+        if (Objects.equals(name, "")) {
+            return "ClientHome.xhtml";
+        }
+        return "client/inloggadhome";
+    }
+
+    public String correctnav(){
+        if (Objects.equals(name, "")) {
+            return "../../includes/client_inc/nav_client.xhtml";
+        }
+        return "../../includes/client_inc/inloggad_nav_client.xhtml";
     }
     public static void main(String [] args){
 
