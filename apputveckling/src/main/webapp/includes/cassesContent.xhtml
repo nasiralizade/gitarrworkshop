@@ -10,6 +10,7 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
    <title>Work Cases</title>
+   <p:messages id="errorMessages" showDetail="true" autoUpdate="true" closable="true" />
    <style>
       .case {
          cursor: pointer;
@@ -212,8 +213,6 @@
             <label for="journalDesc">Journal Description:</label>
             <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" class="form-control mb-2"  />
             <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="#{casesBean.newMemberId == -1}"></h:commandButton>
-            <p:messages id="errorMessages" showDetail="true" autoUpdate="true" closable="true" />
-
          </div>
       </h:form>
 
