@@ -44,7 +44,7 @@
                         <h2>#{item.PRODUCT_NAME}</h2>
                         <p>#{item.PRODUCT_MAIN_DESC}</p>
                         <p>Model: #{item.PRODUCT_YEAR}</p>
-                        <h3>Price: #{item.PRODUCT_PRICE}$</h3>
+                        <h3>Price: #{item.PRODUCT_PRICE} SEK</h3>
                         <h:form styleClass="m-5">
                             <h:commandButton style="float: right" value="Reserve" styleClass="btn btn-dark"
                                              action="#{navigationBean.goToClientReserve()}"/>
@@ -55,7 +55,7 @@
                 <div class="m-5">
                     <div class="" style="justify-content: left">
                         <h2>About #{productBean.productsDetails.get(0).PRODUCT_NAME}</h2>
-                        <p>About #{productBean.productsDetails.get(0).PRODUCT_HISTORY_DESC}</p>
+                        <p>#{productBean.productsDetails.get(0).PRODUCT_HISTORY_DESC}</p>
                     </div>
                 </div>
 

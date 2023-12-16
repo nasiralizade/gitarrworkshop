@@ -7,7 +7,7 @@
                 <img src="#{empty product.firstImage ? '/apputveckling-1.0-SNAPSHOT/resources/img/image_error.png' : product.firstImage}"
                      class="card-img-top" alt="..."/>
                 <h4 class="card-title">#{product.PRODUCT_NAME}</h4>
-                <h5 class="card-title">Price: #{product.PRODUCT_PRICE}</h5>
+                <h5 class="card-title">Price: #{product.PRODUCT_PRICE} SEK</h5>
                 <h:form>
                     <h:commandButton styleClass="card-footer" value="Läs mer..." action="#{productBean.showProductDetails(product.PRODUCT_ID)}"/>
                 </h:form>

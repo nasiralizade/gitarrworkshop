@@ -40,7 +40,7 @@
                             <p:inputText id="email" value="#{eventEntityBean.email}"/>
 
                             <p:outputLabel for="client_name" value="First and last name" styleClass="font-bold"/>
-                            <p:inputText id="client_name" value="#{clientEventEntityBean.client_name}"/>
+                            <p:inputText id="client_name" value="#{eventEntityBean.client_name}"/>
 
                             <p:outputLabel for="url" value="URL" styleClass="font-bold"/>
                             <p:inputText id="url" value="#{eventEntityBean.event.url}"/>
@@ -56,11 +56,11 @@
                         <div class="flex justify-content-between mt-3">
                             <p:commandButton type="reset" value="Reset" styleClass="font-bold ui-button-outlined"
                                              ignoreAutoUpdate="false"/>
-                            <p:commandButton id="addButton" value="Save" action="#{eventEntityBean.addEvent}"
+                            <p:commandButton id="addButton" value="Save" icon="pi pi-save" action="#{eventEntityBean.addEvent}"
                                              oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
                             <p:commandButton id="deleteBtn" type="delete" value="Delete"
                                              style="float: right; background-color: red;"
-                                             styleClass="font-bold ui-button-danger "
+                                             styleClass="font-bold ui-button-danger " icon="pi pi-trash"
                                              action="#{eventEntityBean.deleteEvent}"
                                              oncomplete="PF('myschedule').update();P F('eventDialog').hide(); model.delete"/>
 
@@ -72,7 +72,7 @@
                 <h:form>
                     <h:panelGrid>
                         <p:commandButton id="freeEventCreate" styleClass="ui-button ui-button-success"
-                                         value="Schedule meetings" onclick="PF('freeTime').show()"
+                                         value="Schemalägga möten" onclick="PF('freeTime').show()"
                                          style="position: fixed; bottom: 20px; right: 20px; z-index: 1000"/>
                     </h:panelGrid>
                     <p:dialog header="Time picker" widgetVar="freeTime">
