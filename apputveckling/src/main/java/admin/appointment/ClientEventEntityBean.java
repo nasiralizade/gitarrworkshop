@@ -90,7 +90,7 @@ public class ClientEventEntityBean implements Serializable {
 
     private void availableTime() {
         model = new DefaultScheduleModel();
-        List<EventEntity> events = entityManager.createQuery("SELECT e FROM EventEntity e WHERE e.title = 'Available'", EventEntity.class).getResultList();
+        List<EventEntity> events = entityManager.createQuery("SELECT e FROM EventEntity e WHERE e.title = 'Available' and e.start_date>current_timestamp", EventEntity.class).getResultList();
         if (events != null && !events.isEmpty()) {
             for (EventEntity eventEntity : events) {
                 ScheduleEvent<?> event = DefaultScheduleEvent.builder()
