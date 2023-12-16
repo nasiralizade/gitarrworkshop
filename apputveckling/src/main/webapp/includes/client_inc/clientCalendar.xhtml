@@ -55,7 +55,7 @@
                 <div class="flex justify-content-between mt-3">
                     <p:commandButton type="reset" value="Reset" styleClass="font-bold ui-button-outlined"
                                      ignoreAutoUpdate="false"/>
-                    <p:commandButton id="addButton" value="Save" action="#{clientEventEntityBean.addEvent()}"
+                    <p:commandButton id="addButton" value="Save" icon="pi pi-save" action="#{clientEventEntityBean.addEvent()}"
                                      update="messages"
                                      oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
 
