@@ -1,6 +1,6 @@
 <!-- Statistics page -->
 
-<div class="container-fluid" xmlns:h="http://java.sun.com/jsf/html">
+<div class="container-fluid" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="jakarta.faces.facelets">
     <div class="row">
         <div class="col-md-9 order-md-first">
             <h1>Statistics</h1>
@@ -31,8 +31,10 @@
                     <h5 class="card-title">Next Appointment</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text"><strong>Name: </strong>John Doe</p>
-                    <p class="card-text"><strong>Time: </strong>Tomorrow at 2:00 PM</p>
+                    <ui:repeat value="#{homeBean.events}" var="appointment">
+                        <p class="card-text"><strong>Name: </strong>#{appointment.client_name}</p>
+                        <p class="card-text"><strong>Time: </strong>#{appointment.start_date}</p>
+                    </ui:repeat>
                 </div>
             </div>
         </div>
