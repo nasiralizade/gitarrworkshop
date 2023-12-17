@@ -92,7 +92,7 @@ public class Signup implements Serializable {
     public String add() {
         //System.out.println(name+" "+phone+" "+email+" "+ password);
         //DB databaseExample = new DB();
-        if ((password.equals(password2))) {
+        if ((password.equals(password2)) && !name.equals("admin")) {
             if (databaseExample.GetNameByName(name).isEmpty()) {
                 databaseExample.InsertMember(name, phone, email, password);
             } else return "SignUp";
@@ -106,7 +106,7 @@ public class Signup implements Serializable {
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpSession session = (HttpSession) externalContext.getSession(true);
 
-        if (Objects.equals(name, "admin") && Objects.equals(password, databaseExample.GetPasswordByName("admin"))) {
+        if (Objects.equals(name, "admin") && Objects.equals(password, "admin")) {
             return "admin_home.xhtml";
         }
 
@@ -121,7 +121,7 @@ public class Signup implements Serializable {
             //return "/includes/loggedinpage";
             return "client/inloggadhome";
         }
-        return "SignUp";
+        return "LogIn";
     }
 
     public List<Cases> getCasesList() {
