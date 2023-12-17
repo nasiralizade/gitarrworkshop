@@ -1,11 +1,11 @@
 <div xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
     <div class="#{productBean.isShowProductDetails eq 'true' ? ' m-5' : 'hidden'}">
         <div class="card" style="text-align: left">
-            <ui:repeat value="#{productBean.productsDetails}" var="item">
+            <ui:repeat value="#{productBean.productsDetails}" var="item" varStatus="status">
                 <div class="row">
                     <div class="col-md-6">
                         <!-- Bootstrap Carousel for Image Slider -->
-                        <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 400px">
+                        <div id="imageCarousel_#{status.index}" class="carousel slide" data-bs-ride="carousel" style="max-width: 400px">
                             <div class="carousel-indicators">
                                 <ui:repeat value="#{item.productImages}" var="image"
                                            varStatus="status">
@@ -40,11 +40,12 @@
                             </button>
                         </div>
                     </div>
+                    <!-- Product Details -->
                     <div class="col-md-6 mt-5">
                         <h2>#{item.PRODUCT_NAME}</h2>
                         <p>#{item.PRODUCT_MAIN_DESC}</p>
                         <p>Model: #{item.PRODUCT_YEAR}</p>
-                        <h3>Price: #{item.PRODUCT_PRICE}$</h3>
+                        <h3>Price: #{item.PRODUCT_PRICE} SEK</h3>
                         <h:form styleClass="m-5">
                             <h:commandButton style="float: right" value="Reserve" styleClass="btn btn-dark"
                                              action="#{navigationBean.goToClientReserve()}"/>
@@ -55,7 +56,7 @@
                 <div class="m-5">
                     <div class="" style="justify-content: left">
                         <h2>About #{productBean.productsDetails.get(0).PRODUCT_NAME}</h2>
-                        <p>About #{productBean.productsDetails.get(0).PRODUCT_HISTORY_DESC}</p>
+                        <p>#{productBean.productsDetails.get(0).PRODUCT_HISTORY_DESC}</p>
                     </div>
                 </div>
 
