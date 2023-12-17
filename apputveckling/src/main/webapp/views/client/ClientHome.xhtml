@@ -16,7 +16,8 @@
     <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
 </h:head>
 <h:body>
-    <ui:include src="../../includes/client_inc/nav_client.xhtml"/>
+    <ui:include src="#{signup.correctnav()}"> </ui:include>
+    <!-- <ui:include src="../../includes/client_inc/nav_client.xhtml"/> -->
     <div class="" id="HomeClient" style="margin-top: 130px">
         <ui:include src="../../includes/client_inc/autoplayingSlide.xhtml"/>
         <ui:include src="../../includes/client_inc/clientHomeContent.xhtml"/>
