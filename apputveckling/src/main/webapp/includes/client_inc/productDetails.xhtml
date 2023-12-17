@@ -1,11 +1,11 @@
 <div xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
     <div class="#{productBean.isShowProductDetails eq 'true' ? ' m-5' : 'hidden'}">
         <div class="card" style="text-align: left">
-            <ui:repeat value="#{productBean.productsDetails}" var="item">
+            <ui:repeat value="#{productBean.productsDetails}" var="item" varStatus="status">
                 <div class="row">
                     <div class="col-md-6">
                         <!-- Bootstrap Carousel for Image Slider -->
-                        <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 400px">
+                        <div id="imageCarousel_#{status.index}" class="carousel slide" data-bs-ride="carousel" style="max-width: 400px">
                             <div class="carousel-indicators">
                                 <ui:repeat value="#{item.productImages}" var="image"
                                            varStatus="status">
@@ -40,6 +40,7 @@
                             </button>
                         </div>
                     </div>
+                    <!-- Product Details -->
                     <div class="col-md-6 mt-5">
                         <h2>#{item.PRODUCT_NAME}</h2>
                         <p>#{item.PRODUCT_MAIN_DESC}</p>

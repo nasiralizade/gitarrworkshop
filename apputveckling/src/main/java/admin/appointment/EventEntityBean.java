@@ -59,6 +59,8 @@ public class EventEntityBean implements Serializable {
     public void init() {
 
         try {
+            time_from = LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 0));
+            time_to = LocalDateTime.of(LocalDate.now(), LocalTime.of(18, 0));
             loadEventsFromDatabase();
         } catch (Exception e) {
             throw new RuntimeException(e);

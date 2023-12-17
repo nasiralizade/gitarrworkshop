@@ -6,8 +6,8 @@
                 <h3 class="font-bold">Boka tid</h3>
             </div>
             <div class="card-body">
-                <p:outputLabel value="Vänligen välj en tid för mötet!" styleClass="font-bold"/>
-                <p:outputLabel value="Mötet är 45 minuter långt." styleClass="font-bold"/>
+                <p class="font-bold">Vänligen välj en tid för mötet!</p>
+                <p class="font-bold">Mötet är 45 minuter långt.</p>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             </p:schedule>
 
 
-            <p:dialog widgetVar="eventDialog" header="Bokningsdetaljer" showEffect="fade" hideEffect="fade" >
+            <p:dialog widgetVar="eventDialog" header="Bokningsdetaljer" showEffect="fade" hideEffect="fade" modal="true">
                 <p  class="font-bold"> Mötet är 45 minuter långt</p>
                 <h:panelGrid id="eventDetails" columns="2" cellpadding="3">
 

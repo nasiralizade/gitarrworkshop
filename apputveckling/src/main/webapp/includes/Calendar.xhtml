@@ -21,7 +21,7 @@
                         <p:ajax event="eventMove" listener="#{eventEntityBean.onEventMove}" update="messages"/>
                     </p:schedule>
 
-                    <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="fade" hideEffect="fade">
+                    <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="fade" hideEffect="fade" modal="true">
                         <h:panelGrid id="eventDetails" columns="2" cellpadding="7">
                             <p:outputLabel for="title" value="Titles" styleClass="font-bold"/>
                             <p:inputText id="title" value="#{eventEntityBean.event.title}" required="true"/>
@@ -75,18 +75,22 @@
                                          value="Schemalägga möten" onclick="PF('freeTime').show()"
                                          style="position: fixed; bottom: 20px; right: 20px; z-index: 1000"/>
                     </h:panelGrid>
-                    <p:dialog header="Time picker" widgetVar="freeTime">
-                        <p:outputLabel for="dateFrom" value="From" styleClass="font-bold"/><br/>
-                        <p:datePicker id="dateFrom" value="#{eventEntityBean.time_from}" pattern="yyyy-MM-dd"
-                                      required="true" timeInput="true"
-                                      showTime="true"/><br/>
+                    <p:dialog header="Time Picker" widgetVar="freeTime" responsive="true" modal="true">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel for="dateFrom" value="From:" styleClass="font-bold"/>
+                            <p:datePicker id="dateFrom" value="#{eventEntityBean.time_from}" pattern="yyyy-MM-dd HH:mm"
+                                          required="true" timeInput="true" showTime="false"/>
 
-                        <p:outputLabel for="dateTo" value="To" styleClass="font-bold"/><br/>
-                        <p:datePicker id="dateTo" value="#{eventEntityBean.time_to}" pattern="yyyy-MM-dd"
-                                      required="true" timeInput="true"
-                                      showTime="true"/><br/>
-                        <p:commandButton value="Send" action="#{eventEntityBean.setAvailableEvents}"
-                                         oncomplete="PF('freeTime).hide()"/>
+                            <p:outputLabel for="dateTo" value="To:" styleClass="font-bold"/>
+                            <p:datePicker id="dateTo" value="#{eventEntityBean.time_to}" pattern="yyyy-MM-dd HH:mm"
+                                          required="true" timeInput="true" showTime="false"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" style="margin-top: 10px; width: 100%;">
+                            <p:commandButton value="Cancel" onclick="PF('freeTime').hide()" type="button" styleClass="ui-button-secondary" style="width: 100%;"/>
+                            <p:commandButton value="Send" action="#{eventEntityBean.setAvailableEvents}"
+                                             oncomplete="PF('freeTime').hide()" style="width: 100%;"/>
+                        </h:panelGrid>
                     </p:dialog>
                 </h:form>
             </div>
