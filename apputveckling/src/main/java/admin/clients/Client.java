@@ -1,17 +1,80 @@
 package admin.clients;
 
+import admin.cases.Cases;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Model;
+import jakarta.inject.Named;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+
+@Entity
+@Table(name = "CLIENT")
 public class Client implements Serializable {
-
-    // The serialVersionUID is a universal version identifier for a Serializable class.
-    //private static final long serialVersionUID = 1L;
-
-    private int clientID;
-    private String name;
-    private String phone;
-    private String email;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "CLIENT_ID")
+    private int clientId;
+    @Basic
+    @Column(name = "CLIENT_NAME")
+    private String clientName;
+    @Basic
+    @Column(name = "CLIENT_PHONE")
+    private String clientPhone;
+    @Basic
+    @Column(name = "CLIENT_EMAIL")
+    private String clientEmail;
+    @Basic
+    @Column(name = "CLIENT_DATE")
+    private Date clientDate;
+    @Basic
+    @Column(name = "PASSWORD")
     private String password;
+
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getClientPhone() {
+        return clientPhone;
+    }
+
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
+    }
+
+    public String getClientEmail() {
+        return clientEmail;
+    }
+
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
+    }
+
+    public Date getClientDate() {
+        return clientDate;
+    }
+
+    public void setClientDate(Date clientDate) {
+        this.clientDate = clientDate;
+    }
 
     public String getPassword() {
         return password;
@@ -21,82 +84,5 @@ public class Client implements Serializable {
         this.password = password;
     }
 
-    public String getPassword2() {
-        return password2;
-    }
 
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-    }
-
-    private String password2;
-
-    private String date;
-
-    private String cas_type;
-
-    // Constructors, getters, and setters
-
-    public Client() {
-        // Default constructor
-    }
-
-    public Client(int clientID, String name, String phone, String email, String date, String cas_type) {
-        this.clientID = clientID;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.date = date;
-        this.cas_type = cas_type;
-    }
-
-
-    public String getCas_type() {
-        return cas_type;
-    }
-
-    public void setCas_type(String cas_type) {
-        this.cas_type = cas_type;
-    }
-
-    public int getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 }
