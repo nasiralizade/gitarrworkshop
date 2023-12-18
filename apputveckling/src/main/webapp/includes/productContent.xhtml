@@ -27,11 +27,25 @@
                     </h:form>
                 </div>
             </div>
-        </ui:repeat>
+
 
     </div>
     <h:form>
-        <h:commandButton styleClass="btn btn-info" value="Lägg till produkt" action="#{productBean.changeShowForm()}"/>
+        <h:commandButton id="addButton" styleClass="btn btn-info" value="Lägg till produkt" action="#{productBean.changeShowForm()}" rendered="true" onclick="toggle_button(1)"/>
     </h:form>
     <p:growl id="message" sticky="false" life="3000" showDetail="true"/>
+
+    <script>
+        function toggle_button(hide) {
+            let button = document.getElementById("addButton");
+
+            if(hide === 1) {
+                button.style.display = "none";
+            }
+            else {
+                button.style.display = "block";
+            }
+        }
+    </script>
+
 </div>
