@@ -1,12 +1,21 @@
 package admin.product;
 
-import jakarta.enterprise.context.SessionScoped;
+import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceException;
+import jakarta.transaction.Transactional;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -16,79 +25,80 @@ import java.util.List;
  * This class is also used to get one product image from the database
  */
 @Named
-@SessionScoped
+@RequestScoped
 public class ProductImagesBean implements Serializable {
 
     @Produces
     @PersistenceContext(unitName = "ProductImages")
     private EntityManager entityManager;
     List<ProductImages> productImages;
-    List<ProductImages> oneImage; // for the product page
-    public ProductImagesBean() {
-    }
+    @Inject
+    private ProductBean productBean;
 
-    /**
-     * Get all product images from the database
-     * @param productId the product id
-     * @return a list of product images
-     */
-    public List<ProductImages> getProductImages(int productId) {
-        productImages = entityManager.createQuery("select p from ProductImages p where p.PRODUCT_ID = :productId", ProductImages.class)
-                .setParameter("productId", productId)
-                .getResultList();
-        return productImages;
+    public ProductImagesBean() {
     }
 
     public void setProductImages(List<ProductImages> productImages) {
         this.productImages = productImages;
     }
 
-    /**
-     * Get one product image from the database
-     * @param productId the product id
-     * @return a string of the image path
-     */
-    public String getOneImage(int productId) {
-       oneImage = entityManager.createQuery("select p from ProductImages p where p.PRODUCT_ID = :productId", ProductImages.class)
-                .setParameter("productId", productId)
-                .getResultList();
-        return oneImage.get(0).getImgPathString();
+
+    public List<ProductImages> getProductImages() {
+        productImages = entityManager.createQuery("select p from ProductImages p", ProductImages.class).getResultList();
+        return productImages;
     }
 
+    private String getImgPath() {
+        String webapp = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        //return webapp+"../../src/main/webapp/resources/img";
+        return webapp + "/resources/img";
 
-    public void setOneImage(List<ProductImages> oneImage) {
-        this.oneImage = oneImage;
+    }
+
+    @Transactional
+    public void insertImage(int productId, String filePath) throws IOException {
+        try {
+            byte[] fileContent = Files.readAllBytes(Paths.get(filePath));
+
+            ProductImages image = new ProductImages();
+            image.setProduct(entityManager.find(Product.class, productId)); // Set product
+            image.setImgData(fileContent); // Set image data
+
+            entityManager.persist(image);
+            FacesContext.getCurrentInstance().addMessage("message", new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Picture uploaded."));
+        } catch (PersistenceException e) {
+            if (e.getCause() instanceof PacketTooBigException) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error", "The size of the file selected is too large");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            } else {
+                throw e; // rethrow the exception if it's not a PacketTooBigException
+            }
+        }
     }
 
     /**
-     * Add product images to the database
-     * @param productId the product id
-     * @param imgPathString the image path string [example:image49.jpg]
+     * This method is used to insert product images to the database.
+     * Insertions from the add_data.sql file are moved here.
      */
-    public void addProductImages(int productId, String imgPathString) {
-        ProductImages productImages = new ProductImages();
-        productImages.setPRODUCT_ID(productId);
-        productImages.setImgPathString(imgPathString);
-        entityManager.persist(productImages);
-    }
-    /**
-     * Delete product images from the database
-     * @param productId the product id
-     */
-    public void deleteProductImages(int productId) {
-        entityManager.createQuery("delete from ProductImages p where p.PRODUCT_ID = :productId")
-                .setParameter("productId", productId)
-                .executeUpdate();
-    }
-    /**
-     * Delete one product image from the database
-     * @param productId the product id
-     * @param imgPathString the image path string [example:image49.jpg]
-     */
-    public void deleteOneProductImage(int productId, String imgPathString) {
-        entityManager.createQuery("delete from ProductImages p where p.PRODUCT_ID = :productId and p.imgPathString = :imgPathString")
-                .setParameter("productId", productId)
-                .setParameter("imgPathString", imgPathString)
-                .executeUpdate();
+    @Transactional
+    public void firstTimeInsertion() throws IOException {
+
+        String imgPath = getImgPath();
+        insertImage(1, imgPath + "/BobMarley.JPG");
+        insertImage(1, imgPath + "/IMG_1186.JPG");
+        insertImage(1, imgPath + "/IMG_1187.JPG");
+        insertImage(1, imgPath + "/IMG_1188.JPG");
+        insertImage(2, imgPath + "/IMG_1189.JPG");
+        insertImage(2, imgPath + "/BobMarley.JPG");
+        insertImage(3, imgPath + "/IMG_1186.JPG");
+        insertImage(3, imgPath + "/IMG_1187.JPG");
+        insertImage(4, imgPath + "/IMG_1188.JPG");
+        insertImage(4, imgPath + "/IMG_1189.JPG");
+        insertImage(5, imgPath + "/BobMarley.JPG");
+        insertImage(6, imgPath + "/IMG_1186.JPG");
+        insertImage(7, imgPath + "/IMG_1187.JPG");
+        productBean.reload();
+        getProductImages();
     }
 }

@@ -2,6 +2,10 @@ package admin.product;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+
 /**
  * this class is used to get the list of products from the database
  * and to show the details of a specific product
@@ -10,9 +14,9 @@ import jakarta.persistence.*;
 @Table(name = "PRODUCT")
 public class Product {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // used to generate the id automatically
+    @Column(name = "PRODUCT_ID")
     private int PRODUCT_ID;  // the id of the product
     @Column(name = "PRODUCT_NAME")
     private String PRODUCT_NAME;
@@ -24,8 +28,34 @@ public class Product {
     private String PRODUCT_HISTORY_DESC;
     @Column(name = "PRODUCT_YEAR")
     private int PRODUCT_YEAR;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductImages> productImages = new ArrayList<>();
 
     public Product() {
+    }
+
+    /**
+     * this method is used to get the first image of the product
+     * @return the first image of the product
+     */
+    public String getFirstImage(){
+        if (!productImages.isEmpty()) { // check if the product has images
+            byte[] imgData = productImages.get(0).getImgData(); // get the first image
+            if (imgData != null) { // check if the image is not null
+                String base64Image = Base64.getEncoder().encodeToString(imgData); // convert the image to base64 string
+                return "data:image/jpeg;base64," + base64Image; // return the image as base64 string with the prefix
+            }
+        }
+        return null;
+    }
+
+
+    public List<ProductImages> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(List<ProductImages> productImages) {
+        this.productImages = productImages;
     }
 
     public int getPRODUCT_ID() {
