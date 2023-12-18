@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-9 col-first">
                             <h:outputLabel name="Namn" styleClass="form-label">Produktnamn</h:outputLabel><br/>
-                            <h:inputText name="Name" value="#{item.PRODUCT_NAME}" requiredMessage="hej"/>
+                            <h:inputText name="Name" value="#{item.PRODUCT_NAME}" requiredMessage="hej" class="form-control"/>
                             <h:message for="Name" styleClass="text-danger"/>
                         </div>
                         <br/>
@@ -22,17 +22,17 @@
                     </div>
                     <br/>'
                     <div class="row">
-                        <div class="col-3 col-first">
-                            <h:outputLabel name="Modellår" styleClass="form-label">Modellår</h:outputLabel>
-                            <br/>
-                            <h:inputText converter="jakarta.faces.Number" name="Modellår"  class="form-control" value="#{item.PRODUCT_YEAR}"/>
-                            <br/></div>
                         <div class="col-9">
                             <h:outputLabel name="Main beskrivning" styleClass="form-label">Huvudbeskrivning</h:outputLabel>
                             <br/>
                             <h:inputTextarea name="Main beskrivning" rows="5" cols="30" class="form-control"
                                              value="#{item.PRODUCT_MAIN_DESC}"/>
                         </div>
+                        <div class="col-3 col-first">
+                            <h:outputLabel name="Modellår" styleClass="form-label">Modellår</h:outputLabel>
+                            <br/>
+                            <h:inputText converter="jakarta.faces.Number" name="Modellår"  class="form-control" value="#{item.PRODUCT_YEAR}"/>
+                            <br/></div>
                     </div>
                     <br/>
                     <br/>
